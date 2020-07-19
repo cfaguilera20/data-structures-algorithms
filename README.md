@@ -1,4 +1,4 @@
-# data-structures-algorithms
+# Data structures & Algorithms
 
 Collection of data structures and algorithms solved in different languages. 
 
