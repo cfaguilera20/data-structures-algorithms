@@ -6,6 +6,14 @@ Collection of data structures and algorithms solved in different languages.
 
 - [Java](java/README.md)
 - [Python](python/README.md)
+    - Cracking Code Interview
+        - Chapter 1
+            - [Space complexity](python/crco/chapter6/drop_constants.py)
+            - [Drop the constants](python/crco/chapter6/drop_constants.py)
+            - [Multi-Part ](python/crco/chapter6/drop_constants.py)
+    - Grokking Algorithms
+        - Chapter 1
+            - [Binary search](python/grokking/chapter1/binary_search.py)
 - [JavaScript](javascript/README.md)
 
 ## Concepts of interest
