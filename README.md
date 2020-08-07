@@ -33,3 +33,11 @@ Collection of data structures and algorithms solved in different languages.
 -   [HackerRank](https://www.hackerrank.com/)
 -   [Geekforgeeks](https://www.geeksforgeeks.org/)
 -   [Careercup](https://www.careercup.com/)
+
+## Repos of interest
+
+-[aforarup/interview](https://github.com/aforarup/interview)
+-[aainaj/my-books](https://github.com/aainaj/my-books)
+-[himanshugpt/ebooks-1](https://github.com/himanshugpt/ebooks-1)
+-[himanshugpt/programming-ebooks](https://github.com/himanshugpt/programming-ebooks)
+-[himanshugpt/programming-ebooks](https://github.com/himanshugpt/programming-ebooks)
