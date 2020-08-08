@@ -36,8 +36,8 @@ Collection of data structures and algorithms solved in different languages.
 
 ## Repos of interest
 
-- [aforarup/interview](https://github.com/aforarup/interview)
-- [aainaj/my-books](https://github.com/aainaj/my-books)
-- [himanshugpt/ebooks-1](https://github.com/himanshugpt/ebooks-1)
-- [himanshugpt/programming-ebooks](https://github.com/himanshugpt/programming-ebooks)
-- [himanshugpt/programming-ebooks](https://github.com/himanshugpt/programming-ebooks)
+-   [aforarup/interview](https://github.com/aforarup/interview)
+-   [aainaj/my-books](https://github.com/aainaj/my-books)
+-   [himanshugpt/ebooks-1](https://github.com/himanshugpt/ebooks-1)
+-   [himanshugpt/programming-ebooks](https://github.com/himanshugpt/programming-ebooks)
+-   [Transfusion/hackerrank-solutions](https://github.com/Transfusion/hackerrank-solutions)
