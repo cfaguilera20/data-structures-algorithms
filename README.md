@@ -41,6 +41,7 @@ Collection of data structures and algorithms solved in different languages.
 -   [himanshugpt/ebooks-1](https://github.com/himanshugpt/ebooks-1)
 -   [himanshugpt/programming-ebooks](https://github.com/himanshugpt/programming-ebooks)
 -   [Transfusion/hackerrank-solutions](https://github.com/Transfusion/hackerrank-solutions)
+-   [careercup/CtCI-6th-Edition](https://github.com/careercup/CtCI-6th-Edition)
 
 ## TODO
 
