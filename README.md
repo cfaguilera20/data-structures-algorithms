@@ -26,6 +26,7 @@ Collection of data structures and algorithms solved in different languages.
 
 -   [Logarithms](https://www.khanacademy.org/math/algebra2/x2ec2f6f830c9fb89:logs/x2ec2f6f830c9fb89:log-intro/v/logarithms)
 -   [Big O](https://www.youtube.com/watch?v=v4cd1O4zkGw)
+-   [Euclidean Algorithm](https://www.khanacademy.org/computing/computer-science/cryptography/modarithmetic/a/the-euclidean-algorithm)
 
 ## Pages of interest
 
