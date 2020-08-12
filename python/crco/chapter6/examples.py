@@ -68,6 +68,35 @@ So in that case, every string comparison would take time that is directly propor
 a["aa", "ab", "acz"]
 """
 
+# Example 9
+
+class Node:
+    def __init__(self, value):
+        self.value = value
+        self.right = None
+        self.left = None
+
+'''
+Recurseive function with multiple branches is typically O(branches^depth)
+Time complexity: 2^N
+
+There are N nodes, for a balanced binary three the depth is roughly log N
+
+Time complexity: 2^log N
+
+Log2 means:
+
+2^P = Q -> log2 Q = P
+
+Let P = 2^log N
+
+
+'''
+def sum(node):
+    if node == None:
+        return 0
+    return sum(node.left) + node.value + sum(node.right)
+
 
 if __name__ == '__main__':
     data = [1,2,3,4,5,6,7,8]
@@ -77,3 +106,8 @@ if __name__ == '__main__':
     # printUnorderedPairs(data, data)
     # printUnorderedPairs2(data, data)
     # print(reverse(data))
+
+    root = Node(3)
+    root.left = Node(1)
+    root.right = Node(2)
+    print(sum(root))
