@@ -1,3 +1,5 @@
+import math
+
 # Example 1 - Time complexity O(N).
 def foo(a):
     sum = 0
@@ -69,7 +71,6 @@ a["aa", "ab", "acz"]
 """
 
 # Example 9
-
 class Node:
     def __init__(self, value):
         self.value = value
@@ -97,17 +98,48 @@ def sum(node):
         return 0
     return sum(node.left) + node.value + sum(node.right)
 
+# Example 10 - Time complexity O(sqrt(N)).
+def isPrime(n):
+    x = 2
+    while x * x <= math.sqrt(n):
+        if n % x == 0:
+            return False
+        x = x + 1
+    return True
 
-if __name__ == '__main__':
-    data = [1,2,3,4,5,6,7,8]
-    # foo(data)
-    # printPairs(data)
-    # printPairs2(data)
-    # printUnorderedPairs(data, data)
-    # printUnorderedPairs2(data, data)
-    # print(reverse(data))
+# Example 11 - Time complexity O(sqrt(N)).
+def factorial(n):
+    if n < 0:
+        return -1
+    elif n == 0:
+        return 1
+    else:
+        return n * factorial(n - 1)
 
-    root = Node(3)
-    root.left = Node(1)
-    root.right = Node(2)
-    print(sum(root))
+# Example 12 - Time complexity
+def permutations(str):
+    permutationsAux(str, "")
+def permutationsAux(str, prefix):
+    if len(str) == 0:
+        print(prefix)
+    else:
+        for i in range(len(str)):
+            rem = str[:i] + str[i + 1:]
+            permutationsAux(rem, prefix + str[i])
+
+
+data = [1,2,3,4,5,6,7,8]
+root = Node(3)
+root.left = Node(1)
+root.right = Node(2)
+
+permutations("abc")
+print(factorial(3))
+print(isPrime(5))
+foo(data)
+printPairs(data)
+printPairs2(data)
+printUnorderedPairs(data, data)
+printUnorderedPairs2(data, data)
+print(reverse(data))
+print(sum(root))
