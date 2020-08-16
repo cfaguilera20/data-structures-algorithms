@@ -170,7 +170,7 @@ def allFib(n):
 
 # Example 15 - Time complexity: O(N)
 def allFibCached(n):
-    cache = [0] * n
+    cache = {}
     for i in range(n):
         print(fibCached(i, cache))
 
@@ -179,7 +179,7 @@ def fibCached(n, cache):
         return 0
     elif n == 1:
         return 1
-    elif cache[n] > 0:
+    elif cache.get(n, 0) > 0:
         return cache[n]
     cache[n] = fibCached(n - 1, cache) + fibCached(n - 2, cache)
     return cache[n]
