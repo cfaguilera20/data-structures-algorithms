@@ -107,7 +107,6 @@ Log2 means:
 
 Let P = 2^log N
 
-
 '''
 
 
@@ -164,15 +163,20 @@ def fib(n):
     return fib(n - 1) + fib(n - 2)
 
 # Example 14 - Time complexity: O(2^N+1) => O(2^N)
+
+
 def allFib(n):
     for i in range(n):
         print(fib(i))
 
 # Example 15 - Time complexity: O(N)
+
+
 def allFibCached(n):
     cache = {}
     for i in range(n):
         print(fibCached(i, cache))
+
 
 def fibCached(n, cache):
     if n <= 0:
@@ -184,10 +188,27 @@ def fibCached(n, cache):
     cache[n] = fibCached(n - 1, cache) + fibCached(n - 2, cache)
     return cache[n]
 
+# Example 16 - Time complexity: O(Log N)
+def powerOf2(n):
+    if n < 1:
+        return 0
+    elif n == 1:
+        print(1)
+        return 1
+    else:
+        prev = powerOf2(n // 2)
+        curr = prev * 2
+        print(curr)
+        return curr
+
+
 data = [1, 2, 3, 4, 5, 6, 7, 8]
 root = Node(3)
 root.left = Node(1)
 root.right = Node(2)
+
+print("powerOf2")
+powerOf2(50)
 
 print("allFibCached")
 allFibCached(20)
