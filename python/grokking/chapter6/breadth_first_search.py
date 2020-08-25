@@ -10,6 +10,8 @@ graph["peggy"] = []
 graph["thom"] = []
 graph["jonny"] = []
 
+# Time complexity: O(V+E)
+# V: Vertices, E: Edges
 def bfs(graph, root):
     search_queue = deque() # Creates a new queue
     search_queue += graph[root] # Adds all of your neighbors to the search queue
@@ -26,4 +28,5 @@ def bfs(graph, root):
 def person_is_seller(name):
     return name[-1] == 'm'
 
+print(graph)
 print(bfs(graph, "you"))
