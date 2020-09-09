@@ -42,3 +42,26 @@ for(let i = 0; i < 10; i++) {
     console.log(i);
 }
 console.log(typeof i);
+
+
+console.log('Objects: ');
+
+function Person(first, last) {
+  this.first = first;
+  this.last = last;
+  this.hello =  function() {
+
+  }
+}
+Person.prototype.fullName = function() {
+  return this.first + ' ' + this.last;
+};
+Person.prototype.fullNameReversed = function() {
+  return this.last + ', ' + this.first;
+};
+
+const p = new Person('Carlos', 'Aguilera');
+console.log(p.fullName());
+
+let fullName = p.fullName;
+console.log(fullName());
