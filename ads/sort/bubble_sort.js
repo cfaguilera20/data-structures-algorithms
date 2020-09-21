@@ -1,3 +1,15 @@
+// First iteration
+// [2, 1, 4, 5, 3]
+//   \/
+// [1, 2, 4, 5, 3]
+//      \/
+// [1, 2, 4, 5, 3]
+//         \/
+// [1, 2, 4, 5, 3]
+//            \/
+// [1, 2, 4, 3, 5] <- We have the higher number at the end.
+
+// O(N^2) time | O(1) space
 function bubbleSort(array) {
     let noSwaps;
     for (let i = array.length; i > 0; i--) {
