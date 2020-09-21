@@ -1,11 +1,14 @@
 function bubbleSort(array) {
-
+    let noSwaps;
     for (let i = array.length; i > 0; i--) {
+        noSwaps = true;
         for (let j = 0; j < i - 1; j++) {
             if (array[j] > array[j + 1]) {
+                noSwaps = false;
                 swap(j, j + 1, array);
             }
         }
+        if(noSwaps) break;
     }
     return array;
 }
