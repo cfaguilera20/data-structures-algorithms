@@ -65,7 +65,7 @@ class BST
 
     public function inorder($node)
     {
-        if(is_null($node)) {
+        if (is_null($node)) {
             return;
         }
 
@@ -82,6 +82,10 @@ class BST
 
     public function postorder($node)
     {
+        if (is_null($node)) {
+            return;
+        }
+
         $this->postorder($node->left);
         $this->postorder($node->right);
         echo $node->value . '  ';
@@ -95,22 +99,23 @@ class BST
 
     public function preorder($node)
     {
+        if (is_null($node)) {
+            return;
+        }
+
         echo $node->value . '  ';
         $this->preorder($node->left);
         $this->preorder($node->right);
     }
 }
 
+$numbers = [15, 10, 18, 8, 12, 17, 26, 6, 9, 19, 29,];
 $bst = new BST();
-$bst->insert(15);
-$bst->insert(10);
-$bst->insert(18);
-$bst->insert(8);
-$bst->insert(12);
-$bst->insert(17);
-$bst->insert(26);
-$bst->insert(6);
-$bst->insert(9);
-$bst->insert(19);
-$bst->insert(29);
+foreach ($numbers as $num) {
+    $bst->insert($num);
+}
+$bst->printPreorder();
+echo PHP_EOL;
 $bst->printInorder();
+echo PHP_EOL;
+$bst->printPostorder();

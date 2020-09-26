@@ -1,3 +1,4 @@
+// O(N^2) time | O(1) space
 function selectionSort(array) {
     for(let i = 0; i < array.length; i++) {
         smallest = i;
