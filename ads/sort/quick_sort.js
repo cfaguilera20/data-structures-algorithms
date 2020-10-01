@@ -1,3 +1,4 @@
+// O(nlogn) time | O(logn) space
 function quickSort(array, left = 0, right = array.length - 1) {
     if (left < right) {
         let pivotIndex = pivot(array, left, right);

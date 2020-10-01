@@ -1,3 +1,4 @@
+// O(nlogn) time | O(n) space
 function mergeSort(arr) {
     if (arr.length <= 1) {
         return arr;
