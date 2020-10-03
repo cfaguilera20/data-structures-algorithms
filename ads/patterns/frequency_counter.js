@@ -1,4 +1,3 @@
-clear();
 // Return true if every value in the array hast it's corresponding value squared on the second;
 // O(N^2) time | O(1) space
 function same(arr1, arr2) {

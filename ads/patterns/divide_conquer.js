@@ -1,4 +1,3 @@
-clear();
 function search(arr, num) {
     let min = 0;
     let max = arr.length - 1;

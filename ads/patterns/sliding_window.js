@@ -1,4 +1,3 @@
-clear();
 // O(N*T) time | O(1) space
 function maxSubarraySum(arr, num) {
     if(num >  arr.length) {
