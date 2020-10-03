@@ -24,3 +24,5 @@ linkedList.remove(0);
 linkedList.remove(linkedList.length - 1);
 linkedList.remove(linkedList.length - 2);
 linkedList.toString();
+linkedList.reverse();
+linkedList.toString();

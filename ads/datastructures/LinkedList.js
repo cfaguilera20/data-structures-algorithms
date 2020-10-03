@@ -141,6 +141,22 @@ class LinkedList {
     }
 
     // O(n) time | O(1) space
+    reverse() {
+        let node = this.head;
+        [this.head, this.tail] = [this.tail, this.head];
+
+        let next;
+        let prev = null;
+        for (let i = 0; i < this.length; i++) {
+            next = node.next;
+            node.next = prev;
+            prev = node;
+            node = next;
+        }
+        return this;
+    }
+
+    // O(n) time | O(1) space
     traverse() {
         let current = this.head
         while (current !== null) {
@@ -149,6 +165,7 @@ class LinkedList {
         }
     }
 
+    // O(n) time | O(1) space
     toString() {
         let current = this.head
         let list = '';
