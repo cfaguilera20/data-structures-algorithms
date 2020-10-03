@@ -7,6 +7,7 @@ class LinkedList {
         this.length = 0;
     }
 
+    // O(1) time | O(1) space
     push(value) {
         let node = new Node(value);
 
@@ -22,6 +23,7 @@ class LinkedList {
         return this;
     }
 
+    // O(n) time | O(1) space
     pop() {
         if (this.head === null)
             return undefined;
@@ -46,6 +48,7 @@ class LinkedList {
         return current;
     }
 
+    // O(1) time | O(1) space
     shift() {
         if (this.head === null)
             return undefined;
@@ -57,6 +60,7 @@ class LinkedList {
         return current;
     }
 
+    // O(1) time | O(1) space
     unshift(value) {
         let node = new Node(value);
 
@@ -72,6 +76,7 @@ class LinkedList {
         return this;
     }
 
+    // O(n) time | O(1) space
     get(index) {
         if (index < 0 || index >= this.length)
             return null;
@@ -86,6 +91,20 @@ class LinkedList {
         return current;
     }
 
+    // O(n) time | O(1) space
+    set(index, value) {
+        let node = this.get(index);
+        if (node !== null) {
+            node.value = value;
+            return true;
+        }
+
+        return false;
+
+
+    }
+
+    // O(n) time | O(1) space
     traverse() {
         let current = this.head
         while (current !== null) {

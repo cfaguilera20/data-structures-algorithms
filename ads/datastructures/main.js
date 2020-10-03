@@ -17,3 +17,7 @@ linkedList
     .traverse();
 console.log(linkedList
     .get(1));
+linkedList
+    .set(0, "Hello!");
+linkedList
+    .traverse();
