@@ -20,6 +20,7 @@ class LinkedList {
         }
 
         this.length += 1;
+
         return this;
     }
 
@@ -73,6 +74,7 @@ class LinkedList {
         }
 
         this.length += 1;
+
         return this;
     }
 
@@ -102,6 +104,7 @@ class LinkedList {
         return false;
     }
 
+    // O(n) time | O(1) space
     insert(index, value) {
         if (index < 0 || index > this.length)
             return false;
@@ -116,7 +119,25 @@ class LinkedList {
         let newNode = new Node(value);
         [newNode.next, prev.next] = [prev.next, newNode];
         this.length += 1;
+
         return true;
+    }
+
+    // O(n) time | O(1) space
+    remove(index) {
+        if (index < 0 || index >= this.length)
+            return undefined;
+        if (index === 0)
+            return this.shift();
+        if (index === this.length - 1)
+            return this.pop();
+
+        let prev = this.get(index - 1);
+        let removed = prev.next;
+        prev.next = removed.next;
+        this.length -= 1;
+
+        return removed;
     }
 
     // O(n) time | O(1) space
@@ -137,19 +158,8 @@ class LinkedList {
         }
 
         list += `null`;
-
         console.log(list);
     }
-
-
-
-    // pushNode(node) {
-    //     let root = this.head;
-    //     while (root.next !== null) {
-    //         root = root.next;
-    //     }
-    //     root.next = node;
-    // }
 }
 
 export default LinkedList;

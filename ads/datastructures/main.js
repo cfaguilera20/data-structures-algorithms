@@ -20,3 +20,7 @@ linkedList.insert(4, "Bye!");
 linkedList.insert(4, "Bye!");
 linkedList.insert(0, "¡");
 linkedList.toString();
+linkedList.remove(0);
+linkedList.remove(linkedList.length - 1);
+linkedList.remove(linkedList.length - 2);
+linkedList.toString();
