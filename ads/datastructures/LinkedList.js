@@ -72,6 +72,20 @@ class LinkedList {
         return this;
     }
 
+    get(index) {
+        if (index < 0 || index >= this.length)
+            return null;
+
+        let current = this.head
+        let currentIndex = 0;
+        while (currentIndex !== index) {
+            current = current.next;
+            currentIndex += 1;
+        }
+
+        return current;
+    }
+
     traverse() {
         let current = this.head
         while (current !== null) {

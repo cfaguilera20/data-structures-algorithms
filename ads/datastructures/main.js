@@ -15,3 +15,5 @@ linkedList
     .unshift(1);
 linkedList
     .traverse();
+console.log(linkedList
+    .get(1));
