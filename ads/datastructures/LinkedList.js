@@ -104,7 +104,7 @@ class LinkedList {
         return false;
     }
 
-    // O(n) time | O(1) space
+    // O(1) time | O(1) space
     insert(index, value) {
         if (index < 0 || index > this.length)
             return false;
