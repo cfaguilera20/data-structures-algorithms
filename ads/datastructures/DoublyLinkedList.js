@@ -41,6 +41,25 @@ class DoublyLinkedList {
         return poppedNode;
     }
 
+    shift() {
+        if (this.head === null)
+            return undefined;
+
+        let shiftedNode = this.head;
+        if (this.length === 1) {
+            this.head = null;
+            this.tail = null;
+        } else {
+            this.head = shiftedNode.next;
+            this.head.prev = null;
+            shiftedNode.next = null;
+        }
+
+        this.length -= 1;
+
+        return shiftedNode;
+    }
+
     toString() {
         let current = this.head
         let list = '';
