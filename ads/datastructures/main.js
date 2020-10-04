@@ -31,4 +31,6 @@ let doublyLinked = new DoublyLinkedList();
 console.log('DoublyLinkedList operations');
 doublyLinked.push(1).push(2).push(3).push(4).push(5);
 doublyLinked.toString();
+doublyLinked.pop();
+doublyLinked.toString();
 
