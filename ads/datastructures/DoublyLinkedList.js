@@ -46,6 +46,7 @@ class DoublyLinkedList {
             return undefined;
 
         let shiftedNode = this.head;
+
         if (this.length === 1) {
             this.head = null;
             this.tail = null;
