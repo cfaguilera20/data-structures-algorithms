@@ -34,4 +34,6 @@ doublyLinked.toString();
 doublyLinked.pop();
 doublyLinked.shift();
 doublyLinked.toString();
+doublyLinked.unshift(100);
+doublyLinked.toString();
 
