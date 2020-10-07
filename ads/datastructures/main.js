@@ -36,4 +36,5 @@ doublyLinked.shift();
 doublyLinked.toString();
 doublyLinked.unshift(100);
 doublyLinked.toString();
+console.log(doublyLinked.get(3));
 
