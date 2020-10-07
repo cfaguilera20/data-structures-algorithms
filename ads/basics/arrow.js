@@ -16,7 +16,7 @@ var button5 = {
     }
 }
 
-// ES5
+// ES6
 var button6 = {
     class: '.green',
     click: function () {
