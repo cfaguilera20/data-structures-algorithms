@@ -117,17 +117,20 @@ class DoublyLinkedList {
         if (index < 0 || index > this.length)
             return false;
         if (index === 0)
-            return this.unshift(value);
+            return !!this.unshift(value);
         if (index === this.length)
-            return this.push(value);
+            return !!this.push(value);
+
         let newNode = new Node(value);
         let beforeNode = this.get(index - 1);
+
         newNode.prev = beforeNode;
         newNode.next = beforeNode.next;
         beforeNode.next.prev = newNode;
         beforeNode.next = newNode;
 
         this.length += 1;
+
         return true;
     }
 
