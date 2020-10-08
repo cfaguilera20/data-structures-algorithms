@@ -102,6 +102,17 @@ class DoublyLinkedList {
         return current;
     }
 
+    set(index, value) {
+        let node = this.get(index);
+
+        if (node !== null) {
+            node.value = value;
+            return true;
+        }
+
+        return false;
+    }
+
     toString() {
         let current = this.head
         let list = '';

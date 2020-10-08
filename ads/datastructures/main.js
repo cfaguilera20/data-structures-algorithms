@@ -37,4 +37,7 @@ doublyLinked.toString();
 doublyLinked.unshift(100);
 doublyLinked.toString();
 console.log(doublyLinked.get(3));
+doublyLinked.toString();
+doublyLinked.set(0, 1);
+doublyLinked.toString();
 
