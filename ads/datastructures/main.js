@@ -40,4 +40,7 @@ console.log(doublyLinked.get(3));
 doublyLinked.toString();
 doublyLinked.set(0, 1);
 doublyLinked.toString();
-
+doublyLinked.set(2, 100);
+doublyLinked.toString();
+doublyLinked.insert(2, 400);
+doublyLinked.toString();
