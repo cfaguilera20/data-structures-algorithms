@@ -1,6 +1,7 @@
 import LinkeList from './LinkedList.js';
 import DoublyLinkedList from './DoublyLinkedList.js';
 import Stack from './Stack.js';
+import Queue from './Queue.js';
 
 /**
  * LinkedList operations
@@ -56,3 +57,13 @@ console.log(stack);
 console.log(stack.pop());
 console.log(stack.pop());
 console.log(stack.pop());
+
+
+let queue = new Queue();
+console.log(queue.enqueue(1));
+console.log(queue.enqueue(2));
+console.log(queue.enqueue(3));
+console.log(queue);
+console.log(queue.dequeue());
+console.log(queue.dequeue());
+console.log(queue.dequeue());
