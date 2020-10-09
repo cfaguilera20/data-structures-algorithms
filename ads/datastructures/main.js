@@ -1,5 +1,6 @@
 import LinkeList from './LinkedList.js';
 import DoublyLinkedList from './DoublyLinkedList.js';
+import Stack from './Stack.js';
 
 /**
  * LinkedList operations
@@ -46,3 +47,12 @@ doublyLinked.insert(2, 400);
 doublyLinked.toString();
 doublyLinked.remove(1);
 doublyLinked.toString();
+
+let stack = new Stack();
+console.log(stack.push(1));
+console.log(stack.push(2));
+console.log(stack.push(3));
+console.log(stack);
+console.log(stack.pop());
+console.log(stack.pop());
+console.log(stack.pop());
