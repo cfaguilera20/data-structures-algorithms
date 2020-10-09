@@ -44,3 +44,5 @@ doublyLinked.set(2, 100);
 doublyLinked.toString();
 doublyLinked.insert(2, 400);
 doublyLinked.toString();
+doublyLinked.remove(1);
+doublyLinked.toString();
