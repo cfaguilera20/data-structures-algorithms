@@ -40,30 +40,51 @@ class BinarySearchTree {
 
     // Insert recursively
     insertRecursively(value, parent = this.root) {
-        let newNode = new Node(value);
         if (this.root === null) {
-            this.root = newNode;
+            this.root = new Node(value);
         } else {
             // Prevent duplicates
             // if(value === parent.value)
             //     return undefined;
 
-            if (newNode.value < parent.value) {
+            if (value < parent.value) {
                 if (parent.left === null) {
-                    parent.left = newNode;
+                    parent.left = new Node(value);
                 } else {
-                    this.insertRecursively(newNode, parent.left);
+                    this.insertRecursively(value, parent.left);
                 }
             } else {
                 if (parent.right === null) {
-                    parent.right = newNode;
+                    parent.right = new Node(value);
                 } else {
-                    this.insertRecursively(newNode, parent.right);
+                    this.insertRecursively(value, parent.right);
                 }
             }
         }
 
         return this;
+    }
+
+    find(value) {
+        if (this.root === null)
+            return undefined;
+        let current = this.root;
+        let found = false;
+        while (current && !found) {
+            if (value < current.value) {
+                current = current.left;
+            } else if (value > current.value) {
+                current = current.right;
+            } else {
+                found = true;
+            }
+        }
+
+        return current || undefined;
+    }
+
+    contains(value) {
+        return !!this.find(value);
     }
 
 }

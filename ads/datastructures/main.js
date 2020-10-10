@@ -80,4 +80,5 @@ bst.insert(19);
 bst.insertRecursively(25);
 bst.insertRecursively(22);
 bst.insertRecursively(26);
-console.log(bst);
+console.log(bst.find(18));
+console.log(bst.contains(146));
