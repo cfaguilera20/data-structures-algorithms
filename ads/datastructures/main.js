@@ -82,3 +82,4 @@ bst.insertRecursively(22);
 bst.insertRecursively(26);
 console.log(bst.find(18));
 console.log(bst.contains(146));
+console.log(bst.BFS());

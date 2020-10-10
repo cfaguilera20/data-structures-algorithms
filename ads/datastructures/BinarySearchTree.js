@@ -1,11 +1,12 @@
 import Node from './Node.js';
+import Queue from './Queue.js';
 
 class BinarySearchTree {
     constructor() {
         this.root = null;
     }
 
-    // Insert iteratively
+    // Insert iteratively - O(logn) time | O(1) space
     insert(value) {
         let newNode = new Node(value);
         if (this.root === null) {
@@ -38,7 +39,7 @@ class BinarySearchTree {
         return this;
     }
 
-    // Insert recursively
+    // Insert recursively - O(logn) time | O(logn) space
     insertRecursively(value, parent = this.root) {
         if (this.root === null) {
             this.root = new Node(value);
@@ -65,6 +66,7 @@ class BinarySearchTree {
         return this;
     }
 
+    // O(logn) time | O(1) space
     find(value) {
         if (this.root === null)
             return undefined;
@@ -87,6 +89,24 @@ class BinarySearchTree {
         return !!this.find(value);
     }
 
+    // O(n) time | O(n) space
+    BFS() {
+        let data = [];
+        let queue = new Queue();
+        queue.enqueue(this.root);
+
+        while (queue.size) {
+            let current = queue.dequeue();
+            data.push(current.value);
+
+            if (current.left)
+                queue.enqueue(current.left);
+            if (current.right)
+                queue.enqueue(current.right);
+        }
+
+        return data;
+    }
 }
 
 export default BinarySearchTree;
