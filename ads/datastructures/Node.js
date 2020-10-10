@@ -3,6 +3,8 @@ export default class Node {
         this.value = value;
         this.next = null;
         this.prev = null;
+        this.left = null;
+        this.right = null;
         this.children = null;
     }
 }

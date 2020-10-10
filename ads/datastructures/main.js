@@ -2,6 +2,7 @@ import LinkeList from './LinkedList.js';
 import DoublyLinkedList from './DoublyLinkedList.js';
 import Stack from './Stack.js';
 import Queue from './Queue.js';
+import BST from './BinarySearchTree.js';
 
 /**
  * LinkedList operations
@@ -50,6 +51,7 @@ doublyLinked.remove(1);
 doublyLinked.toString();
 
 let stack = new Stack();
+console.log('Stack operations:');
 console.log(stack.push(1));
 console.log(stack.push(2));
 console.log(stack.push(3));
@@ -60,6 +62,7 @@ console.log(stack.pop());
 
 
 let queue = new Queue();
+console.log('Queue operations:');
 console.log(queue.enqueue(1));
 console.log(queue.enqueue(2));
 console.log(queue.enqueue(3));
@@ -67,3 +70,14 @@ console.log(queue);
 console.log(queue.dequeue());
 console.log(queue.dequeue());
 console.log(queue.dequeue());
+
+let bst = new BST();
+console.log('BST operations:');
+bst.insert(20);
+bst.insert(18);
+bst.insert(16);
+bst.insert(19);
+bst.insertRecursively(25);
+bst.insertRecursively(22);
+bst.insertRecursively(26);
+console.log(bst);
