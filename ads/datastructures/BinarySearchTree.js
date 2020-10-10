@@ -13,6 +13,10 @@ class BinarySearchTree {
         } else {
             let current = this.root;
             while (true) {
+                // Prevent duplicates
+                // if(value === current.value)
+                //     return undefined;
+
                 if (value < current.value) {
                     if (current.left === null) {
                         current.left = newNode;
@@ -40,6 +44,10 @@ class BinarySearchTree {
         if (this.root === null) {
             this.root = newNode;
         } else {
+            // Prevent duplicates
+            // if(value === parent.value)
+            //     return undefined;
+
             if (newNode.value < parent.value) {
                 if (parent.left === null) {
                     parent.left = newNode;
@@ -54,6 +62,7 @@ class BinarySearchTree {
                 }
             }
         }
+
         return this;
     }
 
