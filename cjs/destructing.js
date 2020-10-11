@@ -24,6 +24,27 @@ let { name: n6, age: a6 } = object6;
 console.log(n6, a6);
 
 let scores = [100, 99, 98, 98, 96, 90, 88, 88, 70];
-let [top1, top2, top3, ...rest] = scores;
+let [top1, top2, top3, ...spread] = scores;
 console.log('Top scores:', top1, top2, top3);
-console.log('Rest scores:', rest);
+console.log('Spread scores:', spread);
+
+
+const sum = (...rest) => {
+    let total = 0;
+    for (let i of rest) {
+        total += i;
+    }
+    return total;
+}
+
+console.log(sum(1, 2, 3, 4, 5));
+
+const mult = (base, ...rest) => {
+    let total = [];
+    for (let i of rest) {
+        total.push(base * i);
+    }
+    return total;
+}
+
+console.log(mult(2, 1, 2, 3, 4, 5));
