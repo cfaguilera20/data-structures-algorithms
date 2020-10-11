@@ -40,27 +40,31 @@ class BinarySearchTree {
     }
 
     // Insert recursively - O(logn) time | O(logn) space
-    insertRecursively(value, parent = this.root) {
+    insertRecursively(value) {
+        let newNode = new Node(value);
         if (this.root === null) {
-            this.root = new Node(value);
+            this.root = newNode;
         } else {
-            // Prevent duplicates
-            // if(value === parent.value)
-            //     return undefined;
+            function insert(parent, newNode) {
+                // if(value === parent.value) # Prevent duplicates
+                //     return undefined;
 
-            if (value < parent.value) {
-                if (parent.left === null) {
-                    parent.left = new Node(value);
+                if (newNode.value < parent.value) {
+                    if (parent.left === null) {
+                        parent.left = newNode;
+                    } else {
+                        insert(parent.left, newNode);
+                    }
                 } else {
-                    this.insertRecursively(value, parent.left);
-                }
-            } else {
-                if (parent.right === null) {
-                    parent.right = new Node(value);
-                } else {
-                    this.insertRecursively(value, parent.right);
+                    if (parent.right === null) {
+                        parent.right = newNode;
+                    } else {
+                        insert(parent.right, newNode);
+                    }
                 }
             }
+
+            insert(this.root, newNode);
         }
 
         return this;
@@ -104,6 +108,60 @@ class BinarySearchTree {
             if (current.right)
                 queue.enqueue(current.right);
         }
+
+        return data;
+    }
+
+    // O(nlog) time | O(n) space | Order - Node, left, right
+    DFSPreOrder() {
+        let data = [];
+
+        function traverse(node) {
+            if (node === null)
+                return;
+
+            data.push(node.value);
+            traverse(node.left);
+            traverse(node.right);
+        }
+
+        traverse(this.root);
+
+        return data;
+    }
+
+    // O(nlog) time | O(n) space | Order - Node, left, right
+    DFSPosOrder() {
+        let data = [];
+
+        function traverse(node) {
+            if (node === null)
+                return;
+
+            traverse(node.left);
+            traverse(node.right);
+            data.push(node.value);
+        }
+
+        traverse(this.root);
+
+        return data;
+    }
+
+    // O(nlog) time | O(n) space | Order - Node, left, right
+    DFSInOrder() {
+        let data = [];
+
+        function traverse(node) {
+            if (node === null)
+                return;
+
+            traverse(node.left);
+            data.push(node.value);
+            traverse(node.right);
+        }
+
+        traverse(this.root);
 
         return data;
     }
