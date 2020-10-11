@@ -93,7 +93,7 @@ class BinarySearchTree {
         return !!this.find(value);
     }
 
-    // O(n) time | O(n) space
+    // O(v + e) time | O(n) space
     BFS() {
         let data = [];
         let queue = new Queue();
@@ -112,7 +112,7 @@ class BinarySearchTree {
         return data;
     }
 
-    // O(nlog) time | O(n) space | Order - Node, left, right
+    // O(n) time | O(n) space | Order - node, left, right
     DFSPreOrder() {
         let data = [];
 
@@ -130,7 +130,7 @@ class BinarySearchTree {
         return data;
     }
 
-    // O(nlog) time | O(n) space | Order - Node, left, right
+    // O(n) time | O(n) space | Order - left, right, node
     DFSPosOrder() {
         let data = [];
 
@@ -148,7 +148,7 @@ class BinarySearchTree {
         return data;
     }
 
-    // O(nlog) time | O(n) space | Order - Node, left, right
+    // O(n) time | O(n) space | Order - left, node, right
     DFSInOrder() {
         let data = [];
 
