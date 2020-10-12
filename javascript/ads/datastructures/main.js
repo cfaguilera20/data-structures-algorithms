@@ -3,6 +3,7 @@ import DoublyLinkedList from './DoublyLinkedList.js';
 import Stack from './Stack.js';
 import Queue from './Queue.js';
 import BST from './BinarySearchTree.js';
+import MaxBinaryHeap from './MaxBinaryHeap.js';
 
 /**
  * LinkedList operations
@@ -86,3 +87,12 @@ console.log(bst.BFS());
 console.log(bst.DFSPreOrder());
 console.log(bst.DFSPosOrder());
 console.log(bst.DFSInOrder());
+
+let maxBinaryHeap = new MaxBinaryHeap();
+console.log('MaxBinaryHeap operations:');
+maxBinaryHeap.values = [41, 39, 33, 18, 27, 12];
+maxBinaryHeap.insert(55);
+maxBinaryHeap.insert(56);
+maxBinaryHeap.insert(54);
+maxBinaryHeap.insert(1);
+console.log(maxBinaryHeap.values);
