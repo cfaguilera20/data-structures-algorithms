@@ -51,18 +51,18 @@ Collection of data structures and algorithms solved in different languages.
 
 ## Cracking Code Interview
 
--   Chapter 1: [Space complexity](python/crco/chapter6/drop_constants.py), [Drop the constants](python/crco/chapter6/drop_constants.py), [Multi-Part](python/crco/chapter6/drop_constants.py), [Recursive](python/crco/chapter6/recursive.py)
+-   Chapter 1: [Space complexity](books/crco/chapter6/drop_constants.py), [Drop the constants](books/crco/chapter6/drop_constants.py), [Multi-Part](books/crco/chapter6/drop_constants.py), [Recursive](books/crco/chapter6/recursive.py)
 
 ## Grokking Algorithms
 
--   Chapter 1: [Binary search](python/grokking/chapter1/binary_search.py)
--   Chapter 2: [Selection sort](python/grokking/chapter2/selection_sort.py)
--   Chapter 3: [Count down](python/grokking/chapter3/count_down.py), [Stack call](python/grokking/chapter3/stack.py)
--   Chapter 4: [Recursion](python/grokking/chapter4/recursive.py), [Quicksort](python/grokking/chapter4/quicksort.py)
--   Chapter 5: [Hastables](python/grokking/chapter5/hastable.py)
--   Chapter 6: [BFS](python/grokking/chapter6/breadth_first_search.py)
--   Chapter 7: [Dijkstras](python/grokking/chapter7/dijkstras.py)
--   Chapter 8: [Greddy](python/grokking/chapter7/greddy.py)
+-   Chapter 1: [Binary search](books/grokking/chapter1/binary_search.py)
+-   Chapter 2: [Selection sort](books/grokking/chapter2/selection_sort.py)
+-   Chapter 3: [Count down](books/grokking/chapter3/count_down.py), [Stack call](books/grokking/chapter3/stack.py)
+-   Chapter 4: [Recursion](books/grokking/chapter4/recursive.py), [Quicksort](books/grokking/chapter4/quicksort.py)
+-   Chapter 5: [Hastables](books/grokking/chapter5/hastable.py)
+-   Chapter 6: [BFS](books/grokking/chapter6/breadth_first_search.py)
+-   Chapter 7: [Dijkstras](books/grokking/chapter7/dijkstras.py)
+-   Chapter 8: [Greddy](books/grokking/chapter7/greddy.py)
 
 # Links
 
