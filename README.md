@@ -35,6 +35,7 @@ Collection of data structures and algorithms solved in different languages.
 -   [Parameters](javascript/cjs/parameters.js)
 -   [Maps](javascript/cjs/maps.js)
 -   [Classes](javascript/cjs/classes.js)
+-   [Async](javascript/cjs/async.js)
 
 # Hacker Rank
 
