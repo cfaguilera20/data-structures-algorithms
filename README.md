@@ -34,6 +34,7 @@ Collection of data structures and algorithms solved in different languages.
 -   [Destructing: Spread & Rest](javascript/cjs/destructing.js)
 -   [Parameters](javascript/cjs/parameters.js)
 -   [Maps](javascript/cjs/maps.js)
+-   [Classes](javascript/cjs/classes.js)
 
 # Hacker Rank
 

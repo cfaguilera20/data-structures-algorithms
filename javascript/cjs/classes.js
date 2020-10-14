@@ -59,3 +59,19 @@ console.log(athlete5.getAge());
 console.log(athlete5.wonMedal());
 
 // ES6
+class Athlete6 extends Person6 {
+    constructor(name, yearOfBirth, job, medals) {
+        super(name, yearOfBirth, job);
+        this.medals = medals;
+    }
+
+    wonMedal() {
+        return ++this.medals;
+    }
+}
+
+var athlete6 = new Athlete6('Carlos Aguilera', 1986, 'Software Engineer', 8);
+console.log(athlete6);
+console.log(athlete6.__proto__);
+console.log(athlete6.getAge());
+console.log(athlete6.wonMedal());
