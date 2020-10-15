@@ -68,13 +68,46 @@ const getRecipe = recipeId => {
 //     .catch((error) => console.log(error));
 
 // Consuming Promises with async/await
-
 async function getRecipiesAW() {
     const IDs = await getIds;
     const recipe = await getRecipe(IDs[3]);
     return recipe;
 }
 
-getRecipiesAW().then(result => {
-    console.log(result);
-});
+// getRecipiesAW().then(result => {
+//     console.log(result);
+// });
+
+// Consuming an API with Fetch & Promises.
+function getWeather(place) {
+    fetch(`https://www.metaweather.com/api/location/${place}`)
+        .then(response => {
+            return response.json();
+        })
+        .then(data => {
+            const today = data.consolidated_weather[0];
+            console.log(`Temperatures in ${data.title} stay between ${today.min_temp} and ${today.max_temp}`);
+        })
+        .catch(error => console.log(error));
+}
+
+
+getWeather(116545);
+getWeather(44418);
+getWeather(2487956);
+
+// Consuming an API with Async & Await
+async function getWeatherAW(place) {
+    try {
+        const response = await fetch(`https://www.metaweather.com/api/location/${place}`);
+        const data = await response.json();
+        const today = data.consolidated_weather[0];
+        console.log(`Temperatures in ${data.title} stay between ${today.min_temp} and ${today.max_temp}`);
+    } catch(error) {
+        console.log(error);
+    };
+}
+
+getWeatherAW(116545);
+getWeatherAW(44418);
+getWeatherAW(2487956);
