@@ -57,12 +57,24 @@ const getRecipe = recipeId => {
     });
 }
 
-getIds
-    .then((recipes) => {
-        console.log(recipes);
-        return getRecipe(recipes[3]);
-    }).
-    then((recipe) => {
-        console.log(recipe);
-    })
-    .catch((error) => console.log(error));
+// getIds
+//     .then((recipes) => {
+//         console.log(recipes);
+//         return getRecipe(recipes[3]);
+//     }).
+//     then((recipe) => {
+//         console.log(recipe);
+//     })
+//     .catch((error) => console.log(error));
+
+// Consuming Promises with async/await
+
+async function getRecipiesAW() {
+    const IDs = await getIds;
+    const recipe = await getRecipe(IDs[3]);
+    return recipe;
+}
+
+getRecipiesAW().then(result => {
+    console.log(result);
+});
