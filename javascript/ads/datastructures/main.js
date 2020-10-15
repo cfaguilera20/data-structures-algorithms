@@ -4,6 +4,7 @@ import Stack from './Stack.js';
 import Queue from './Queue.js';
 import BST from './BinarySearchTree.js';
 import MaxBinaryHeap from './MaxBinaryHeap.js';
+import PriorityQueue from './PriorityQueue.js';
 
 /**
  * LinkedList operations
@@ -100,3 +101,15 @@ maxBinaryHeap.insert(55);
 console.log(maxBinaryHeap.values);
 console.log(maxBinaryHeap.extractMax());
 console.log(maxBinaryHeap.values);
+
+let ER = new PriorityQueue(); // MinBinaryHeap
+console.log('PriorityQueue operations:');
+ER.enqueue('common cold,', 10);
+ER.enqueue('H1N1,', 2);
+ER.enqueue('COVID19,', 1);
+ER.enqueue('high fever,', 7);
+ER.enqueue('gunshot wound,', 1);
+console.log(ER);
+console.log(ER.dequeue());
+console.log(ER.dequeue());
+console.log(ER);
