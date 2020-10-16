@@ -5,6 +5,7 @@ import Queue from './Queue.js';
 import BST from './BinarySearchTree.js';
 import MaxBinaryHeap from './MaxBinaryHeap.js';
 import PriorityQueue from './PriorityQueue.js';
+import Graph from './Graph.js';
 
 /**
  * LinkedList operations
@@ -113,3 +114,21 @@ console.log(ER);
 console.log(ER.dequeue());
 console.log(ER.dequeue());
 console.log(ER);
+
+let graph = new Graph(); //
+console.log('Graph:');
+graph.addVertex("México");
+graph.addVertex("USA");
+graph.addVertex("Canada");
+graph.addVertex("Tokyo");
+graph.addEdge("México", "USA");
+graph.addEdge("USA", "Mexico");
+graph.addEdge("Canada", "México");
+graph.addEdge("México", "Canada");
+graph.addEdge("Canada", "Tokyo");
+graph.addEdge("Tokyo", "Canada");
+console.log(graph);
+graph.removeEdge("Canada", "México");
+console.log(graph);
+graph.removeVertex("Canada");
+console.log(graph);

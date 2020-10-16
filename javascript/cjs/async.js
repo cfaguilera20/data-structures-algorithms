@@ -103,11 +103,12 @@ async function getWeatherAW(place) {
         const data = await response.json();
         const today = data.consolidated_weather[0];
         console.log(`Temperatures in ${data.title} stay between ${today.min_temp} and ${today.max_temp}`);
-    } catch(error) {
+        return data;
+    } catch (error) {
         console.log(error);
     };
 }
 
 getWeatherAW(116545);
 getWeatherAW(44418);
-getWeatherAW(2487956);
+getWeatherAW(2487956).then(data => console.log(data));
