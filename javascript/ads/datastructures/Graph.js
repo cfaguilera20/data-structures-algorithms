@@ -1,3 +1,19 @@
+/**
+ * Same graph represented in different ways
+ *
+ *  Adjancency Matrix
+ *      a   b   c   d
+ *  a   0   0   0   1
+ *  b   1   0   1   1
+ *  c   1   1   0   1
+ *  d   0   0   0   0
+ *
+ * Adjancency List
+ * a: [d]
+ * b: [a, c, d]
+ * c: [a, b, d]
+ * d: []
+ */
 class Graph {
     constructor() {
         this.adjacencyList = {};
@@ -23,6 +39,26 @@ class Graph {
             this.removeEdge(v, adjacentVertex);
         }
         delete this.adjacencyList[v];
+    }
+
+    depthFirstRecursive(start) {
+        const result = [];
+        const visited = new Map();
+        const adjacencyList = this.adjacencyList;
+
+        (function dfs(vertex) {
+            if (!vertex)
+                return null;
+            visited.set(vertex, true);
+            result.push(vertex);
+            adjacencyList[vertex].forEach(neighbor => {
+                if (!visited.has(neighbor)) {
+                    return dfs(neighbor);
+                }
+            });
+        })(start);
+
+        return result;
     }
 }
 

@@ -116,7 +116,7 @@ console.log(ER.dequeue());
 console.log(ER);
 
 let graph = new Graph(); //
-console.log('Graph:');
+console.log('Graph operations:');
 graph.addVertex("México");
 graph.addVertex("USA");
 graph.addVertex("Canada");
@@ -132,3 +132,36 @@ graph.removeEdge("Canada", "México");
 console.log(graph);
 graph.removeVertex("Canada");
 console.log(graph);
+
+console.log('Graph travers:');
+let DFSg = new Graph(); //
+DFSg.addVertex("A");
+DFSg.addVertex("B");
+DFSg.addVertex("C");
+DFSg.addVertex("D");
+DFSg.addVertex("E");
+DFSg.addVertex("F");
+DFSg.addEdge("A", "B");
+DFSg.addEdge("A", "C");
+DFSg.addEdge("B", "A");
+DFSg.addEdge("B", "D");
+DFSg.addEdge("C", "A");
+DFSg.addEdge("C", "E");
+DFSg.addEdge("D", "B");
+DFSg.addEdge("D", "E");
+DFSg.addEdge("D", "F");
+DFSg.addEdge("E", "C");
+DFSg.addEdge("E", "D");
+DFSg.addEdge("E", "F");
+DFSg.addEdge("F", "D");
+DFSg.addEdge("F", "E");
+console.log(DFSg);
+console.log(DFSg.depthFirstRecursive("A"));
+console.log(DFSg.depthFirstRecursive("B"));
+//            A
+//          /   \
+//        B       C
+//        |       |
+//        D   -   E
+//          \    /
+//            F
