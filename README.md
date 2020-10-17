@@ -25,6 +25,7 @@ Collection of data structures and algorithms solved in different languages.
     -   [Queue](javascript/ads/datastructures/Queue.js)
     -   [BinarySearchTree](javascript/ads/datastructures/BinarySearchTree.js)
     -   [MaxBinaryHeap](javascript/ads/datastructures/MaxBinaryHeap.js)
+    -   [Graph](javascript/ads/datastructures/Graph.js)
 
 ### Examples: ES5 & ES6
 
@@ -39,13 +40,18 @@ Collection of data structures and algorithms solved in different languages.
 
 # Hacker Rank
 
--   [Array manipulation](hackerrank/array_manipulation.js)
--   [Insert node at position linked list](hackerrank/insert_node_at_position_linked_list.js)
--   [Make anagram](hackerrank/make_anagram.js)
--   Minimum swaps: [JS](hackerrank/minimum_swaps.js), [Python](hackerrank/minimum_swaps.py)
--   [New York chaos](hackerrank/new_york_chaos.js)
--   [Ransom note](hackerrank/ransom_note.js)
--   [Two strings](hackerrank/two_strings.js)
+-   [Array manipulation](platforms/hackerrank/array_manipulation.js)
+-   [Insert node at position linked list](platforms/hackerrank/insert_node_at_position_linked_list.js)
+-   [Make anagram](platforms/hackerrank/make_anagram.js)
+-   Minimum swaps: [JS](platforms/hackerrank/minimum_swaps.js), [Python](platforms/hackerrank/minimum_swaps.py)
+-   [New York chaos](platforms/hackerrank/new_york_chaos.js)
+-   [Ransom note](platforms/hackerrank/ransom_note.js)
+-   [Two strings](platforms/hackerrank/two_strings.js)
+
+# Leetcode
+
+-   [136. Single Number.](platforms/leetcode/single_number.js)
+
 
 # Books solutions
 
