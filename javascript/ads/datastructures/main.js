@@ -160,6 +160,8 @@ console.log(DFSg.depthFirstRecursive("A"));
 console.log(DFSg.depthFirstRecursive("B"));
 console.log(DFSg.depthFirstIterative("A"));
 console.log(DFSg.depthFirstIterative("B"));
+
+console.log(DFSg.breathFirst("A"));
 //            A
 //          /   \
 //        B       C

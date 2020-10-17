@@ -81,6 +81,27 @@ class Graph {
 
         return result;
     }
+
+    breathFirst(start) {
+        const queue = [start];
+        const result = [];
+        const visited = new Map();
+        let currentVertex;
+
+        visited.set(start, true);
+        while (queue.length) {
+            currentVertex = queue.shift();
+            result.push(currentVertex);
+            this.adjacencyList[currentVertex].forEach(neighbor => {
+                if (!visited.has(neighbor)) {
+                    visited.set(neighbor, true);
+                    queue.push(neighbor);
+                }
+            });
+        }
+
+        return result;
+    }
 }
 
 export default Graph;
