@@ -60,6 +60,27 @@ class Graph {
 
         return result;
     }
+
+    depthFirstIterative(start) {
+        const result = [];
+        const stack = [start];
+        const visited = new Map();
+        let currentVertex;
+
+        visited.set(start, true);
+        while (stack.length) {
+            currentVertex = stack.pop();
+            result.push(currentVertex);
+            this.adjacencyList[currentVertex].forEach(neighbor => {
+                if (!visited.has(neighbor)) {
+                    visited.set(neighbor, true);
+                    stack.push(neighbor);
+                }
+            });
+        }
+
+        return result;
+    }
 }
 
 export default Graph;

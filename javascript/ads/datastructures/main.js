@@ -158,6 +158,8 @@ DFSg.addEdge("F", "E");
 console.log(DFSg);
 console.log(DFSg.depthFirstRecursive("A"));
 console.log(DFSg.depthFirstRecursive("B"));
+console.log(DFSg.depthFirstIterative("A"));
+console.log(DFSg.depthFirstIterative("B"));
 //            A
 //          /   \
 //        B       C
