@@ -26,6 +26,7 @@ Collection of data structures and algorithms solved in different languages.
     -   [BinarySearchTree](javascript/ads/datastructures/BinarySearchTree.js)
     -   [MaxBinaryHeap](javascript/ads/datastructures/MaxBinaryHeap.js)
     -   [Graph](javascript/ads/datastructures/Graph.js)
+    -   [WeightedGraph](javascript/ads/datastructures/WeightedGraph.js)
 
 ### Examples: ES5 & ES6
 
