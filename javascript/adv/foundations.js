@@ -270,3 +270,9 @@ function multiply(a, b) {
 let multiplyByTwo = multiply.bind(null, 2);
 console.log('multiplyByTwo', multiplyByTwo(4));
 
+// -------------------------
+// Context vs Scope
+// -------------------------
+
+// Scope is functon based: Visibility of variables.
+// Context is about object: How a function is invoked with the value of this.
