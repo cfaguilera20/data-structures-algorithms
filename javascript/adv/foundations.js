@@ -96,7 +96,7 @@ function tikTok(seconds) {
     setTimeout(() => {
         if (seconds > 0) {
             tikTok(seconds - 1);
-            console.log(".");
+            // console.log(".");
         }
 
     }, 1000)
@@ -132,3 +132,18 @@ function removeItemsFromList() {
 };
 
 removeItemsFromList();
+
+// -------------------------
+// Function vs block scope
+// -------------------------
+
+if(true) {
+    var globalScope = "Global";
+    let blockScope = "Hello";
+    console.log(blockScope);
+}
+
+console.log(globalScope);
+
+// ReferenceError: blockScope is not defined
+// console.log(blockScope);
