@@ -209,3 +209,55 @@ const obj = {
     }
 }
 obj.sing()(); // // Bind: "This" is the object that the function is a property of.
+
+// -------------------------
+// Call, apply, bind
+// -------------------------
+
+function friend() {
+    console.log("Hi!");
+}
+friend();
+friend.call();
+friend.apply();
+
+const wizard = {
+    name: "Carlos",
+    health: 50,
+    heal(percent = 100) {
+        return this.health = percent;
+    }
+}
+const archer = {
+    name: "Robin Hood",
+    health: 30
+}
+
+// Heal itself
+console.log("wizard", wizard.heal());
+
+// Heal another
+console.log("archer", archer.health);
+wizard.heal.call(archer, 89);
+console.log("archer call", archer.health);
+
+// Apply takes an array of parameters
+console.log("archer", archer.health);
+wizard.heal.apply(archer, [29]);
+console.log("archer apply", archer.health);
+
+// Bind takes the parameters like call, and returns a new function to call it later.
+console.log("archer", archer.health);
+const healArcher = wizard.heal.bind(archer, 100);
+healArcher();
+console.log("archer bind", archer.health);
+
+// Another example
+const array = [1, 2, 3];
+
+// in this case, the 'this' keyword doesn't matter!
+function getMaxNumber(arr) {
+    return Math.max.apply(null, arr);
+}
+
+console.log(getMaxNumber(array));
