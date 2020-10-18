@@ -259,5 +259,14 @@ const array = [1, 2, 3];
 function getMaxNumber(arr) {
     return Math.max.apply(null, arr);
 }
+console.log('getMaxNumber', getMaxNumber(array));
 
-console.log(getMaxNumber(array));
+// -------------------------
+// Bind & Currying
+// -------------------------
+function multiply(a, b) {
+    return a * b;
+}
+let multiplyByTwo = multiply.bind(null, 2);
+console.log('multiplyByTwo', multiplyByTwo(4));
+
