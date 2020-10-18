@@ -106,7 +106,8 @@ tikTok(5);
 // This line is executed after 3 seconds, and the callstack finished the curren tasks.
 // The web api enqueue the task when the time is passed
 // And the event loop is constantly checking the queue to pass it to the callstack
-setTimeout(() => console.log("The callstack was empty!"), 3000);
+// Uncomment this:
+// setTimeout(() => console.log("The callstack was empty!"), 3000);
 
 // .
 // .
@@ -127,7 +128,8 @@ function removeItemsFromList() {
         // So we can handle a list of thousand of items.
         setTimeout(removeItemsFromList, 0);
     } else {
-        console.log("Finish!");
+        // Uncomment this:
+        // console.log("Finish!");
     }
 };
 
@@ -137,7 +139,7 @@ removeItemsFromList();
 // Function vs block scope
 // -------------------------
 
-if(true) {
+if (true) {
     var globalScope = "Global";
     let blockScope = "Hello";
     console.log(blockScope);
@@ -147,3 +149,63 @@ console.log(globalScope);
 
 // ReferenceError: blockScope is not defined
 // console.log(blockScope);
+
+// -------------------------
+// IIFE - Inmediatly invoke function expression.
+// -------------------------
+
+//ES5
+var iife5 = "iife5";
+
+(function () {
+    var iife5inside = "iife5inside";
+    console.log(iife5inside);
+})();
+console.log(iife5);
+
+// ReferenceError: iife5inside is not defined
+// console.log(iife5inside);
+
+//ES6
+const iife6 = "iife6";
+{
+    const iife6inside = "hello6";
+}
+console.log(iife6);
+
+// ReferenceError: iife6inside is not defined
+// console.log(iife6inside);
+
+// -------------------------
+// This - This is the object that the function is a property of.
+// -------------------------
+
+// For web browsers the default object is the window object.
+console.log(this);
+
+const obj = {
+    name: "Caros",
+    sing() {
+        console.log('sing', this); // "This" is the object that the function is a property of.
+
+        const anotherFunction = function () {
+            console.log("anotherFunction", this) // "This" is the global scope
+        }
+        anotherFunction();
+
+        const self = this;
+        const anotherSelfFunction = function () {
+            console.log("anotherSelfFunction", self) // "This" is the global scope
+        }
+        anotherSelfFunction();
+
+        const anotherArrowFunction = () => {
+            console.log("anotherArrowFunction", this) // Arrow: "This" is the object that the function is a property of.
+        }
+        anotherArrowFunction();
+
+        return anotherFunction.bind(this);
+
+    }
+}
+obj.sing()(); // // Bind: "This" is the object that the function is a property of.
