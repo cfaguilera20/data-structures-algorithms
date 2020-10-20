@@ -86,6 +86,7 @@ Collection of data structures and algorithms solved in different languages.
 -   [Geekforgeeks](https://www.geeksforgeeks.org/)
 -   [Careercup](https://www.careercup.com/)
 -   [AST Explorer](https://astexplorer.net/)
+-   [JS Equality Table](https://dorey.github.io/JavaScript-Equality-Table/)
 
 ## Repos of interest
 
