@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Anchor Element</title>
+    </head>
+    <body>
+        <p>Open your developer tools...</p>
+        <a href="#">I'm an anchor!</a>
+        <script>
+            const nodeAnchor = document.querySelector('a');
+            const props = [];
+
+            console.dir(nodeAnchor);
+
+            // All nodes have these properties
+            console.log('nodeName:', nodeAnchor.nodeName);
+            console.log('nodeType:', nodeAnchor.nodeType);
+            console.dir('nodeAnchor.firstChild:', nodeAnchor.firstChild);
+            console.log('nodeName:', nodeAnchor.firstChild.nodeName);
+            console.log('nodeType:', nodeAnchor.firstChild.nodeType);
+            console.log('nodeType:', nodeAnchor.firstChild.parentNode);
+
+            // nodeValue: returns null for most of the node types (except Text & Comment).
+            console.log('nodeValue:', nodeAnchor.firstChild.nodeValue);
+
+            // Let's get the properties and methods
+            for (let key in nodeAnchor) {
+                props.push(key);
+            }
+
+            console.log(props.sort());
+
+            // Let's see it's inherance.
+            let depth = '';
+            let current = nodeAnchor;
+            while (current) {
+                depth += '-';
+                console.log(depth, current);
+                current = current.__proto__;
+            }
+        </script>
+    </body>
+</html>

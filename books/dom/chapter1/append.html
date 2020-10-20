@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Append</title>
+    </head>
+    <body>
+        <p>Open your developer tools...</p>
+        <div>Hi</div>
+        <script>
+            const elementNode = document.createElement('strong');
+            const textNode = document.createTextNode(' Carlos Aguilera !');
+            document.querySelector('div').appendChild(elementNode);
+            document.querySelector('strong').appendChild(textNode);
+            console.log(document.body.innerHTML);
+        </script>
+        <ul>
+            <li>2</li>
+            <li>3</li>
+        </ul>
+        <script>
+            const ul = document.querySelector('ul');
+            const li = document.createElement('li');
+            const text = document.createTextNode('1');
+            li.appendChild(text);
+            ul.insertBefore(li, ul.firstChild);
+        </script>
+    </body>
+</html>

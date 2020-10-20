@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Creating</title>
+    </head>
+    <body>
+        <p>Open your developer tools...</p>
+        <script>
+            const elementNode = document.createElement('div');
+            console.log(elementNode);
+            console.log('nodeType:', elementNode.nodeType);
+
+            const textNode = document.createTextNode('Hi!');
+            console.log(textNode);
+            console.log('nodeType:', textNode.nodeType);
+        </script>
+
+        <div id="a"></div>
+        <span id="b"></span>
+        <div id="c"></div>
+        <div id="d"></div>
+        <div id="e"></div>
+        <script>
+            // Creates a strong element adn text node and add it to the DOM
+            document.getElementById('a').innerHTML =
+                "<strong>I'm Strong</strong>";
+
+            // Creates a div element and text node to replace
+            document.getElementById('b').outerHTML =
+                '<div id="b">Replaced</div>';
+
+            // Create a text node and update the element
+            document.getElementById('c').textContent = 'The text content';
+
+            // Create a text node and update the element
+            document.getElementById('d').textContent = 'Keep it';
+
+            // Create a text node and replace the element
+            document.getElementById('e').outerText = 'real!';
+
+            console.log(document.body.innerHTML);
+
+            //insertAdjacentHTML: Only forn Elements
+        </script>
+        <br />
+        <i id="elem">how</i>
+        <script>
+            const elem = document.getElementById('elem');
+            elem.insertAdjacentHTML('beforebegin', '<span>Hey-</span>');
+            elem.insertAdjacentHTML('afterbegin', '<span>dude-</span>');
+            elem.insertAdjacentHTML('beforeend', '<span>-are</span>');
+            elem.insertAdjacentHTML('afterend', '<span>-you?</span>');
+            console.log(elem.innerHTML);
+        </script>
+    </body>
+</html>

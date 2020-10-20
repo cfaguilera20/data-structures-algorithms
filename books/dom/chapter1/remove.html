@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <p>Open your developer tools...</p>
+
+        <div id="a">Hi</div>
+        <div id="b">Carlos Aguilera</div>
+        <script>
+            const divA = document.getElementById('a');
+            divA.parentNode.removeChild(divA);
+
+            const textB = document.getElementById('b').firstChild;
+            textB.parentNode.removeChild(textB);
+        </script>
+
+        <div id="c">Hi</div>
+        <div id="d">Carlos</div>
+
+        <script>
+            // Replace the element
+            const divC = document.getElementById('c');
+            const newSpan = document.createElement('span');
+            newSpan.innerText = 'Hello';
+            divC.parentNode.replaceChild(newSpan, divC);
+
+            // Replace the text node
+            const oldTextNode = document.getElementById('d').firstChild;
+            const newTextNode = document.createTextNode("Carlos Aguilera");
+            oldTextNode.parentNode.replaceChild(newTextNode, oldTextNode);
+
+            console.log(document.body.innerHTML);
+        </script>
+    </body>
+</html>

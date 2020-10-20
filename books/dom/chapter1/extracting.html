@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <p>Open your developer tools...</p>
+        <div id="a"><i>Hi!</i></div>
+        <div id="b">Carlos <strong> !</strong></div>
+        <script>
+            const elemA = document.getElementById('a');
+            console.log('innerHTML:', elemA.innerHTML);
+            console.log('outerHTML:', elemA.outerHTML);
+
+            const elemB = document.getElementById('b');
+            // Returns as text even if there are other elemts.
+            console.log('textContent:', elemB.textContent);
+            console.log('innerText:', elemB.innerText); // NON standar
+            console.log('outerText:', elemB.outerText); // NON standar
+
+            console.log('document.textContent:', document.body.textContent); // NON standar
+        </script>
+    </body>
+</html>
