@@ -1,4 +1,5 @@
 // Primitive: Data, represent a single value.
+// Primitives pass by value
 // These have object wrappers.
 
 // -------------------------
