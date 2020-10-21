@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Poistion</title>
+    </head>
+    <body>
+        <p>Open your developer tools...</p>
+        <script>
+            const p = document.querySelector('p');
+            console.log('document.body.contains p', document.body.contains(p));
+            console.log('p.contains body', p.contains(document.body));
+            console.log('p.contains p', p.contains(p));
+        </script>
+    </body>
+</html>

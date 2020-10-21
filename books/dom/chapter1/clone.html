@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Clone</title>
+    </head>
+    <body>
+        <p>Open your developer tools...</p>
+        <ul>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+        </ul>
+        <script>
+            // All attributes are cloned
+            const cloneUL = document.querySelector('ul').cloneNode();
+            console.log(cloneUL.constructor);
+
+            // It's empty beacause only cloned the ul element.
+            console.log(cloneUL.innerHTML);
+
+            const cloneAll = document.querySelector('ul').cloneNode(true);
+            console.log(cloneAll.innerHTML);
+            document.body.appendChild(cloneAll);
+        </script>
+    </body>
+</html>

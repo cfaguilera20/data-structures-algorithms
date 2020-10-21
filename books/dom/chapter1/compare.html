@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Compare</title>
+    </head>
+    <body>
+        <input type="text" value="Value" />
+        <input type="text" value="Value" />
+        <textarea cols="30" rows="10">Carlos</textarea>
+        <textarea cols="30" rows="10">Aguilera</textarea>
+        <script>
+            const input = document.querySelectorAll('input');
+            console.log('input', input);
+            console.log('equal', input[0].isEqualNode(input[1]));
+            console.log('identical', input[0] === input[1]);
+
+            const area = document.querySelectorAll('textarea');
+            console.log('area', area);
+            console.log('not equal', area[0].isEqualNode(area[1]));
+            console.log('identical', area[0] === area[1]);
+        </script>
+    </body>
+</html>

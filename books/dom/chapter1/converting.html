@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Converting</title>
+    </head>
+    <body>
+        <p>Open your developer tools...</p>
+        <a href="#">I'm an anchor</a>
+    </body>
+    <script>
+        console.log(Array.isArray(document.querySelector('a')));
+        // Let's convert to have access to array methods
+        const anchors = Array.prototype.slice.call(
+            document.querySelectorAll('a')
+        );
+        console.log(Array.isArray(anchors), anchors);
+    </script>
+</html>

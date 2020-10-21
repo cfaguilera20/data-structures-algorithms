@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Traversing</title>
+    </head>
+    <body>
+        <p>Open your developer tools...</p>
+        <i>These traverse not just element nodes:</i>
+        <ul>
+            <!--Comments: 1-->
+            <li>parentNode</li>
+            <li>firstChild</li>
+            <li>lastChild</li>
+            <li>nextSibling</li>
+            <li>previousSibling</li>
+        </ul>
+        <p>Next sibiling</p>
+        <script>
+            const ul = document.querySelector('ul');
+            console.log('parentNode', ul.parentNode);
+            console.log('firstChild', ul.firstChild);
+            console.log('lastChild', ul.lastChild);
+            console.log('nextSibling', ul.nextSibling);
+            console.log('previousSibling', ul.previousSibling);
+        </script>
+        <ul id="element">
+            <li>firstElementChild</li>
+            <li>lastElementChild</li>
+            <li>nextElementSibling</li>
+            <li>previousElementSibling</li>
+            <li>children</li>
+            <li>parentElement</li>
+        </ul>
+        <script>
+            const element = document.getElementById('element');
+            console.log('firstElementChild', element.firstElementChild);
+            console.log('lastElementChild', element.lastElementChild);
+            console.log('nextElementSibling', element.nextElementSibling);
+            console.log(
+                'previousElementSibling',
+                element.previousElementSibling
+            );
+            console.log('children', element.children);
+            console.log('parentElement', element.parentElement);
+        </script>
+    </body>
+</html>

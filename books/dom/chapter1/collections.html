@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Collections</title>
+    </head>
+    <body>
+        <p>Open your developer tools...</p>
+        <script>
+            let nodeList = document.querySelector('*');
+            console.log(nodeList);
+            console.log(document.scripts);
+        </script>
+        <ul>
+            <li>Hi</li>
+            <li>Carlos Aguilera!</li>
+        </ul>
+        <script>
+            const ulElementChildNodes = document.querySelector('ul').childNodes;
+            console.log(ulElementChildNodes);
+            for (let node of ulElementChildNodes) {
+                console.log(node.nodeType, node.nodeName, node.nodeValue);
+            }
+        </script>
+    </body>
+</html>
