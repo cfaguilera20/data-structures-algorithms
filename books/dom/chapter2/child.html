@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document child</title>
+    </head>
+    <body>
+        <p>Open your developer tools...</p>
+        <script>
+            console.log(
+                '<!DOCTYPE html>',
+                document.childNodes[0].nodeType,
+                Node.DOCUMENT_TYPE_NODE
+            );
+            console.log(
+                '<html lang="en">',
+                document.childNodes[1].nodeType,
+                Node.ELEMENT_NODE
+            );
+
+            // Shortcuts
+            console.log('<!DOCTYPE html>', document.doctype);
+            console.log('<html lang="en">', document.documentElement);
+            console.log('<head>', document.head);
+            console.log('<body>', document.body);
+        </script>
+    </body>
+</html>

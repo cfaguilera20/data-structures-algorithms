@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <p>Open your developer tools...</p>
+        <script>
+            //Own
+            console.log(Object.keys(document).sort());
+
+            //Own & inherited
+            const documentPropertiesIncludeInherited = [];
+            for (let p in document) {
+                documentPropertiesIncludeInherited.push(p);
+            }
+            console.log(documentPropertiesIncludeInherited.sort());
+
+            //Only inherited
+            const documentPropertiesOnlyInherited = [];
+            for (let p in document) {
+                if (!document.hasOwnProperty(p))
+                    documentPropertiesOnlyInherited.push(p);
+            }
+            console.log(documentPropertiesOnlyInherited.sort());
+        </script>
+    </body>
+</html>

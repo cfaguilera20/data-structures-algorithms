@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document Information</title>
+    </head>
+    <body>
+        <p>Open your developer tools...</p>
+        <script>
+            const d = document;
+            console.log('title', d.title);
+            console.log('url', d.URL);
+            console.log('referrer', d.referrer);
+            console.log('lastModified', d.lastModified);
+
+            // Implementation
+            console.log('Core 2.0', d.implementation.hasFeature('Core', '2.0'));
+            console.log('Core 3.0', d.implementation.hasFeature('Core', '3.0'));
+        </script>
+    </body>
+</html>
