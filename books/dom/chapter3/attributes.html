@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Attributes</title>
+    </head>
+    <body>
+        <p>Open your developer tools...</p>
+        <a
+            href="#"
+            title="Carlos"
+            data-foo="Aguilera"
+            class="inline blue"
+            style="margin: 0"
+            hidden="hidden"
+            >Hello link!</a
+        >
+        <script>
+            const a = document.querySelector('a');
+            const attr = a.attributes;
+            console.log('a.attributes', attr);
+
+            for (let i = 0; i < attr.length; i++) {
+                console.log(attr[i].nodeName, attr[i].nodeValue);
+            }
+
+            setTimeout(function () {
+                a.removeAttribute('hidden');
+            }, 1000);
+            setTimeout(function () {
+                a.setAttribute('style', 'color:red');
+            }, 1500);
+
+            console.log(
+                'a.getAttribute("data-foo")',
+                a.getAttribute('data-foo')
+            );
+            console.log('a.hasAttribute("id")', a.hasAttribute('id'));
+            console.log('a.hasAttribute("class")', a.hasAttribute('class'));
+        </script>
+        <div class="big brown bear">More than one class...</div>
+        <script>
+            const div = document.querySelector('div');
+            console.log('div.classList', div.classList);
+            console.log('div.className', div.className);
+            div.classList.add('last');
+            div.classList.remove('bear');
+            div.classList.toggle('big'); // Remove
+            console.log('classList.contains', div.classList.contains('big'));
+            div.classList.toggle('big'); // Add again
+        </script>
+        <div data-foo-foo="foo" data-bar-bar="bar" id="dataset">Has dataset...</div>
+        <script>
+            const dataset = document.querySelector('#dataset');
+            console.log('div.dataset', dataset.dataset.fooFoo);
+            console.log('div.dataset', dataset.dataset.barBar);
+            dataset.dataset.goGo = "go";
+        </script>
+    </body>
+</html>
