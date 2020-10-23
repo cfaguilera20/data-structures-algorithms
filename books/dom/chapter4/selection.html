@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Selection</title>
+    </head>
+    <body>
+        <p>Open your developer tools...</p>
+        <ul>
+            <li>1</li>
+            <li class="middle">2</li>
+            <li class="middle">3</li>
+            <li id="last">4</li>
+        </ul>
+        <script>
+            // Find the firs element
+            console.log(
+                'document.querySelector',
+                document.querySelector('li').textContent
+            );
+            // Find specfic element
+            console.log(
+                'document.getElementById',
+                document.getElementById('last').textContent
+            );
+
+            // Find all elements - spnapshoot
+            console.log(
+                'document.querySelectorAll',
+                document.querySelectorAll('li')
+            );
+
+            // Find by tagname - always reflect the state
+            console.log(
+                'document.getElementsByTagName',
+                document.getElementsByTagName('li')
+            );
+
+            // Find by class - always reflect the state
+            console.log(
+                'document.getElementsByClassName',
+                document.getElementsByClassName('middle')
+            );
+
+            // Child elements
+            console.log(
+                'document.querySelector.children',
+                document.querySelector('ul').children
+            );
+        </script>
+        <h2>Contextual elements</h2>
+        <div style="border: 1px solid pink">
+            <ul>
+                <li class="contextual">1</li>
+                <li class="contextual">2</li>
+                <li class="contextual">3</li>
+                <li class="contextual">4</li>
+            </ul>
+        </div>
+        <script>
+            const div = document.querySelector('div');
+            console.log('div.querySelector', div.querySelector('ul'));
+            console.log('div.querySelectorAll', div.querySelectorAll('li'));
+            console.log(
+                'div.getElementsByClassName',
+                div.getElementsByClassName('contextual')
+            );
+        </script>
+        <h2>Creating & Selectig DOM</h2>
+        <script>
+            const divElem = document.createElement('div');
+            const ulElem = document.createElement('ul');
+            const liElem = document.createElement('li');
+            liElem.textContent = 'Created element';
+            liElem.setAttribute('class', 'created');
+            ulElem.appendChild(liElem);
+            divElem.appendChild(ulElem);
+            document.body.appendChild(divElem);
+
+            // We can navigate these elements
+            console.log('divElem.querySelector', divElem.querySelector('ul'));
+        </script>
+        <h2>Preconfigured selections</h2>
+        <form action="#"></form>
+        <img
+            src="https://cfadev.com/img/undraw_work_together_h63l.1c7a7ffd.svg"
+            alt=""
+        />
+        <a href="https://cfadev.com">https://cfadev.com</a>
+        <style>
+            img {
+                width: 300px;
+                display: block;
+            }
+        </style>
+        <script>
+            console.log('document.all', document.all);
+            console.log('document.forms', document.forms);
+            console.log('document.images', document.images);
+            console.log('document.links', document.links);
+            console.log('document.scripts', document.scripts);
+            console.log('document.styleSheets', document.styleSheets);
+        </script>
+        <h2>Matches selector</h2>
+        <ul id="matches">
+            <li class="contextual">1</li>
+            <li class="contextual">2</li>
+            <li class="contextual">3</li>
+            <li class="contextual">4</li>
+        </ul>
+        <script>
+            const ulMatches = document.getElementById('matches');
+            console.log(
+                'webkitMatchesSelector.li:last-child',
+                ulMatches
+                    .querySelector('li')
+                    .webkitMatchesSelector('li:first-child')
+            );
+            console.log(
+                'webkitMatchesSelector.li:last-child',
+                ulMatches
+                    .querySelector('li')
+                    .webkitMatchesSelector('li:last-child')
+            );
+        </script>
+    </body>
+</html>
