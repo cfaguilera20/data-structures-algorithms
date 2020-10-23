@@ -12,27 +12,40 @@ function createElf(name, weapon) {
     newElf.name = name;
     newElf.weapon = weapon;
 
-    // We can remove these lines because of Object.create()
-    // return {
-    //     //ES5
-    //     name: name,
-    //     //ES6
-    //     weapon,
-    //     // If we create 1000 objects we will have 1000 functions in memory
-    //     // attack() {
-    //     //     return this.name + ' attack with ' + weapon;
-    //     // }
-    // }
-
     return newElf;
 }
 
 const carlos = createElf('Carlos', 'fire');
 const aguilera = createElf('Aguilera', 'stones');
 
-// We can remove these lines because of Object.create()
-// carlos.attack = elfFunctions.attack;
-// aguilera.attack = elfFunctions.attack;
-
 console.log(carlos.attack());
 console.log(aguilera.attack());
+
+
+//------------------------------
+// Constructor functions
+//------------------------------
+const Elfunc = Function('name', 'weapon', `
+    this.name = name;
+    this.weapon = weapon;
+`);
+
+const elf1 = new Elfunc('Carlos', 'Fire')
+console.log(elf1.name, elf1.weapon);
+
+function Elf(name, weapon) {
+    this.name = name;
+    this.weapon = weapon;
+}
+
+Elf.prototype.attack = function () {
+    return this.name + ' attack with ' + this.weapon;
+}
+
+// All the objects points to the same attack location in memory
+const elf2 = new Elf('Carlos', 'Stones');
+console.log(elf2.name, elf2.weapon);
+console.log(elf2.attack());
+
+// The prototype
+console.log(Elf.prototype, elf2.__proto__);
