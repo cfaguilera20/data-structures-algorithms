@@ -8,7 +8,7 @@ const elfFunctions = {
     }
 }
 function createElf(name, weapon) {
-    // This is a prototypal inherence
+    // This is a prototypal inheritance
     const newElf = Object.create(elfFunctions);
     newElf.name = name;
     newElf.weapon = weapon;
