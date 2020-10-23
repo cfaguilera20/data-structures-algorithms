@@ -46,7 +46,19 @@ class Dijkstra extends WeightedGraph {
         const nodes = new PriorityQueue();
         const distances = {};
         const previous = {};
+        let path = [];
         let smallest;
+
+        // Creates the initial distance and previous table.
+        // Vertex   Shortest Dist From Start(A)
+        //    A                0
+        //    B             Infinity
+        //    C             Infinity
+        //   ...              ...
+        //    A               null
+        //    B               null
+        //    C               null
+        //   ...              ...
 
         for (let vertex in this.adjacencyList) {
             if (vertex === start) {
@@ -60,19 +72,37 @@ class Dijkstra extends WeightedGraph {
         }
 
         while (nodes.values.length) {
+            // Get the most priority node. The first is the start node because it has priority 0
             smallest = nodes.dequeue().value;
-            if (smallest === finish) {
 
+            // If smallest is equal to our finish node we are done.
+            if (smallest === finish) {
+                // We traverse the previous hashmap to get our path
+                while (previous[smallest]) {
+                    path.push(smallest);
+                    smallest = previous[smallest];
+                }
+                break;
             }
+
             if (smallest || distances[smallest] !== Infinity) {
                 for (let neighbor in this.adjacencyList[smallest]) {
                     let nextNode = this.adjacencyList[smallest][neighbor];
-                    console.log(nextNode);
-                    nodes.enqueue(nextNode);
+                    // Calculate new distance
+                    let candiateDistance = distances[smallest] + nextNode.weight;
+                    let nextNeighbor = nextNode.node;
+                    if (candiateDistance < distances[nextNeighbor]) {
+                        // Updating new smallest distance to neighbor
+                        distances[nextNeighbor] = candiateDistance;
+                        // Updating previous
+                        previous[nextNeighbor] = smallest;
+                        // Enquee
+                        nodes.enqueue(nextNeighbor, candiateDistance);
+                    }
                 }
             }
         }
-
+        return path.concat(smallest).reverse();
     }
 }
 
