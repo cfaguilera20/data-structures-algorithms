@@ -1,6 +1,7 @@
 //------------------------------
 // Factory functions
 //------------------------------
+console.log("--------------------------");
 const elfFunctions = {
     attack() {
         return this.name + ' attack with ' + this.weapon;
@@ -25,6 +26,7 @@ console.log(aguilera.attack());
 //------------------------------
 // Constructor functions
 //------------------------------
+console.log("--------------------------");
 const Elfunc = Function('name', 'weapon', `
     this.name = name;
     this.weapon = weapon;
@@ -49,3 +51,21 @@ console.log(elf2.attack());
 
 // The prototype
 console.log(Elf.prototype, elf2.__proto__);
+
+//------------------------------
+// Classes
+//------------------------------
+console.log("--------------------------");
+class ElfClass {
+    constructor(name, weapon) {
+        this.name = name;
+        this.weapon = weapon;
+    }
+    attack() {
+        return this.name + ' attack with ' + this.weapon;
+    }
+}
+
+const elf3 = new ElfClass('Carlos', 'Stones');
+console.log(elf3.name, elf3.weapon);
+console.log(elf3.attack());
