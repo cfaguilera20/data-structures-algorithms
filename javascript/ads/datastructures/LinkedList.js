@@ -165,6 +165,17 @@ class LinkedList {
         }
     }
 
+    rotate(places) {
+        while (places > 0) {
+            let newTail = this.shift();
+            newTail.next = null;
+            this.tail.next = newTail;
+            this.tail = newTail;
+            this.length += 1;
+            places -= 1;
+        }
+    }
+
     // O(n) time | O(1) space
     toString() {
         let current = this.head
