@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <style>
+        body {
+            margin: 0;
+        }
+        #blue {
+            height: 100px;
+            width: 100px;
+            background-color: blue;
+            border: 10px solid gray;
+            padding: 25px;
+            margin: 25px;
+        }
+        #green {
+            height: 100px;
+            width: 100px;
+            background-color: green;
+            border: 10px solid gray;
+            padding: 25px;
+            margin: 25px;
+            position: absolute;
+        }
+        #red {
+            height: 50px;
+            width: 50px;
+            background-color: red;
+            border: 10px solid gray;
+        }
+        #yellow {
+            height: 50px;
+            width: 50px;
+            background-color: yellow;
+            border: 10px solid gray;
+        }
+    </style>
+    <body>
+        <p>Open your developer tools...</p>
+        <h2>Offset is based int body</h2>
+        <div id="blue"><div id="red"></div></div>
+        <script>
+            const red = document.querySelector('#red');
+            console.log('red.offsetTop', red.offsetTop);
+            console.log('red.offsetLeft', red.offsetLeft);
+            console.log('red.offsetParent', red.offsetParent);
+        </script>
+        <h2>Offset is based in green becasuse it has position absolute</h2>
+        <div id="green"><div id="yellow"></div></div>
+        <script>
+            const yellow = document.querySelector('#yellow');
+            console.log('yellow.offsetTop', yellow.offsetTop);
+            console.log('yellow.offsetLeft', yellow.offsetLeft);
+            console.log('yellow.offsetParent', yellow.offsetParent);
+        </script>
+    </body>
+</html>
