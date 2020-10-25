@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <style>
+            div {
+                background-color: red;
+                border: 1px solid black;
+                height: 100px;
+                width: 100px;
+            }
+            .foo {
+                background-color: red;
+                padding: 10px;
+            }
+            #bar {
+                border: 10px solid #000;
+                margin: 150px;
+            }
+        </style>
+    </head>
+    <body>
+        <div
+            style="background-color: greenyellow; border: 1px solid purple"
+        ></div>
+        <script>
+            const div = document.querySelector('div');
+            // getComputedStyle is read-only
+            console.log(
+                'window.getComputedStyle(div).backgroundColor',
+                window.getComputedStyle(div).backgroundColor
+            );
+            console.log(
+                'window.getComputedStyle(div).border',
+                window.getComputedStyle(div).border
+            );
+            console.log(
+                'window.getComputedStyle(div).height',
+                window.getComputedStyle(div).height
+            );
+            console.log(
+                'window.getComputedStyle(div).width',
+                window.getComputedStyle(div).width
+            );
+        </script>
+        <span></span>
+        <script>
+            const span = document.querySelector('span');
+            span.setAttribute('id', 'bar');
+            span.classList.add('foo');
+        </script>
+    </body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Inline Styles</title>
+    </head>
+    <body>
+        <p>Open your developer tools...</p>
+        <div
+            style="
+                background-color: red;
+                border: 1px solid red;
+                height: 100px;
+                width: 100px;
+            "
+        ></div>
+        <script>
+            const div = document.querySelector('div');
+            console.log('div.style', div.style);
+
+            // Modify css properties
+            const divStyle = div.style;
+            setTimeout(function () {
+                divStyle.backgroundColor = 'green';
+                divStyle.border = '1px solid gray';
+                divStyle.height = '50px';
+                divStyle.width = '50px';
+            }, 1000);
+
+            // Get css properties
+            console.log('divStyle.backgroundColor', divStyle.backgroundColor);
+            console.log('divStyle.border', divStyle.border);
+            console.log('divStyle.height', divStyle.height);
+            console.log('divStyle.width', divStyle.width);
+
+            // Remove
+            setTimeout(function () {
+                divStyle.backgroundColor = '';
+            }, 2000);
+
+
+            // We can use the methos
+            divStyle.setProperty('margin-top', '100px');
+            divStyle.setProperty('padding', '10px');
+            console.log('divStyle.getPropertyValue', divStyle.getPropertyValue('margin-top'));
+
+            setTimeout(function () {
+                divStyle.setProperty('background-color', '10px');
+            }, 2500);
+
+            // Modify all
+            const cssText = divStyle.cssText;
+            // div.getAttribute('style');
+            console.log('divStyle.cssText', cssText);
+
+            // Restore
+            setTimeout(function () {
+                divStyle.cssText = '';
+                // div.removeAttribute('style');
+            }, 3000);
+
+            // Restore
+            setTimeout(function () {
+                divStyle.cssText = cssText;
+                // div.setAttribute('style', cssText);
+            }, 3500);
+
+        </script>
+    </body>
+</html>
