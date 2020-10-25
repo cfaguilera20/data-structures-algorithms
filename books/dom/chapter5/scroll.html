@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .conatiner1 {
+            height: 100px;
+            width: 100px;
+            border: 1px solid gray;
+            overflow: auto;
+        }
+        .container2 {
+            height: 30px;
+            width: 30px;
+            border: 1px solid gray;
+            overflow: auto;
+        }
+        p.scroll {
+            height: 1000px;
+            width: 1000px;
+            background-color: lightseagreen;
+        }
+        .container2 p {
+            background-color: red;
+        }
+    </style>
+    <body>
+        <p>Open your developer tools...</p>
+        <div class="conatiner1"><p class="scroll"></p></div>
+        <script>
+            const div = document.querySelector('.conatiner1');
+            console.log('div.scrollHeight', div.scrollHeight);
+            console.log('div.scrollHeight', div.scrollHeight);
+
+            div.scrollTop = 500;
+            div.scrollLeft = 500;
+
+            console.log('div.scrollTop', div.scrollTop);
+            console.log('div.scrollLeft', div.scrollLeft);
+        </script>
+        <div class="container2">
+            <content>
+                <p>1</p>
+                <p>2</p>
+                <p>3</p>
+                <p>4</p>
+                <p>5</p>
+                <p>6</p>
+                <p>7</p>
+                <p>8</p>
+                <p>9</p>
+                <p>10</p>
+            </content>
+        </div>
+        <script>
+            document.querySelector('content').children[4].scrollIntoView(true);
+        </script>
+    </body>
+</html>

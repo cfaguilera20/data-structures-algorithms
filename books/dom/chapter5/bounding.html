@@ -3,9 +3,12 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Document</title>
+        <title>Bounding Client Rect</title>
     </head>
     <style>
+        body {
+            margin: 0;
+        }
         .bounding {
             height: 50px;
             width: 50px;
@@ -13,9 +16,36 @@
             border: 10px solid gray;
             margin: 100px;
         }
+        .padding {
+            padding: 25px;
+        }
     </style>
     <body>
-        <h2>Bounding Client Rect</h2>
         <div class="bounding"></div>
+        <p>Open your developer tools...</p>
+        <script>
+            const divEdges = document
+                .querySelector('div')
+                .getBoundingClientRect();
+            console.log('divEdges.top', divEdges.top);
+            console.log('divEdges.right', divEdges.right);
+            console.log('divEdges.bottom', divEdges.bottom);
+            console.log('divEdges.left', divEdges.left);
+        </script>
+        <div class="bounding padding"></div>
+        <script>
+            const divBound = document.querySelector('.padding').getBoundingClientRect();
+            console.log('divBound.height', divBound.height);
+            console.log('divBound.width', divBound.width);
+
+            // Same values are returned by
+            const divSize = document.querySelector('.padding');
+            console.log('divSize.offsetHeight', divSize.offsetHeight);
+            console.log('divSize.offsetWidth', divSize.offsetWidth);
+
+            // Exluding border
+            console.log('divSize.clientHeight', divSize.clientHeight);
+            console.log('divSize.clientWidth', divSize.clientWidth);
+        </script>
     </body>
 </html>
