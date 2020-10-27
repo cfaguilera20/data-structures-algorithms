@@ -100,6 +100,7 @@ console.log(changed);
 items = [
     { color: 'red', type: 'tv', age: 18 },
     { color: 'silver', type: 'phone', age: 20 },
+    { skin: 'silver', name: 'phone', age: 20 },
     { color: 'red', type: 'phone', age: 20 }
 ];
 
@@ -119,18 +120,43 @@ console.log('excludeItems', excludeItems(items, excludes));
 // 3. How would you optimize it ?
 
 function excludeItems2(items, excludes) {
-    let result = items.filter(item =>  {
-       for(let e = 0; e < excludes.length; e++) {
-           let pair = excludes[e];
-           if((item[pair.k] === pair.v)) {
-               return false;
-               // moving to next item. no need to see next excluded element
-           }
-       }
-       return true;
-   });
-   return result;
+    let result = items.filter(item => {
+        for (let e = 0; e < excludes.length; e++) {
+            let pair = excludes[e];
+            if ((item[pair.k] === pair.v)) {
+                return false;
+                // moving to next item. no need to see next excluded element
+            }
+        }
+        return true;
+    });
+    return result;
 }
 
 console.log('excludeItems2', excludeItems2(items, excludes));
 
+//-----------------------
+// Sum two numbers
+//-----------------------
+function sum(a, b) {
+    let result = [];
+    let carrying = false;
+    let num;
+    const getNextInt = (str) => parseInt(str.substring(str.length - 1) || 0);
+    while (a.length || b.length) {
+        num = getNextInt(a) + getNextInt(b) + (+carrying);
+        carrying = num >= 10;
+        num = carrying ? num - 10 : num;
+        //result = `${num}${result}`;
+        result.push(num);
+        a = a.slice(0, -1);
+        b = b.slice(0, -1);
+    }
+
+    return result.reverse().join('');
+}
+
+console.log(sum('123123', '5523783'), '5646906');
+console.log(sum('0', '0'), '0');
+console.log(sum('0', '10'), '10');
+console.log(sum('10', '19'), '29');
