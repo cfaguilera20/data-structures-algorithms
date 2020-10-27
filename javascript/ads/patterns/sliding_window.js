@@ -50,7 +50,6 @@ function maxSubarraySumRefactor(arr, num) {
     }
 
     return maxSum;
-
 }
 
 
