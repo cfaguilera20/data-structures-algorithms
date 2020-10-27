@@ -93,3 +93,44 @@ function changeIndex(array, index) {
 
 const changed = changeIndex([1, 2, 3, 4, 5], [0, 2, 4, 1, 3]);
 console.log(changed);
+
+
+// Given input:
+// could be potentially more than 3 keys in  the object above
+items = [
+    { color: 'red', type: 'tv', age: 18 },
+    { color: 'silver', type: 'phone', age: 20 },
+    { color: 'red', type: 'phone', age: 20 }
+];
+
+excludes = [{ k: 'color', v: 'silver' }, { k: 'type', v: 'tv' },]
+
+// O(n * e) complexity | O(1) space
+function excludeItems(items, excludes) {
+    excludes.forEach(pair => {
+        items = items.filter(item => item[pair.k] !== pair.v);
+    });
+    return items;
+}
+
+console.log('excludeItems', excludeItems(items, excludes));
+// 1. Describe what this function is doing...
+// 2. What is wrong with that function ?
+// 3. How would you optimize it ?
+
+function excludeItems2(items, excludes) {
+    let result = items.filter(item =>  {
+       for(let e = 0; e < excludes.length; e++) {
+           let pair = excludes[e];
+           if((item[pair.k] === pair.v)) {
+               return false;
+               // moving to next item. no need to see next excluded element
+           }
+       }
+       return true;
+   });
+   return result;
+}
+
+console.log('excludeItems2', excludeItems2(items, excludes));
+
