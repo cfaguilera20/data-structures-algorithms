@@ -92,3 +92,6 @@ function updateName(obj, name) {
 console.log(updateName(obj, "Carlos Aguilera"));
 console.log(obj);
 
+//------------------------------------------------
+// HOF (Higher Order Functions) - Closures
+//------------------------------------------------
