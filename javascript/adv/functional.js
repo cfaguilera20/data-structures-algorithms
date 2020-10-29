@@ -72,3 +72,23 @@ for (let i = 0; i < 5; i++) {
 
 // jQuery is imperative
 // Vue, Angular, React are declarative
+
+//------------------------------------------------
+// Immutability - Not changing the data (state)
+//------------------------------------------------
+
+const obj = { name: 'Carlos' };
+
+function clone(obj) {
+    return { ...obj }; // This is pure, but only to one level, not for nested objects.
+}
+
+function updateName(obj, name) {
+    const objClone = clone(obj);
+    objClone.name = name;
+    return objClone;
+}
+
+console.log(updateName(obj, "Carlos Aguilera"));
+console.log(obj);
+
