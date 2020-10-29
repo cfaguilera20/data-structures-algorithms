@@ -47,3 +47,28 @@ function c(num) {
 // Referential transparency
 console.log(c(b(3, 4)));
 console.log(c(7));
+
+//---------------------------
+// Idempotence
+//---------------------------
+function notGood(num) {
+    return Math.random(num)
+}
+console.log('notGood', notGood(5));
+console.log('Math.abs', Math.abs(-50), Math.abs(Math.abs(-50))); // Always thje same input
+
+
+//-------------------------------------------------------------------------------
+// Imperative (Best for machines) vs Declarative (Best for humans)
+//-------------------------------------------------------------------------------
+
+// Imperative
+for (let i = 0; i < 5; i++) {
+    console.log(i);
+}
+
+// Declarative
+[1, 2, 3, 4, 5].forEach(item => console.log(item));
+
+// jQuery is imperative
+// Vue, Angular, React are declarative
