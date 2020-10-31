@@ -126,3 +126,6 @@ console.log('curriedMultiplyBy5', curriedMultiplyBy5(3));
 //------------------------------------------------
 // Partial Application
 //------------------------------------------------
+const multiply2 = (a, b, c) => a * b * c;
+const partialMultiplyBy5 = multiply2.bind(null, 5);
+console.log('partialMultiplyBy5', partialMultiplyBy5(4, 10));
