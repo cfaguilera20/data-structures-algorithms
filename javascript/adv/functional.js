@@ -95,3 +95,24 @@ console.log(obj);
 //------------------------------------------------
 // HOF (Higher Order Functions) - Closures
 //------------------------------------------------
+
+// HOF
+const hof = () => () => 5;
+console.log(hof()());
+
+// Closures
+const closure = function () {
+    let count = 0;
+
+    return function increment() {
+        return ++count;
+
+    }
+}
+const incrementFn = closure();
+console.log('incrementFn', incrementFn());
+console.log('incrementFn', incrementFn());
+
+//------------------------------------------------
+// Currying
+//------------------------------------------------
