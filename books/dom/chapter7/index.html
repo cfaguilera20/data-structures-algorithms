@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Text Nodes</title>
+    </head>
+    <body>
+        <p>Open your developer tools...</p>
+        <p id="hi">Hi!</p>
+        <script>
+            const textHi = document.querySelector('#hi').firstChild;
+            console.log('textHi.constructor', textHi.constructor);
+            console.log(textHi);
+
+            // Properties
+            console.log(Object.keys(textHi).sort());
+
+            const textPropertiesIncludedInherited = [];
+            for (let p in textHi) {
+                textPropertiesIncludedInherited.push(p);
+            }
+            console.log(textPropertiesIncludedInherited);
+
+            const textPropertiesOnlyInherited = [];
+            for (let p in textHi) {
+                if (!textHi.hasOwnProperty(p))
+                    textPropertiesOnlyInherited.push(p);
+            }
+            console.log(textPropertiesOnlyInherited);
+
+            // Other properties
+            console.log('textHi.textContent', textHi.textContent);
+        </script>
+        <h2>Withespace creates a node</h2>
+        <p id="p1"></p>
+        <p id="p2"> </p> <!-- Yes there is a carriage return text node before this comment, even this comment is a text node -->
+        <script>
+            console.log(
+                '#p1.firstChild',
+                document.querySelector('#p1').firstChild
+            );
+            console.log(
+                '#p2.firstChild',
+                document.querySelector('#p2').firstChild.nodeName
+            );
+
+            console.log(
+                '#p2.nextSibiling',
+                document.querySelector('#p2').nextSibling
+            );
+        </script>
+        <h2>Creating and injecting text nodes.</h2>
+        <div></div>
+        <script>
+            const newTextNode = document.createTextNode("Created textNode !");
+            const div = document.querySelector('div');
+            div.appendChild(newTextNode);
+            console.log('div.innerText', div.innerText);
+
+            //Inser text in element
+            const otherTextNode = document.createTextNode("Other textNode !");
+            const elementP = document.createElement('p');
+            elementP.appendChild(otherTextNode);
+            div.appendChild(elementP);
+        </script>
+        <h2>Getting a Text Node Value with .data or nodeValue</h2>
+        <p id="value">Hi!, <strong>Carlos</strong>!</p>
+        <script>
+            const pValue = document.querySelector('#value');
+            console.log('firstChild.data', pValue.firstChild.data);
+            console.log('firstChild.nodeValue', pValue.firstChild.nodeValue);
+        </script>
+        <h2>Manipulating Text Nodes</h2>
+        <p id="manipulating">!Go Carlos</p>
+        <script>
+            const pElementText = document.querySelector('#manipulating').firstChild;
+
+            // Add !
+            pElementText.appendData('!!');
+            pElementText.deleteData(0, 3);
+            pElementText.insertData(0, 'Go');
+            pElementText.replaceData(9,9, ' Aguilera!');
+            console.log(pElementText.substringData(3,7));
+        </script>
+        <p id="multisiblings">Multiple <strong>Sibling</strong> Text Node!</p>
+        <script>
+            const pElementMulti = document.querySelector('#multisiblings');
+            console.log('pElementMulti.firstChild.data', pElementMulti.firstChild.data);
+            console.log('pElementMulti.firstChild.nextSibling.innerText', pElementMulti.firstChild.nextSibling.innerText);
+            console.log('pElementMulti.lastChild.nodeValue', pElementMulti.lastChild.nodeValue);
+        </script>
+        <p id="removemarkup">Remove <strong>Markup</strong> and return all child Text Nodes!</p>
+        <script>
+            const pElementRemove = document.querySelector('#removemarkup');
+            console.log('pElementRemove.textContent', pElementRemove.textContent);
+        </script>
+        <h2>Normalize</h2>
+        <div id="normalize"></div>
+        <script>
+            const pElementNorm = document.createElement('p');
+            const textNodeHi = document.createTextNode('Hi');
+            const textNodeCarlos = document.createTextNode(' Carlos');
+            pElementNorm.appendChild(textNodeHi);
+            pElementNorm.appendChild(textNodeCarlos);
+            document.querySelector('#normalize').appendChild(pElementNorm);
+            console.log(document.querySelector('#normalize p').childNodes.length);
+            document.querySelector('#normalize').normalize();
+            console.log(document.querySelector('#normalize p').childNodes.length);
+
+        </script>
+        <h2>Split Text</h2>
+        <p id="split">Hey Yo!</p>
+        <script>
+            console.log(document.querySelector('#split').firstChild.splitText(4).data);
+            console.log(document.querySelector('#split').firstChild.textContent);
+        </script>
+    </body>
+</html>
