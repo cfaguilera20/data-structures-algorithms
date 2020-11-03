@@ -23,3 +23,11 @@ function fail(fail) {
 
 fail(false);
 fail(true);
+
+try {
+    setTimeout(function() {
+        fakeVariableInWebAPI;
+    }, 1000)
+} catch(e) {
+    console.log(e);
+}
