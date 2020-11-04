@@ -24,10 +24,36 @@ function fail(fail) {
 fail(false);
 fail(true);
 
+setTimeout(function () {
+    // This dosen't throws an error because it runs in the Web APIs
+    fakeVariableInWebAPI;
+}, 0);
+
+// We hace to use a try catch to get the error.
 try {
-    setTimeout(function() {
+    setTimeout(function () {
         fakeVariableInWebAPI;
-    }, 1000)
-} catch(e) {
+    }, 0);
+} catch (e) {
     console.log(e);
 }
+
+
+Promise
+    .resolve('asyncfail')
+    .then(response => {
+        // throw new Error("Failed promise!");
+
+        // This is not handleded
+        Promise.resolve().then(() => {
+            throw new Error("Another error in promise!");
+        }).catch(console.log);
+
+        return 5;
+    })
+    .then(response => {
+        console.log(response);
+    })
+    .catch(error => {
+        return error;
+    });
