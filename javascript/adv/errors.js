@@ -70,3 +70,26 @@ Promise
     }
     console.log('is this still good?')
 })();
+
+//------------------------
+// Extending errors
+//------------------------
+
+class AuthError extends Error {
+    constructor(message) {
+        super(message);
+        this.message = 'AuthError';
+    }
+}
+
+class DatabaseError extends Error {
+    constructor(message) {
+        super(message);
+        this.name = 'DatabaseError';
+        this.message = 'DatabaseError';
+    }
+}
+
+
+throw new AuthError("Opps auth!");
+throw new DatabaseError("Opps auth!");
