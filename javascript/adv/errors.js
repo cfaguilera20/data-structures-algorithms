@@ -57,3 +57,16 @@ Promise
     .catch(error => {
         return error;
     });
+
+
+//------------------------
+// Try & Catch - Async
+//------------------------
+(async function () {
+    try {
+        await Promise.reject('oops in try catch!');
+    } catch (error) {
+        console.log(error)
+    }
+    console.log('is this still good?')
+})();
