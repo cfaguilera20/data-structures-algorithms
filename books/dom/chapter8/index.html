@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>DocumentFragment</title>
+    </head>
+    <body>
+        <p>Open your developer tools...</p>
+        <ul></ul>
+        <script>
+            const ulElem = document.querySelector('ul');
+            const docFrag = document.createDocumentFragment();
+            ['blue', 'green', 'red', 'blue', 'pink'].forEach(function (e) {
+                let li = document.createElement('li');
+                li.textContent = e;
+                docFrag.appendChild(li);
+            });
+            console.log(docFrag.textContent);
+
+            // Appending to the DOM
+            console.log(docFrag.childNodes);
+            ulElem.append(docFrag);
+
+            // To keep the nodes at memory
+            // ulElem.append(docFrag.clone(true));
+            console.log(docFrag.childNodes);
+
+            console.log(document.body.innerHTML);
+
+            // Document fracment as tree of nodes
+            const divElem = document.createElement('div');
+            const docFragTree = document.createDocumentFragment();
+            docFragTree.appendChild(divElem);
+            docFragTree.querySelector('div').innerHTML =
+                '<ul><li>foo</li><li>bar</li></ul>';
+
+            // The string becomes a DOM structure
+            console.log(docFragTree.querySelectorAll('li').length);
+        </script>
+        <div id="divElem2"></div>
+        <script>
+            // Append the tree structure without the wrapper
+            const divElem2 = document.querySelector('#divElem2');
+
+            divElem2.appendChild(docFragTree.querySelector('div').firstChild);
+        </script>
+    </body>
+</html>
