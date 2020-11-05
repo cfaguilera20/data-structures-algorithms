@@ -31,3 +31,9 @@ async function sequence() {
     return `Sequence is done: ${out1} ${out2} ${out3}`;
 }
 sequence().then(console.log);
+
+const promiseOne = new Promise((resolve, reject) => setTimeout(resolve, 3000));
+const promiseTwo = new Promise((resolve, reject) => setTimeout(reject, 2000));
+
+// Promise.all([promiseOne, promiseTwo]).then(console.log);
+Promise.allSettled([promiseOne, promiseTwo]).then(console.log);
