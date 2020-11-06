@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Stylesheets</title>
+        <link
+            id="linkElement"
+            rel="stylesheet"
+            type="text/css"
+            href="http://yui.yahooapis.com/3.3.0/build/cssreset/reset-min.css"
+        />
+        <style id="styleElement">
+            body {
+                background-color: #ffffff;
+            }
+        </style>
+    </head>
+    <body>
+        <p>Open your developer tools...</p>
+        <script>
+            console.log(
+                'linkElement.constructor',
+                document.querySelector('#linkElement').constructor
+            );
+            console.log(
+                'styleElement.constructor',
+                document.querySelector('#styleElement').constructor
+            );
+            console.log(
+                'sheet.constructor',
+                document.querySelector('#styleElement').sheet.constructor
+            );
+            console.log(
+                'sheet.cssRules[].constructor',
+                document.querySelector('#styleElement').sheet.cssRules[0]
+                    .constructor
+            );
+
+            // Accesing all
+            console.log(
+                'document.styleSheets.length',
+                document.styleSheets.length
+            );
+            console.log('document.styleSheets[0]', document.styleSheets[0]);
+            // document.querySelector('#linkElement').sheet
+
+            console.log('document.styleSheets[1]', document.styleSheets[1]);
+            // document.querySelector('#styleElement').sheet
+
+            // Properties
+            const styleSheet = document.querySelector('#styleElement').sheet;
+            console.log('styleSheet.keys', Object.keys(styleSheet).sort());
+
+            const styleSheetPropertiesIncludeInherited = [];
+            for (let p in styleSheet) {
+                styleSheetPropertiesIncludeInherited.push(p);
+            }
+            console.log(styleSheetPropertiesIncludeInherited.sort());
+
+            const styleSheetPropertiesOnlyInherited = [];
+            for (let p in styleSheet) {
+                if (!styleSheet.hasOwnProperty(p))
+                    styleSheetPropertiesOnlyInherited.push(p);
+            }
+            console.log(styleSheetPropertiesOnlyInherited.sort());
+        </script>
+    </body>
+</html>
