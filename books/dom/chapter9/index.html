@@ -13,11 +13,16 @@
         <style id="styleElement">
             body {
                 background-color: #ffffff;
+                margin: 20px;
+            }
+            p {
+                color: red;
             }
         </style>
     </head>
     <body>
         <p>Open your developer tools...</p>
+        <a href="" class="btn btn-primary m-5">Button</a>
         <script>
             console.log(
                 'linkElement.constructor',
@@ -64,6 +69,40 @@
                     styleSheetPropertiesOnlyInherited.push(p);
             }
             console.log(styleSheetPropertiesOnlyInherited.sort());
+
+            // CSSStyleRule Overview
+            const sSheet = document.querySelector('#styleElement').sheet;
+            console.log(sSheet.cssRules[0].cssText);
+            const sSheetRule = sSheet.cssRules;
+            console.log(Object.keys(sSheetRule).sort());
+
+            // Insert rule
+            sSheet.insertRule('p{color: red}', 1);
+            sSheet.deleteRule(1);
+
+            // Modify rule
+            sSheet.cssRules[1].style.color = 'blue';
+
+            // Creating a new inline css style
+            const styleElem = document.createElement('style');
+            styleElem.innerHTML = 'body{ background-color: whitesmoke;}';
+            document.querySelector('head').appendChild(styleElem);
+
+            // Programmatically adding external stylesheets to an HTML Doc.
+            const linkElem = document.createElement('link');
+            linkElem.setAttribute('rel', 'stylesheet');
+            linkElem.setAttribute('type', 'text/css');
+            linkElem.setAttribute('id', 'linkElemProgramm');
+            linkElem.setAttribute(
+                'href',
+                'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css'
+            );
+            document.querySelector('head').appendChild(linkElem);
+
+            // Disable link or style
+            document.createElement('linkElement').disabled = true;
+            document.querySelector('#styleElement').disabled = true;
+
         </script>
     </body>
 </html>
