@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>JavaScript in the Dom</title>
+    </head>
+    <body>
+        <p>Open your developer tools...</p>
+        <!--Exteranal, cross domain JS include-->
+        <!--Stop document parsing, block document parsing, load js, execute js, then resume document parsing...-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.11.0/underscore-min.js"></script>
+
+        <!--Page inline JS-->
+        <!--Stop document parsing, block document parsing, execute js, then resume document parsing...-->
+        <script>
+            console.log('hi');
+        </script>
+
+        <!--Defer, don't block just ignore this until the <html> element is parsed-->
+        <script
+            defer
+            src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.11.0/underscore-min.js"
+        ></script>
+
+        <!--Don't block, just start downloading and then parse the file when it's donde downloading-->
+        <script
+            async
+            src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.11.0/underscore-min.js"
+        ></script>
+        <!--Async drawback is that js files potentially get parsed out of the order in wich they are included in the DOM.-->
+
+        <script>
+            /* Only afetr everything is loaded can we safely conclude that libraries was loaded and parsed.*/
+            document.body.onload = function () {
+                console.log(_);
+            };
+        </script>
+
+        <!--Dynamic script-->
+        <!--Don't block, just start downloading and then parse the file when it's donde downloading-->
+        <script>
+            const underscoreScript = document.createElement('script');
+            underscoreScript.setAttribute('id', 'dynamic');
+            underscoreScript.src =
+                'https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.11.0/underscore-min.js';
+            document.body.appendChild(underscoreScript);
+        </script>
+
+        <!--Onload callback-->
+        <!--Don't block, just start downloading and then parse the file when it's donde downloading-->
+        <script>
+            const onloadCallback = function () {
+                console.log('Underscore is loaded and executed.');
+            };
+            const underscoreScriptWithCallback = document.createElement(
+                'script'
+            );
+            underscoreScriptWithCallback.setAttribute('id', 'dynamic');
+            underscoreScriptWithCallback.onload = onloadCallback;
+            underscoreScriptWithCallback.src =
+                'https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.11.0/underscore-min.js';
+            document.body.appendChild(underscoreScriptWithCallback);
+        </script>
+
+        <script
+            async
+            onload="onloadCallback()"
+            src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.11.0/underscore-min.js"
+        ></script>
+    </body>
+</html>
