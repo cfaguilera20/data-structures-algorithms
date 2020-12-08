@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>DOM Events</title>
+    </head>
+    <body onclick="console.log('fire/trigger attribute event handler.')">
+        <p>Open your developer tools...</p>
+        <div>Clikc me !!</div>
+        <script>
+            const elementDiv = document.querySelector('div');
+            elementDiv.onclick = function () {
+                console.log(
+                    'fire/trigger property event handler overridden/replaced.'
+                );
+            };
+
+            elementDiv.onclick = function () {
+                console.log('fire/trigger property wins!.');
+            };
+
+            elementDiv.addEventListener(
+                'click',
+                function () {
+                    console.log('fire/trigger addEventListener.');
+                },
+                true
+            );
+        </script>
+    </body>
+</html>
