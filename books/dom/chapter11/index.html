@@ -28,5 +28,113 @@
                 true
             );
         </script>
+        <div id="eventFlow">Click to trigger the event flow!</div>
+        <p>After the div is clicked, the event flow proceeds in this order:</p>
+        <ol>
+            <li>Capture phase invokes click events on window that are set to fire on capture </li>
+            <li>Capture phase invokes click events on document that are set to fire on capture </li>
+            <li>Capture phase invokes click events on html element that are set to fire on capture </li>
+            <li>Capture phase invokes click events on body element that are set to fire on capture </li>
+            <li>Target phase invokes click events on div element that are set to fire on capture</li>
+            <li>Target phase invokes click events on div element that are set to fire on bubble </li>
+            <li>Bubbling phase invokes click events on body element that are set to fire on bubble </li>
+            <li>Bubbling phase invokes click events on html element that are set to fire on bubble </li>
+            <li>Bubbling phase invokes click events on document that are set to fire on bubble </li>
+            <li>Bubbling phase invokes click events on window that are set to fire on bubble</li>
+        </ol>
+        <i>Lindley, Cody. DOM Enlightenment: Exploring JavaScript and the Modern DOM (p. 171). O'Reilly Media. Kindle Edition. </i>
+        <script>
+            // Notice the  parameter (true) passed to addEventListener to capture events fire, not just bubbling events.
+
+            // 1 capture phase
+            window.addEventListener(
+                'click',
+                function () {
+                    console.log(1);
+                },
+                true
+            );
+
+            // 2 capture phase
+            document.addEventListener(
+                'click',
+                function () {
+                    console.log(2);
+                },
+                true
+            );
+
+            // 3 capture phase
+            document.documentElement.addEventListener(
+                'click',
+                function () {
+                    console.log(3);
+                },
+                true
+            );
+
+            // 4 capture phase
+            document.body.addEventListener(
+                'click',
+                function () {
+                    console.log(4);
+                },
+                true
+            );
+
+            // 5 target phase occurs during capture phase
+            document.querySelector('#eventFlow').addEventListener(
+                'click',
+                function () {
+                    console.log(5);
+                },
+                true
+            );
+
+            // 6 target phase occurs during bubbling phase
+            document.querySelector('#eventFlow').addEventListener(
+                'click',
+                function () {
+                    console.log(6);
+                },
+                false
+            );
+
+            // 7 bubbling phase
+            document.body.addEventListener(
+                'click',
+                function () {
+                    console.log(7);
+                },
+                false
+            );
+
+            // 8 bubbling phase
+            document.documentElement.addEventListener(
+                'click',
+                function () {
+                    console.log(8);
+                },
+                false
+            );
+
+            // 9 bubbling phase
+            document.addEventListener(
+                'click',
+                function () {
+                    console.log(9);
+                },
+                false
+            );
+
+            // 10 bubbling phase
+            window.addEventListener(
+                'click',
+                function () {
+                    console.log(10);
+                },
+                false
+            );
+        </script>
     </body>
 </html>
