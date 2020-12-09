@@ -93,3 +93,95 @@ class EmployeeSaver extends Employee {
 ```
 
 # OCP - The Open-Closed Principle
+
+A software artifact should be open for extension but closed for modification.
+
+# LSP - The Liskov Substitution Principle
+
+What is wanted heres is something like the following substitution property: If for each object o1 of type S ther is an object o2 of type T such that for all programs P defined in terms of T, the behavior of P is unchanged when o1 is substituted for o2 then S is a subtype of T.
+
+```js
+class Billing {
+    bill(license) {
+        const amount = license.calFee();
+    }
+}
+
+class ILicense {
+    calcFee() {
+        throw Error('Not implemented');
+    }
+}
+class PersonaLicense extends ILicense {
+    calcFee() {
+        return 100;
+    }
+}
+
+class BussinesLicense extends ILicense {
+    calcFee() {
+        return 200;
+    }
+}
+```
+
+**_License, and its derivates, conform LSP._**
+
+## LSP Violation
+
+Aggregator for many taxy dispatch services.
+
+-   Uver
+    -   driver
+        -   /pickupAdress
+        -   /pickupTime
+        -   /destination
+-   Lift
+    -   driver
+        -   /pickupAdress
+        -   /pickupTime
+        -   /destination
+
+```js
+class Driver {
+    find(id) {
+        // Some code
+    }
+    getDispatchUri() {
+        return this.uri;
+    }
+}
+
+const driver = Driver.find(1);
+const uri = driver.getDispatchUri();
+const pickupAddressUrl = `${uri}/pickupAdress/24 Street`;
+const pickupTimeUrl = `${uri}/pickupTime/153`;
+const destinationUrl = `${uri}/destination/ORD`;
+```
+
+Now suppose that theres another company that created another spec for destination:
+
+-   Bibi
+    -   driver
+        -   /pickupAdress
+        -   /pickupTime
+        -   /dest
+
+We need to add a special case:
+
+```js
+const driver = Driver.find(1);
+const uri = driver.getDispatchUri();
+const pickupAddressUrl = `${driver.uri}/pickupAdress/24 Street`;
+const pickupTimeUrl = `${driver.uri}/pickupTime/153`;
+const destinationUrl = getDestinationUrl(driver);
+
+function getDestinationUrl(driver) {
+    let destination = 'destination';
+    if (driver.getDispatchUri().includes('bibi')) {
+        destination = 'dest';
+    }
+
+    return `${driver.uri}/${destination}/ORD`;
+}
+```
