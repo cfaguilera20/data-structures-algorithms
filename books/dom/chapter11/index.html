@@ -31,18 +31,51 @@
         <div id="eventFlow">Click to trigger the event flow!</div>
         <p>After the div is clicked, the event flow proceeds in this order:</p>
         <ol>
-            <li>Capture phase invokes click events on window that are set to fire on capture </li>
-            <li>Capture phase invokes click events on document that are set to fire on capture </li>
-            <li>Capture phase invokes click events on html element that are set to fire on capture </li>
-            <li>Capture phase invokes click events on body element that are set to fire on capture </li>
-            <li>Target phase invokes click events on div element that are set to fire on capture</li>
-            <li>Target phase invokes click events on div element that are set to fire on bubble </li>
-            <li>Bubbling phase invokes click events on body element that are set to fire on bubble </li>
-            <li>Bubbling phase invokes click events on html element that are set to fire on bubble </li>
-            <li>Bubbling phase invokes click events on document that are set to fire on bubble </li>
-            <li>Bubbling phase invokes click events on window that are set to fire on bubble</li>
+            <li>
+                Capture phase invokes click events on window that are set to
+                fire on capture
+            </li>
+            <li>
+                Capture phase invokes click events on document that are set to
+                fire on capture
+            </li>
+            <li>
+                Capture phase invokes click events on html element that are set
+                to fire on capture
+            </li>
+            <li>
+                Capture phase invokes click events on body element that are set
+                to fire on capture
+            </li>
+            <li>
+                Target phase invokes click events on div element that are set to
+                fire on capture
+            </li>
+            <li>
+                Target phase invokes click events on div element that are set to
+                fire on bubble
+            </li>
+            <li>
+                Bubbling phase invokes click events on body element that are set
+                to fire on bubble
+            </li>
+            <li>
+                Bubbling phase invokes click events on html element that are set
+                to fire on bubble
+            </li>
+            <li>
+                Bubbling phase invokes click events on document that are set to
+                fire on bubble
+            </li>
+            <li>
+                Bubbling phase invokes click events on window that are set to
+                fire on bubble
+            </li>
         </ol>
-        <i>Lindley, Cody. DOM Enlightenment: Exploring JavaScript and the Modern DOM (p. 171). O'Reilly Media. Kindle Edition. </i>
+        <i
+            >Lindley, Cody. DOM Enlightenment: Exploring JavaScript and the
+            Modern DOM (p. 171). O'Reilly Media. Kindle Edition.
+        </i>
         <script>
             // Notice the  parameter (true) passed to addEventListener to capture events fire, not just bubbling events.
 
@@ -132,6 +165,60 @@
                 'click',
                 function () {
                     console.log(10);
+                },
+                false
+            );
+        </script>
+        <div id="mouseOver">Mouse over me</div>
+        <script>
+            window.addEventListener(
+                'mouseover',
+                function (event) {
+                    console.log('Mouse over window');
+                },
+                false
+            );
+            document.querySelector('#mouseOver').addEventListener(
+                'mouseover',
+                function (event) {
+                    console.log('Mouse over:', event.currentTarget);
+                },
+                false
+            );
+
+            const onClick = function () {
+                console.log('Click over body');
+            };
+            document.body.addEventListener('click', onClick, false);
+            document.body.removeEventListener('click', onClick, false);
+
+            const onClickEvent = function (event) {
+                Object.keys(event)
+                    .sort()
+                    .forEach(function (item) {
+                        console.log(item + ' = ' + event[item]);
+                    });
+            };
+            document.body.addEventListener('click', onClickEvent, false);
+
+            // Window load
+            this.addEventListener(
+                'load',
+                function (event) {
+                    Object.keys(event)
+                        .sort()
+                        .forEach(function (item) {
+                            console.log(item + ' = ' + event[item]);
+                        });
+                },
+                false
+            );
+
+            // The value of this
+            document.querySelector('#mouseOver').addEventListener(
+                'click',
+                function (event) {
+                    console.log('Value if this: ', this);
                 },
                 false
             );

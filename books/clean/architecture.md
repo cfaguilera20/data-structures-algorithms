@@ -185,3 +185,7 @@ function getDestinationUrl(driver) {
     return `${driver.uri}/${destination}/ORD`;
 }
 ```
+# ISP - The Interface Segregation Principle
+
+# DIP - The Dependency Inversion Principle
+
