@@ -138,13 +138,13 @@ Refactoring problems:
 class EmployeeController extends AbstractActionController {
     protected $employeeRepository;
 
-    public function __construct(CustomerRepositoryInterface $respository) {
+    public function __construct(EmployeeRepositoryInterface $respository) {
         $this->employeeRepository = $repository;
     }
 
     public function indexAction() {
         return [
-            'employees' => $this->customerRepository->getAll();
+            'employees' => $this->EmployeeRepository->getAll();
         ];
     }
 }
@@ -195,3 +195,65 @@ How to reduce it
 -   Dependency injection
 -   Use Interfaces, not concrete Classes
 -   Use Adapters
+
+## Decoupling Toolbox
+
+Design Patterns
+
+-   Factory
+-   Repository
+-   Adapater
+-   Strategy
+
+### Factory
+
+Tradicional way
+
+```php
+// Some code
+$employee = new Employee();
+// Some code
+```
+
+Factory
+
+```php
+class EmployeeFactory {
+    protected $managerRepo;
+
+    public function __construct(ManagerRepository $repo) {
+        $this->managerRepo = $repo;
+    }
+
+    public function createEmployee($name) {
+        $employee = new Employee();
+        $employee->setName($name);
+        $employee->setStatus('active');
+        $employee->setManager(
+            $this->managerRepo->getRandom()
+        );
+        return $employee;
+    }
+}
+```
+
+Benefits
+
+-   Reusable code
+-   Testable code
+-   Easy to change
+
+Static Factory
+
+```php
+class EmployeeFactory {
+    public static function createEmployee($name) {
+        $employee = new Employee();
+        $employee->setName($name);
+        $employee->setStatus('active');
+        return $employee;
+    }
+}
+
+$employee = EmployeeFactory::createEmployee('Carlos Aguilera');
+```
