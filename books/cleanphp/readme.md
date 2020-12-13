@@ -1,12 +1,36 @@
-# Clean Arquitecture in PHP
+# Table of Contents
+
+- [Table of Contents](#table-of-contents)
+- [Introduction](#introduction)
+- [The Problem With Code](#the-problem-with-code)
+  - [Writing Good Code is Hard](#writing-good-code-is-hard)
+  - [What is Architecture?](#what-is-architecture)
+    - [Layers](#layers)
+    - [Poor Architcture](#poor-architcture)
+    - [Poor MVC](#poor-mvc)
+    - [Poor Usage of Database Abstraction](#poor-usage-of-database-abstraction)
+    - [Good architecture](#good-architecture)
+    - [Cost of Poor Arquitecture](#cost-of-poor-arquitecture)
+  - [Coupling, The Enemy](#coupling-the-enemy)
+- [Decoupling Toolbox](#decoupling-toolbox)
+  - [Design Patterns](#design-patterns)
+    - [Factory](#factory)
+    - [Types of Factories](#types-of-factories)
+      - [Factory Method](#factory-method)
+
+
+# Introduction
+
+Framework to developing applications:
 
 1. Testable
 2. Refactorable
 3. Easy to work with
 4. Easy to maintain
 
-## The Problem With Code
+# The Problem With Code
 
+## Writing Good Code is Hard
 -   Writing Good Code is Hard
 -   Writing Bad Code is Easy
 -   We Can`t Test Anything
@@ -14,7 +38,7 @@
 -   We Live or Die by the Framework
 -   We Want to Use all the Libraries
 
-### What is Architecture?
+## What is Architecture?
 
 Software architecture is the structure. This can apply to the application as a whole, or might only apply to individual pieces of the application.
 
@@ -163,7 +187,7 @@ Benefits
 -   Hard to refactor
 -   Impossible to upgrade
 
-### Coupling, The Enemy
+## Coupling, The Enemy
 
 Spaghetti coupling
 
@@ -196,9 +220,9 @@ How to reduce it
 -   Use Interfaces, not concrete Classes
 -   Use Adapters
 
-## Decoupling Toolbox
+# Decoupling Toolbox
 
-Design Patterns
+## Design Patterns
 
 -   Factory
 -   Repository
@@ -257,3 +281,11 @@ class EmployeeFactory {
 
 $employee = EmployeeFactory::createEmployee('Carlos Aguilera');
 ```
+
+### Types of Factories
+
+-   Factory Method
+-   Abstract Factory
+
+
+#### Factory Method
