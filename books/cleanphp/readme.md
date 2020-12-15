@@ -289,3 +289,46 @@ $employee = EmployeeFactory::createEmployee('Carlos Aguilera');
 
 
 #### Factory Method
+
+```php 
+class Document {
+    public function createPage() {
+        return new Page();
+    }
+}
+```
+***Note: Returns a new page***
+
+```php 
+abstract class AbstractDocument {
+    public function render() {
+        $this->addPAge(1, $this->createPage());
+    }
+
+    public function addPage(1, AbstractPAge) {
+
+    }
+
+    abstract public function createPage();
+}
+```
+***Note: It allows create multiple different types of documents.***
+
+Example: 
+```php
+class ResumeDocument extends AbstractDocument {
+    public function createPage() {
+        return new ResumePage();
+    }
+}
+
+class PortfolioDocument extends AbstractDocument {
+    public function createPage() {
+        return new PortfolioPage();
+    }
+}
+
+interface PageInterface {}
+class ResumePage implements PageInterface {}
+class PortfolioPage implements PortfolioPage {}
+```
