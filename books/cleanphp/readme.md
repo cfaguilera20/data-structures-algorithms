@@ -17,6 +17,7 @@
     - [Factory](#factory)
     - [Types of Factories](#types-of-factories)
       - [Factory Method](#factory-method)
+      - [Abstract Factory](#abstract-factory)
 
 
 # Introduction
@@ -331,4 +332,102 @@ class PortfolioDocument extends AbstractDocument {
 interface PageInterface {}
 class ResumePage implements PageInterface {}
 class PortfolioPage implements PortfolioPage {}
+```
+
+#### Abstract Factory
+
+- Client code
+- Object Interface
+- Concrete Objects
+- Abstract Factory
+- Concrete Factories
+
+```php 
+class Building {
+    public function createCars() {}
+    public function createTrucks() {}
+}
+```
+
+First create the Object Interfaces:
+
+```php
+interface CarInterface {}
+interface TruckInterface {}
+```
+
+Then create the Concrete Obejcts:
+
+```php 
+class ChevyCamaro implements CarInterface {}
+class ChevySilverado implements TruckInterface {}
+
+class FordMustang implements CarInterface {}
+class ChevyF150 implements TruckInterface {}
+```
+
+Then create the Abstract Factory:
+
+```php
+interface AssemblyLineInterface {
+    public function createCar();
+    public function createTruck();
+}
+```
+
+Then creat our Concrete Factories:
+
+```php
+class ChevyAssemblyLine implements AssemblyLineInterface {
+    public function createCar() {
+        return new ChevyCamaro();
+    }
+    public function createTruck() {
+        return new ChevySilverado();
+    }
+}
+
+class FordAssemblyLine implements AssemblyLineInterface {
+    public function createCar() {
+        return new FordMustang();
+    }
+    public function createTruck() {
+        return new ChevyF150();
+    }
+}
+```
+
+Finally Building class can be supplied a specific AssemblyLineInterface:
+
+```php 
+class Building {
+    protected $assemblyLine;
+    protected $inventory = [];
+
+    public function __construct(AssemblyLineInterface $assemblyLine) {
+        $this->assemblyLine = $assemblyLine;
+    }
+
+    public function createCars($num = 1) {
+        for($i = 0; $i < $num; $i++) {
+            $this->inventory[] = $this->assemblyLine->createCar();
+        }
+    }
+
+    public function createTrucks($num = 1) {
+        for($i = 0; $i < $num; $i++) {
+            $this->inventory[] = $this->assemblyLine->createTruck();
+        }
+    }
+}
+```
+
+Call the code:
+
+```php
+$building = new Building(new FordAssemblyLine());
+$building->createCars(10);
+
+$building = new Building(new ChevyAssemblyLine());
+$building->createTrucks(10);
 ```
