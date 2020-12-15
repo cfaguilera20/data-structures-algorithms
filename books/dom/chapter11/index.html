@@ -223,5 +223,39 @@
                 false
             );
         </script>
+        <a href="https://google.com" id="preventDefault">preventDefault</a>
+        <script>
+            document.querySelector('#preventDefault').addEventListener(
+                'click',
+                function (event) {
+                    event.preventDefault();
+                },
+                false
+            );
+        </script>
+        <div id="stopPropagation">stopPropagarion: Click</div>
+        <script>
+            document
+                .querySelector('#stopPropagation')
+                .addEventListener(
+                    'click',
+                    function (event) {
+                        console.log(
+                            'Invoked, but cancel capture and bubble event phases.'
+                        );
+                        event.stopPropagation();
+                    },
+                    false
+                );
+
+            document.body.addEventListener(
+                'click',
+                function (event) {
+                    console.log('What, denied..');
+                    event.preventDefault();
+                },
+                false
+            );
+        </script>
     </body>
 </html>
