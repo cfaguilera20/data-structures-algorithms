@@ -79,9 +79,9 @@ dom.fn.html = function (htmlString) {
 }
 
 dom.fn.text = function (textString) {
-    if (htmlString) {
+    if (textString) {
         return this.each(function () {
-            this.textContext = textString;
+            this.textContent = textString;
         });
     } else {
         return this[0].textContent.trim();
