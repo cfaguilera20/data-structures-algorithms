@@ -19,6 +19,7 @@
       - [Factory Method](#factory-method)
       - [Abstract Factory](#abstract-factory)
     - [Repository](#repository)
+    - [Adapter](#adapter)
 
 
 # Introduction
@@ -445,6 +446,7 @@ class MyRepository {
     public function retrive($id) {}
 }
 ```
+
 Retrieval in different ways:
 
 ```php 
@@ -471,5 +473,18 @@ public function saveAction() {
     $customer = $this->customerRepository->getById(2004);
     $customer->setName('Carlos Aguilera');
     $this->customerRepository->save($customer);
+}
+```
+
+### Adapter
+```php 
+class GoogleMapsApi {
+    public fun ction getWalkingDirections($from, $to){}
+}
+```
+
+```php
+interface DistanceInterface {
+    public function getDistance($from, $to);
 }
 ```
