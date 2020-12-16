@@ -8,7 +8,7 @@
     const GetOrMakeDom = function (params, context) {
         let currentContext = doc;
         if (context) {
-            if (context.nodetype) {
+            if (context.nodeType) {
                 currentContext = context;
             } else {
                 currentContext = doc.querySelector(context);
@@ -45,7 +45,7 @@
         if (typeof params !== 'string') {
             nodes = params;
         } else {
-            nodes = currentContext.querySelector(params.trim());
+            nodes = currentContext.querySelectorAll(params.trim());
         }
 
         const nodeLength = nodes.length;
