@@ -58,12 +58,45 @@
 
     global.dom = dom;
     dom.fn = GetOrMakeDom.prototype
-
-    dom.fn.each = function (callback) {
-        const len = this.length;
-        for (let i = 0; i < len; i++) {
-            callback.call(this[i], i, this[i]);
-        }
-        return this;
-    };
 })(window);
+
+dom.fn.each = function (callback) {
+    const len = this.length;
+    for (let i = 0; i < len; i++) {
+        callback.call(this[i], i, this[i]);
+    }
+    return this;
+};
+
+dom.fn.html = function (htmlString) {
+    if (htmlString) {
+        return this.each(function () {
+            this.innerHTML = htmlString;
+        });
+    } else {
+        return this[0].innerHTML;
+    }
+}
+
+dom.fn.text = function (textString) {
+    if (htmlString) {
+        return this.each(function () {
+            this.textContext = textString;
+        });
+    } else {
+        return this[0].textContent.trim();
+    }
+}
+
+dom.fn.append = function (stringObject) {
+    return this.each(function () {
+        if (typeof stringObject === 'string') {
+            this.insertAdjacentHTML('beforeend', stringObject);
+        } else {
+            const that = this;
+            dom(stringObject).each(function (name, value) {
+                that.insertAdjacentHTML('beforeend', value.outerHTML);
+            });
+        }
+    });
+}
