@@ -18,6 +18,7 @@
     - [Types of Factories](#types-of-factories)
       - [Factory Method](#factory-method)
       - [Abstract Factory](#abstract-factory)
+    - [Repository](#repository)
 
 
 # Introduction
@@ -430,4 +431,45 @@ $building->createCars(10);
 
 $building = new Building(new ChevyAssemblyLine());
 $building->createTrucks(10);
+```
+
+### Repository
+
+Common retrieval methods variants:
+
+```php 
+class MyRepository {
+    public function getById($id) {}
+    public function findById($id) {}
+    public function find($id) {}
+    public function retrive($id) {}
+}
+```
+Retrieval in different ways:
+
+```php 
+class MyRepository {
+    public function getById($id) {}
+    public function getAll($id) {}
+    public function getBy(array $conditions) {}
+}
+```
+
+Persistence methods:
+
+```php 
+class MyRepository {
+    public function persist($object) {}
+    public function save($object) {}
+}
+```
+
+Should ony refer to ony obejct:
+
+```php 
+public function saveAction() {
+    $customer = $this->customerRepository->getById(2004);
+    $customer->setName('Carlos Aguilera');
+    $this->customerRepository->save($customer);
+}
 ```
