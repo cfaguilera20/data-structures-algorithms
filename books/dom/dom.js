@@ -58,4 +58,12 @@
 
     global.dom = dom;
     dom.fn = GetOrMakeDom.prototype
+
+    dom.fn.each = function (callback) {
+        const len = this.length;
+        for (let i = 0; i < len; i++) {
+            callback.call(this[i], i, this[i]);
+        }
+        return this;
+    };
 })(window);
