@@ -519,11 +519,12 @@ public function invoiceCustomer(array $customers) {
     
     switch($customer->getDeliveryMethod()) {
         case 'email': 
-        $strategy = new EmailDeliveryStrategy();
-        break;
+            $strategy = new EmailDeliveryStrategy();
+            break;
         case 'print': 
-        $strategy = new PrintDeliveryStrategy();
-        break;
+        default:
+            $strategy = new PrintDeliveryStrategy();
+            break;
     } 
 
     $strategy->send($invoice);
@@ -554,3 +555,39 @@ class PrintDeliveryStrategy implements InvoiceDeliveryInterface {
 }
 ```
 
+Delivery factory:
+
+```php
+class InvoiceDeliveryStrategyFactory {
+    public function create(Customer $customer) {
+        switch ($customer->getDeliveryMethod()) {
+            case 'email': 
+                return new EmailDeliveryStrategy();
+                break;
+            case 'print': 
+            default:
+                return new PrintDeliveryStrategy();
+                break;
+        }
+    }
+}
+```
+
+Use the factory:
+
+```php 
+public function invoiceCustomer(array $customers) {
+    foreach($customers as $customer) {
+        $invoice = $this->invoiceFactory->create(
+            $customer,
+            $this->orderRepository->getByCustomer($customer)
+        );
+    }
+
+    $strategy = $this->deliveryMethodFactory->create(
+        $customer;
+    );
+
+    $strategy->send($invoice);
+}
+```
