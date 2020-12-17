@@ -483,8 +483,23 @@ class GoogleMapsApi {
 }
 ```
 
+Interfacer that defines the structure that gets distances:
+
 ```php
 interface DistanceInterface {
     public function getDistance($from, $to);
+}
+
+```
+
+Concrete class - Adapter:
+
+```php 
+class WalkingDistance implements DistanceInterface {
+    public function getDistance($form, $to) {
+        $api = new GoogleMapsApi();
+        $directions = $api->getWalkingDirections($from, $to);
+        return $directions->getTotalDistance();
+    }
 }
 ```
