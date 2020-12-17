@@ -20,6 +20,7 @@
       - [Abstract Factory](#abstract-factory)
     - [Repository](#repository)
     - [Adapter](#adapter)
+    - [Strategy](#strategy)
 
 
 # Introduction
@@ -503,3 +504,53 @@ class WalkingDistance implements DistanceInterface {
     }
 }
 ```
+
+### Strategy
+
+```php 
+public function invoiceCustomer(array $customers) {
+    foreach($customers as $customer) {
+        $invoice = $this->invoiceFactory->create(
+            $customer,
+            $this->orderRepository->getByCustomer($customer)
+        );
+    }
+
+    
+    switch($customer->getDeliveryMethod()) {
+        case 'email': 
+        $strategy = new EmailDeliveryStrategy();
+        break;
+        case 'print': 
+        $strategy = new PrintDeliveryStrategy();
+        break;
+    } 
+
+    $strategy->send($invoice);
+}
+```
+
+Interface:
+
+```php
+interface InvoiceDeliveryInterface {
+    public function send(Invoice $invoice);
+}
+```
+
+Delivery options:
+
+```php
+class EmailDeliveryStrategy implements InvoiceDeliveryInterface {
+    public function send(Invoice $invoice) {
+        // Use an email library
+    }
+}
+
+class PrintDeliveryStrategy implements InvoiceDeliveryInterface {
+    public function send(Invoice $invoice) {
+        // Send it to printer
+    }
+}
+```
+
