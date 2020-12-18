@@ -21,6 +21,8 @@
     - [Repository](#repository)
     - [Adapter](#adapter)
     - [Strategy](#strategy)
+  - [SOLID Design Principles](#solid-design-principles)
+    - [Single Responsibility Principle](#single-responsibility-principle)
 
 
 # Introduction
@@ -589,5 +591,34 @@ public function invoiceCustomer(array $customers) {
     );
 
     $strategy->send($invoice);
+}
+```
+
+## SOLID Design Principles
+
+### Single Responsibility Principle
+
+This class violates the principle because manage the state, and the retrieval from and persistance. 
+
+```php
+class User {
+    public function getName() {}
+    public function getEmail() {}
+
+    public function find($id) {}
+    public function save() {}
+}
+```
+
+Refactoring:
+
+```php
+class User {
+    public function getName() {}
+    public function getEmail() {}
+}
+class UserRepository {
+    public function find($id) {}
+    public function save() {}
 }
 ```
