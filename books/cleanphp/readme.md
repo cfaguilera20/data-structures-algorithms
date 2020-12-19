@@ -24,6 +24,7 @@
   - [SOLID Design Principles](#solid-design-principles)
     - [Single Responsibility Principle](#single-responsibility-principle)
     - [Open-Closed](#open-closed)
+    - [Liskov Substitution](#liskov-substitution)
 
 
 # Introduction
@@ -670,3 +671,44 @@ class EdiStrategy implements DeliveryInterface {
     }
 }
 ```
+
+### Liskov Substitution
+
+Objects of the same interface should be interchangable without affecting the behavior of the client program.
+
+Interface:
+
+```php
+interface HelloInterface() {
+    public function getHello();
+}
+```
+
+Concrete classes:
+
+```php 
+class EnglishHello implements HelloInterface {
+    public function getHello() {
+        return "Hello";
+    }
+}
+
+class SpanishHello implements HelloInterface {
+    public function getHello() {
+        return "Hola";
+    }
+}
+```
+
+The concrete classes should be interchangables in the client:
+
+```php
+class Greeter {
+    public function sayHello(HelloInterface $hello) {
+        echo $hello->getHello();
+    }
+}
+
+$greeter = new Greeter();
+$greeter->sayHello(new EnglishHello());
+$greeter->sayHello(new SpanishHello());
