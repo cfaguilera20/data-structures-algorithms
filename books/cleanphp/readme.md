@@ -712,3 +712,4 @@ class Greeter {
 $greeter = new Greeter();
 $greeter->sayHello(new EnglishHello());
 $greeter->sayHello(new SpanishHello());
+```
