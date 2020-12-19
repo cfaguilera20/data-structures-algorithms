@@ -25,6 +25,7 @@
     - [Single Responsibility Principle](#single-responsibility-principle)
     - [Open-Closed](#open-closed)
     - [Liskov Substitution](#liskov-substitution)
+    - [Interface Segregation](#interface-segregation)
 
 
 # Introduction
@@ -712,4 +713,85 @@ class Greeter {
 $greeter = new Greeter();
 $greeter->sayHello(new EnglishHello());
 $greeter->sayHello(new SpanishHello());
+```
+
+### Interface Segregation
+
+The client code should not be forced to depend on methods it does not use.
+
+```php 
+interface LoggerInterface {
+    public function write($message);
+    public function read($messageCount);
+}
+
+class FileLogger implements LoggerInterface {
+    protected $file;
+
+    public function __construct($file) {
+        $this->file = new \SplFileObejct($file);
+    }
+
+    public function write($message) {
+        $this->file->fwrite($message);
+    }
+
+    public function read($messageCount) {
+        $lines = 0;
+        $contents = [];
+
+        while(!$this->fileeof() && $lines < $messageCount) {
+            $contents[] = $this->file->fgets();
+            $lines++;
+        }
+
+        return $contents;
+    }
+}
+```
+
+Now implements a email logger:
+
+```php
+class EmailLogger implements LoggerInterface {
+    protected $address;
+
+    public function __construct($address) {
+        $this->address = $address;
+    }
+
+    public function write($message) {
+        mail($this->address, 'Alert!', $message);
+    }
+
+    public function read($messageCount) {
+        # What should we read?
+    }
+}
+```
+
+Refactoring interfaces: 
+
+```php
+interface LogWriterInterface {
+    public function write($message);
+}
+
+interface LogReaderInterface {
+    public function read($messageCount);
+}
+
+interface LogManagerInterface extends LogWriterInterface, LogReaderInterface {}
+```
+
+Concrete classes: 
+
+```php 
+class FileLogger implements LogManagerInterface {
+    // Some code...
+}
+
+class EmailLogger implements LogWriterInterface {
+    // Some code...
+}
 ```
