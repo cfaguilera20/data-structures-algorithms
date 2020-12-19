@@ -23,6 +23,7 @@
     - [Strategy](#strategy)
   - [SOLID Design Principles](#solid-design-principles)
     - [Single Responsibility Principle](#single-responsibility-principle)
+    - [Open-Closed](#open-closed)
 
 
 # Introduction
@@ -658,3 +659,14 @@ class  InvoiceDeliveryService {
 }
 ```
 
+### Open-Closed
+
+Classes should be open to extension, but closed to modification.
+
+```php
+class EdiStrategy implements DeliveryInterface {
+    public function send(Invoice $invoice) {
+        // Use EDI library...
+    }
+}
+```
