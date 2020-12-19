@@ -622,3 +622,39 @@ class UserRepository {
     public function save() {}
 }
 ```
+
+Breaking classes
+
+```php 
+class  InvoicingServices {
+    public function generateAndSendInvoices() {}
+    public function generateInvoice($customer) {}
+    public function createInvoiceFile($invoice) {}
+    public function sendInvoice($invoice) {}
+}
+```
+
+Refactoring: 
+
+```php 
+class  OrderRepository {
+    public function getOrdersByMonth($month) {}
+}
+
+class  InvoicingService {
+    public function generateAndSendInvoices() {}
+}
+
+class  InvoiceFactory {
+    public function createInvoice(Order $order) {}
+}
+
+class  InvoiceGenerator {
+    public function createInvoiceFormat(Invoice $invoice, $format) {}
+}
+
+class  InvoiceDeliveryService {
+    public function sendInvoice(Invoice $invoice, $method) {}
+}
+```
+
