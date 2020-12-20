@@ -26,6 +26,7 @@
     - [Open-Closed](#open-closed)
     - [Liskov Substitution](#liskov-substitution)
     - [Interface Segregation](#interface-segregation)
+    - [Dependency Inversion](#dependency-inversion)
 
 
 # Introduction
@@ -795,3 +796,62 @@ class EmailLogger implements LogWriterInterface {
     // Some code...
 }
 ```
+
+### Dependency Inversion
+
+>*A. high level modules should not depend upon low level modules. Both should depen upon abstractions. 
+<br>and<br>
+B. Abstractions should not depend upon details. Details should depend upon abstractions.*
+
+```php
+class GameManager {
+    protected $input;
+    protected $video;
+
+    public function __construct() {
+        $this->input = new KeyboardInput();
+        $this->video = new VidepOutpu();
+    }
+
+    public function run() {
+        // accept user input from $this->input 
+        // draw the game state on $this->video 
+    }
+}
+```
+
+Refactoring:
+
+```php
+class GameManager {
+    protected $input;
+    protected $video;
+
+    public function __construct(InputInterface $input, OutInterface $output) {
+        $this->input = $input;
+        $this->video = $output;
+    }
+
+    public function run() {
+        // accept user input from $this->input 
+        // draw the game state on $this->video 
+    }
+}
+
+class KeyboardInput implements InputInterface {
+    public function getInputEvent() {}    
+}
+
+class JoystickInput implements InputInterface {
+    public function getInputEvent() {}    
+}
+
+class ScreenOutput implements OutInterface {
+    public function render() {}    
+}
+
+class TerminalOutput implements OutInterface {
+    public function render() {}    
+}
+```
+
