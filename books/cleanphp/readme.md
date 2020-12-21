@@ -27,6 +27,7 @@
     - [Liskov Substitution](#liskov-substitution)
     - [Interface Segregation](#interface-segregation)
     - [Dependency Inversion](#dependency-inversion)
+  - [Dependency Injection](#dependency-injection)
 
 
 # Introduction
@@ -855,3 +856,14 @@ class TerminalOutput implements OutInterface {
 }
 ```
 
+## Dependency Injection
+
+```php 
+class CustomerController {
+    public function viewAction() {
+        $repository = new CustomerRepository();
+        $customer = $respository->getById(1001);
+        return $customer;
+    }
+}
+```
