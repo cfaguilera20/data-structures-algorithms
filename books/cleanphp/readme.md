@@ -521,20 +521,19 @@ public function invoiceCustomer(array $customers) {
             $customer,
             $this->orderRepository->getByCustomer($customer)
         );
+
+        switch($customer->getDeliveryMethod()) {
+            case 'email': 
+                $strategy = new EmailDeliveryStrategy();
+                break;
+            case 'print': 
+            default:
+                $strategy = new PrintDeliveryStrategy();
+                break;
+        } 
+
+        $strategy->send($invoice);
     }
-
-    
-    switch($customer->getDeliveryMethod()) {
-        case 'email': 
-            $strategy = new EmailDeliveryStrategy();
-            break;
-        case 'print': 
-        default:
-            $strategy = new PrintDeliveryStrategy();
-            break;
-    } 
-
-    $strategy->send($invoice);
 }
 ```
 
@@ -589,13 +588,9 @@ public function invoiceCustomer(array $customers) {
             $customer,
             $this->orderRepository->getByCustomer($customer)
         );
+        $strategy = $this->deliveryMethodFactory->create($customer);
+        $strategy->send($invoice);
     }
-
-    $strategy = $this->deliveryMethodFactory->create(
-        $customer;
-    );
-
-    $strategy->send($invoice);
 }
 ```
 
