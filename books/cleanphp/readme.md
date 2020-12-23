@@ -28,6 +28,7 @@
     - [Interface Segregation](#interface-segregation)
     - [Dependency Inversion](#dependency-inversion)
   - [Dependency Injection](#dependency-injection)
+    - [Inversion of Control](#inversion-of-control)
 
 
 # Introduction
@@ -861,4 +862,24 @@ class CustomerController {
         return $customer;
     }
 }
+```
+
+### Inversion of Control
+
+Service locator
+
+```php 
+public function viewAction() {
+    $repository => $this->serviceLocator->get('CustomerRepository');
+    $customer = $repository->getById(1001);
+    return $customer;
+}
+```
+
+Register services in the service locator - Depends of the framework:
+
+```php
+$serviceLocator->setFactory('CustomerRepository', function($sl){
+    return \Paht\To\CustomerRepository($sl->get('Connection'));
+});
 ```
