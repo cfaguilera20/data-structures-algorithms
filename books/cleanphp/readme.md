@@ -29,6 +29,9 @@
     - [Dependency Inversion](#dependency-inversion)
   - [Dependency Injection](#dependency-injection)
     - [Inversion of Control](#inversion-of-control)
+    - [Using Dependency Injection](#using-dependency-injection)
+      - [Setter Injection](#setter-injection)
+      - [Constructor Injection](#constructor-injection)
 
 
 # Introduction
@@ -883,3 +886,56 @@ $serviceLocator->setFactory('CustomerRepository', function($sl){
     return \Paht\To\CustomerRepository($sl->get('Connection'));
 });
 ```
+
+### Using Dependency Injection
+
+#### Setter Injection
+
+```php 
+$controller = new CustomerController();
+$controller->setCustomerRepository(new CustomerRepository());
+$customer = $controller->viewAction(1001);
+```
+
+Controller implementation:
+
+```php
+class CustomerController {
+    protected $repository;
+
+    public function setCustomerRepository(CustomerRepository $repo) {
+        $this->repository = $repo;
+    }
+
+    public function viewAction($id) {
+        $customer = $this->repository->getById($id);
+        return $customer;
+    }
+}
+```
+*Note: The dependencies are not required.*
+
+#### Constructor Injection
+
+```php
+$controller = new CustomerController(new CustomerRepository());
+$customer = $controller->viewAction(1001);
+```
+
+Controller implementation:
+
+```php 
+class CustomerController {
+    protected $respository;
+
+    public function __constructor(CustomerRepository $repo) {
+        $this->respository = $repo;
+    }
+
+    public function viewAction($id) {
+        $customer = $this->repository->getById($id);
+        return $customer;
+    }
+}
+```
+*Note: The controller now requires an instance of the repository.*
