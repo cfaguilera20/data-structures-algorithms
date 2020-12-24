@@ -32,6 +32,10 @@
     - [Using Dependency Injection](#using-dependency-injection)
       - [Setter Injection](#setter-injection)
       - [Constructor Injection](#constructor-injection)
+    - [Using Factories to Create Dependecies](#using-factories-to-create-dependecies)
+    - [Handly Many Dependencies](#handly-many-dependencies)
+    - [Are we still coupling?](#are-we-still-coupling)
+  - [Defining a Contract With Interfaces](#defining-a-contract-with-interfaces)
 
 
 # Introduction
@@ -939,3 +943,90 @@ class CustomerController {
 }
 ```
 *Note: The controller now requires an instance of the repository.*
+
+Some times isn`t necessary to use dependency injection:
+
+```php 
+public function viewAction() {
+    $customer = $this->repository->getById(1001);
+    return new viewModel([
+        'customer' => $customer
+    ]);
+}
+```
+*ViewModel is injected directly in the controller. It has no configuration, it has no dependencies itself, and in the case of testing, we probably just want to verify that an instance of ViewModel was returned.*
+
+
+### Using Factories to Create Dependecies
+
+Depends of the context we can return a different type of response.
+
+```php 
+class CustomerController {
+    protected $repository;
+    protected $responseFactory;
+
+    public function __construct(CustomerRepository $repo, ResponseFactory $factory) {
+        $this->repository = $repo;
+        $this->responseFactory = $factory;
+    }
+
+    public function viewAction($id) {
+        $customer = $this->repository->getById($id);
+        $response = $this->responseFactory->create($this->params('context'));
+        $response->setData('customer', $customer);
+        return $response;
+    }
+}
+```
+
+### Handly Many Dependencies
+
+Don't get out of control.
+
+```php 
+public function __construct() {
+    CustomerRepository $customerRepository,
+    ProductRepository $productRepository,
+    UserRepository $userRepository,
+    TaxService $taxService,
+    InvoiceFactory $invoiceFactory,
+    ResponseFactory $responseFactory,
+}
+```
+*Note: This usually indicates that we have a class that vilates the Single Responsability Principle.*
+
+### Are we still coupling?
+
+We moved from this:
+
+```php
+class CustomerController { 
+    public function viewAction($id) {
+        $repository = new CustomerRepository();
+        $customer = $repository->getById($id);
+        return $customer;
+    }
+}
+```
+
+To this: 
+
+```php
+class CustomerController { 
+    protected $respository;
+
+    public function __construct(CustomerRepository $repo) {
+        $this->respository = $repo;
+    }
+    
+    public function viewAction($id) {
+        $customer = $this->repository->getById($id);
+        return $customer;
+    }
+}
+```
+
+We still need something that is or extends from CustomerRepository
+
+## Defining a Contract With Interfaces
