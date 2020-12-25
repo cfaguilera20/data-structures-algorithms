@@ -38,6 +38,9 @@
   - [Defining a Contract With Interfaces](#defining-a-contract-with-interfaces)
     - [Interfaces in PHP](#interfaces-in-php)
     - [Interfaces as Type Hints](#interfaces-as-type-hints)
+  - [Abstracting with Adapters](#abstracting-with-adapters)
+  - [Setting up the Adapter](#setting-up-the-adapter)
+- [The Clean Arquitecture](#the-clean-arquitecture)
 
 
 # Introduction
@@ -1097,3 +1100,66 @@ class CustomerRepository implements CustomerRepositoryInterface {
     }
 }
 ```
+
+## Abstracting with Adapters
+
+```php
+class AddressContrller extends Abstract Controller {
+    protected $geocoder;
+
+    public function __construct(BillsGeocoder $geocoder) {
+        $this->geocoder = $geocoder;
+    }
+
+    public function validateAddressAction() {
+        $address = $this->vars()->fromPost('address');
+        $isValid = $this->geocoder->geocode($address) !== false;
+    }
+}
+```
+
+What if BillsGeocoder goes away?
+
+## Setting up the Adapter
+
+```php 
+interface GeocoderInterface {
+    public function geocoder($address);
+}
+```
+
+Controller depends only upon interfaces:
+
+```php
+class AddressContrller extends Abstract Controller {
+    protected $geocoder;
+
+    public function __construct(GeocoderInterface $geocoder) {
+        $this->geocoder = $geocoder;
+    }
+
+    public function validateAddressAction() {
+        $address = $this->vars()->fromPost('address');
+        $isValid = $this->geocoder->geocode($address) !== false;
+    }
+}
+```
+
+Adapter
+
+```php 
+class BillsGeocoderAdapter implements GeocoderInterface {
+    protected $geocoder;
+
+    public function __contruct(BillsGeocoder $geocoder)  {
+        $this->geocoder = $geocoder;
+    }
+
+    public function geocode($address) {
+        return $this->geocoder->geocode($address);
+    }
+}
+```
+
+# The Clean Arquitecture
+
