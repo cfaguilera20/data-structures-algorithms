@@ -36,6 +36,8 @@
     - [Handly Many Dependencies](#handly-many-dependencies)
     - [Are we still coupling?](#are-we-still-coupling)
   - [Defining a Contract With Interfaces](#defining-a-contract-with-interfaces)
+    - [Interfaces in PHP](#interfaces-in-php)
+    - [Interfaces as Type Hints](#interfaces-as-type-hints)
 
 
 # Introduction
@@ -1030,3 +1032,68 @@ class CustomerController {
 We still need something that is or extends from CustomerRepository
 
 ## Defining a Contract With Interfaces
+
+### Interfaces in PHP 
+
+Definition without implementation:
+
+```php
+interface Automobile {
+    public function drive();
+    public function idle();
+    public function park();
+}
+```
+
+Implement: 
+
+```php
+class Car implements Automobile {
+    public function drive() {
+        echo 'Driving!';
+    }
+
+    public function idle() {
+        echo 'Idling!';
+    }
+
+    public function park() {
+        echo 'Parking!';
+    }
+}
+```
+
+### Interfaces as Type Hints
+
+```php
+interface CustomerRepositoryInterface {
+    public function getById($id);
+}
+```
+
+The argument passed to the `__contruct()` method must be an instance of the interface:
+
+```php 
+class CustomerController {
+    protected $repository;
+
+    public function __construct(CustomerRepositoryInterface $repo) {
+        $this->repository = $repo;
+    }
+
+    public function viewAction($id) {
+        $customer = $this->repository->getById(1001);
+        return $customer;
+    }
+}
+```
+
+Concrete class
+
+```php 
+class CustomerRepository implements CustomerRepositoryInterface {
+    public function getById($id) {
+        // Some Code
+    }
+}
+```
