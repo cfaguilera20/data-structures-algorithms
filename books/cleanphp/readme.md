@@ -43,6 +43,10 @@
 - [The Clean Arquitecture](#the-clean-arquitecture)
   - [MVC, and it's limtations](#mvc-and-its-limtations)
     - [MVC Diagram](#mvc-diagram)
+    - [MVC Components](#mvc-components)
+      - [Model](#model)
+      - [View](#view)
+      - [Controller](#controller)
 
 
 # Introduction
@@ -1171,6 +1175,82 @@ class BillsGeocoderAdapter implements GeocoderInterface {
 
 ![MVC Diagram][mvc_diagram]
 
-
-
 [mvc_diagram]: ./assets/MVC.png "MVC Diagram"
+
+### MVC Components
+
+#### Model
+
+Represents the data.
+
+```php 
+class User extends AbstractModel {
+    public $id;
+    public $alias;
+    public $fullName;
+    public $email;
+}
+
+$user = new User();
+$user->alias 'cfaguilera';
+$user->fullName 'Carlos Aguilera';
+$user->email 'carlos@cfaguilera.me';
+```
+
+#### View
+
+What is presented to the user.
+
+```php 
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Full Name</th>
+            <th>Email</th>
+            <th>&nbsp;</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach($users as $user): ?>
+        <tr>
+            <td><?php echo $user->id; ?></td>
+            <td><?php echo $user->fullName; ?></td>
+            <td><?php echo $user->email; ?></td>
+            <td>
+                <a href="/users/edit/<?php echo $user->id; ?>"
+                    Edit
+                </a>
+            </td>
+        </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
+```
+
+#### Controller
+
+Responsible for interpreting and responding.
+
+```php 
+class UserController extends AbstractModel {
+    // Responsible for listing.
+    public function indexAction() {}
+    
+    // Responsible for viewing.
+    public function viewAction() {
+        $id = $this->params('id');
+        $user = $this->respository->getById($id);
+
+        $view  = new View();
+        $view->setFile('users/view.phtml');
+        $view->setData([
+            'userr' => $user
+        ]);
+        return $view;
+    }
+    // Responsible for updating.
+    public function updateAction() {}
+}
+```
+
