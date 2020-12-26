@@ -41,6 +41,8 @@
   - [Abstracting with Adapters](#abstracting-with-adapters)
   - [Setting up the Adapter](#setting-up-the-adapter)
 - [The Clean Arquitecture](#the-clean-arquitecture)
+  - [MVC, and it's limtations](#mvc-and-its-limtations)
+    - [MVC Diagram](#mvc-diagram)
 
 
 # Introduction
@@ -1163,3 +1165,12 @@ class BillsGeocoderAdapter implements GeocoderInterface {
 
 # The Clean Arquitecture
 
+## MVC, and it's limtations
+
+### MVC Diagram
+
+![MVC Diagram][mvc_diagram]
+
+
+
+[mvc_diagram]: ./assets/MVC.png "MVC Diagram"
