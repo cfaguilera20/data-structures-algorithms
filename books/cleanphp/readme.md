@@ -1303,11 +1303,20 @@ BigTable, CouchDB, or something else. Your business rules are not bound to the d
 
 ## The Onion Arquitecture
 
-<div style="width: 350px; margin-left: auto;margin-right: auto;"> 
 
-![Onion][arquitecture_onion]
+<!-- ![Onion][arquitecture_onion] -->
 
-</div>
+- Layer 1
+  - Domain Model: Pure models or entities that are representative of the bussines objects in your application.
+- Layer 2
+  - Domain Service: Things like factories, repositories, and other services that use the core domain model.
+- Layer 3
+  - Application Services: Composed of application implementation. Controllers, router, data parsers, authentication or translator. Everything necessary to bootstrap and provide the UI.
+- Layer 4
+  - User Interface
+  - Infrastructure
+  - External Libraries
+  - Tests
 
 
 # References
