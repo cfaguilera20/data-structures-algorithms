@@ -1303,8 +1303,11 @@ BigTable, CouchDB, or something else. Your business rules are not bound to the d
 
 ## The Onion Arquitecture
 
-![MVC Diagram][arquitecture_onion]
+<div style="width: 350px; margin-left: auto;margin-right: auto;"> 
 
+![Onion][arquitecture_onion]
+
+</div>
 
 
 # References
