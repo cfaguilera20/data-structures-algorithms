@@ -47,6 +47,8 @@
       - [Model](#model)
       - [View](#view)
       - [Controller](#controller)
+    - [MVC Isn't Good Enough](#mvc-isnt-good-enough)
+    - [Obese Models](#obese-models)
 
 
 # Introduction
@@ -1245,7 +1247,7 @@ class UserController extends AbstractModel {
         $view  = new View();
         $view->setFile('users/view.phtml');
         $view->setData([
-            'userr' => $user
+            'user' => $user
         ]);
         return $view;
     }
@@ -1254,3 +1256,25 @@ class UserController extends AbstractModel {
 }
 ```
 
+### MVC Isn't Good Enough
+
+- View is a role well defined.
+- Controllers become overwhelmed with business logic or
+- Models absorbs it all.
+
+*Note: Fat model, skinny controller.*
+
+
+### Obese Models
+
+A clean model looks like: 
+
+ ```php 
+class User { 
+    public $id;
+    public $alias;
+    public $fullName;
+    public $email;
+} 
+ ```
+ *Note: Classes like the above are Entities.*
