@@ -41,7 +41,7 @@
   - [Abstracting with Adapters](#abstracting-with-adapters)
   - [Setting up the Adapter](#setting-up-the-adapter)
 - [The Clean Arquitecture](#the-clean-arquitecture)
-  - [MVC, and it's limtations](#mvc-and-its-limtations)
+  - [MVC, and it's Limtations](#mvc-and-its-limtations)
     - [MVC Diagram](#mvc-diagram)
     - [MVC Components](#mvc-components)
       - [Model](#model)
@@ -49,6 +49,10 @@
       - [Controller](#controller)
     - [MVC Isn't Good Enough](#mvc-isnt-good-enough)
     - [Obese Models](#obese-models)
+    - [More Layers for All of the Things!](#more-layers-for-all-of-the-things)
+  - [Clean Arquitecture](#clean-arquitecture)
+  - [The Onion Arquitecture](#the-onion-arquitecture)
+- [References](#references)
 
 
 # Introduction
@@ -1171,7 +1175,7 @@ class BillsGeocoderAdapter implements GeocoderInterface {
 
 # The Clean Arquitecture
 
-## MVC, and it's limtations
+## MVC, and it's Limtations
 
 ### MVC Diagram
 
@@ -1278,3 +1282,34 @@ class User {
 } 
  ```
  *Note: Classes like the above are Entities.*
+
+### More Layers for All of the Things!
+
+- Entity
+- Persistence
+- View 
+- Controller
+
+## Clean Arquitecture
+
+Uncle Bob describes these architectures as being:
+
+- Independent of Frameworks. The architecture does not depend on the existence of some library of feature laden software. This allows you to use such frameworks as tools, rather than having to cram your system into their limited constraints.
+- Testable. The business rules can be tested without the UI, Database, Web Server, or any other external element.
+- Independent of UI. The UI can change easily, without changing the rest of the system. A Web UI could be replaced with a console UI, for example, without changing the business rules.
+- Independent of Database. You can swap out Oracle or SQL Server, for Mongo,
+BigTable, CouchDB, or something else. Your business rules are not bound to the database.
+- Independent of any external agency. In fact your business rules simply don’t know anything at all about the outside world.
+
+## The Onion Arquitecture
+
+![MVC Diagram][arquitecture_onion]
+
+
+
+# References
+[The Onion Arquitecture](https://jeffreypalermo.com/2008/07/the-onion-architecture-part-1/)
+
+<!--Assets-->
+[mvc_diagram]: ./assets/MVC.png "MVC Diagram"
+[arquitecture_onion]: ./assets/Onion.png "Onion"
