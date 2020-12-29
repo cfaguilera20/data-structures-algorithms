@@ -10,7 +10,7 @@
     - [Poor MVC](#poor-mvc)
     - [Poor Usage of Database Abstraction](#poor-usage-of-database-abstraction)
     - [Good architecture](#good-architecture)
-    - [Cost of Poor Arquitecture](#cost-of-poor-arquitecture)
+    - [Cost of Poor Architecture](#cost-of-poor-architecture)
   - [Coupling, The Enemy](#coupling-the-enemy)
 - [Decoupling Toolbox](#decoupling-toolbox)
   - [Design Patterns](#design-patterns)
@@ -32,7 +32,7 @@
     - [Using Dependency Injection](#using-dependency-injection)
       - [Setter Injection](#setter-injection)
       - [Constructor Injection](#constructor-injection)
-    - [Using Factories to Create Dependecies](#using-factories-to-create-dependecies)
+    - [Using Factories to Create Dependencies](#using-factories-to-create-dependencies)
     - [Handly Many Dependencies](#handly-many-dependencies)
     - [Are we still coupling?](#are-we-still-coupling)
   - [Defining a Contract With Interfaces](#defining-a-contract-with-interfaces)
@@ -40,7 +40,7 @@
     - [Interfaces as Type Hints](#interfaces-as-type-hints)
   - [Abstracting with Adapters](#abstracting-with-adapters)
   - [Setting up the Adapter](#setting-up-the-adapter)
-- [The Clean Arquitecture](#the-clean-arquitecture)
+- [The Clean Architecture](#the-clean-architecture)
   - [MVC, and it's Limtations](#mvc-and-its-limtations)
     - [MVC Diagram](#mvc-diagram)
     - [MVC Components](#mvc-components)
@@ -50,8 +50,9 @@
     - [MVC Isn't Good Enough](#mvc-isnt-good-enough)
     - [Obese Models](#obese-models)
     - [More Layers for All of the Things!](#more-layers-for-all-of-the-things)
-  - [Clean Arquitecture](#clean-arquitecture)
-  - [The Onion Arquitecture](#the-onion-arquitecture)
+  - [Clean Architecture](#clean-architecture)
+  - [The Onion Architecture](#the-onion-architecture)
+- [Framework Independence](#framework-independence)
 - [References](#references)
 
 
@@ -198,7 +199,7 @@ Refactoring problems:
 class EmployeeController extends AbstractActionController {
     protected $employeeRepository;
 
-    public function __construct(EmployeeRepositoryInterface $respository) {
+    public function __construct(EmployeeRepositoryInterface $repository) {
         $this->employeeRepository = $repository;
     }
 
@@ -217,7 +218,7 @@ Benefits
 -   Not impediment to upgrade to newser version of PHP or libraries.
 -   Queries abstraction
 
-### Cost of Poor Arquitecture
+### Cost of Poor Architecture
 
 -   Untestable
 -   Hard to refactor
@@ -882,7 +883,7 @@ class TerminalOutput implements OutInterface {
 class CustomerController {
     public function viewAction() {
         $repository = new CustomerRepository();
-        $customer = $respository->getById(1001);
+        $customer = $repository->getById(1001);
         return $customer;
     }
 }
@@ -947,10 +948,10 @@ Controller implementation:
 
 ```php 
 class CustomerController {
-    protected $respository;
+    protected $repository;
 
     public function __constructor(CustomerRepository $repo) {
-        $this->respository = $repo;
+        $this->repository = $repo;
     }
 
     public function viewAction($id) {
@@ -974,7 +975,7 @@ public function viewAction() {
 *ViewModel is injected directly in the controller. It has no configuration, it has no dependencies itself, and in the case of testing, we probably just want to verify that an instance of ViewModel was returned.*
 
 
-### Using Factories to Create Dependecies
+### Using Factories to Create Dependencies
 
 Depends of the context we can return a different type of response.
 
@@ -1031,10 +1032,10 @@ To this:
 
 ```php
 class CustomerController { 
-    protected $respository;
+    protected $repository;
 
     public function __construct(CustomerRepository $repo) {
-        $this->respository = $repo;
+        $this->repository = $repo;
     }
     
     public function viewAction($id) {
@@ -1116,7 +1117,7 @@ class CustomerRepository implements CustomerRepositoryInterface {
 ## Abstracting with Adapters
 
 ```php
-class AddressContrller extends Abstract Controller {
+class AddressController extends Abstract Controller {
     protected $geocoder;
 
     public function __construct(BillsGeocoder $geocoder) {
@@ -1143,7 +1144,7 @@ interface GeocoderInterface {
 Controller depends only upon interfaces:
 
 ```php
-class AddressContrller extends Abstract Controller {
+class AddressController extends Abstract Controller {
     protected $geocoder;
 
     public function __construct(GeocoderInterface $geocoder) {
@@ -1173,7 +1174,7 @@ class BillsGeocoderAdapter implements GeocoderInterface {
 }
 ```
 
-# The Clean Arquitecture
+# The Clean Architecture
 
 ## MVC, and it's Limtations
 
@@ -1246,7 +1247,7 @@ class UserController extends AbstractModel {
     // Responsible for viewing.
     public function viewAction() {
         $id = $this->params('id');
-        $user = $this->respository->getById($id);
+        $user = $this->repository->getById($id);
 
         $view  = new View();
         $view->setFile('users/view.phtml');
@@ -1290,7 +1291,7 @@ class User {
 - View 
 - Controller
 
-## Clean Arquitecture
+## Clean Architecture
 
 Uncle Bob describes these architectures as being:
 
@@ -1301,10 +1302,10 @@ Uncle Bob describes these architectures as being:
 BigTable, CouchDB, or something else. Your business rules are not bound to the database.
 - Independent of any external agency. In fact your business rules simply don’t know anything at all about the outside world.
 
-## The Onion Arquitecture
+## The Onion Architecture
 
 
-<!-- ![Onion][arquitecture_onion] -->
+<!-- ![Onion][architecture_onion] -->
 
 - Layer 1
   - Domain Model: Pure models or entities that are representative of the bussines objects in your application.
@@ -1313,15 +1314,17 @@ BigTable, CouchDB, or something else. Your business rules are not bound to the d
 - Layer 3
   - Application Services: Composed of application implementation. Controllers, router, data parsers, authentication or translator. Everything necessary to bootstrap and provide the UI.
 - Layer 4
-  - User Interface
-  - Infrastructure
+  - User Interface: 
+  - Infrastructure: Where the data comes from: Databases, Services (API), or something else.
   - External Libraries
   - Tests
 
+# Framework Independence
+
 
 # References
-[The Onion Arquitecture](https://jeffreypalermo.com/2008/07/the-onion-architecture-part-1/)
+[The Onion Architecture](https://jeffreypalermo.com/2008/07/the-onion-architecture-part-1/)
 
 <!--Assets-->
 [mvc_diagram]: ./assets/MVC.png "MVC Diagram"
-[arquitecture_onion]: ./assets/Onion.png "Onion"
+[architecture_onion]: ./assets/Onion.png "Onion"
