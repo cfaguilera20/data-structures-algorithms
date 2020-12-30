@@ -56,6 +56,11 @@
   - [The Problem with Framework](#the-problem-with-framework)
   - [Framework Independence](#framework-independence-1)
     - [Abstract the Usage of the Framework](#abstract-the-usage-of-the-framework)
+    - [Routes and Controllers](#routes-and-controllers)
+      - [Using Adapters to Wrap Your Controller.](#using-adapters-to-wrap-your-controller)
+      - [Keep Controllers Small](#keep-controllers-small)
+      - [Views](#views)
+      - [Forms](#forms)
 - [References](#references)
 
 
@@ -1342,6 +1347,62 @@ We use several tactics to abstract the usage of a framework:
 - **Use the Adapter Pattern** We also discussed the usage of the Adapter design pattern to wrap the functionality of one class and make it conform to the specification of another, such as an interface.
 - **Follow the principles of clean code and SOLID** Writing clean code, and following the principles of SOLID, allow us to have nicely organized and grouped code, and when implemented correctly, code that doesn’t depend strongly on the framework to function.
 
+### Routes and Controllers
+
+The hardest part.
+
+```php 
+class CustomerController extends BaseController {}
+```
+
+It extends immediately from the framework.
+
+#### Using Adapters to Wrap Your Controller.
+
+Write controllers completely outside from your application. Similar to services:
+
+```php 
+namespace MyApp\Controller;
+
+class Customers {
+    public function index() {
+        return [
+            'customers' => $this->customerRepository->getAll()
+        ];
+    }
+}
+```
+
+Use an adapter in the framework:
+
+```php 
+
+use MyApp\Controller\Customers;
+
+class CustomerController extends AbstractActionController {
+    protected $controller;
+
+    public function __construct(Customers $controller) {
+        $this->controller = $controller;
+    }
+
+    public function indexAction() {
+        return $this->controller->index();
+    }
+}
+```
+
+#### Keep Controllers Small
+
+Controllers should be like response factories. The should create a response based on the input (the HTTP request).
+
+#### Views
+
+Composed by HTML, JS, and CSS. It's recommendable to use a library like Plates. This allow to keep the view layer intact when switching frameworks.
+
+#### Forms
+
+Aura.Input
 
 # References
 [The Onion Architecture](https://jeffreypalermo.com/2008/07/the-onion-architecture-part-1/)
