@@ -53,6 +53,9 @@
   - [Clean Architecture](#clean-architecture)
   - [The Onion Architecture](#the-onion-architecture)
 - [Framework Independence](#framework-independence)
+  - [The Problem with Framework](#the-problem-with-framework)
+  - [Framework Independence](#framework-independence-1)
+    - [Abstract the Usage of the Framework](#abstract-the-usage-of-the-framework)
 - [References](#references)
 
 
@@ -1320,6 +1323,24 @@ BigTable, CouchDB, or something else. Your business rules are not bound to the d
   - Tests
 
 # Framework Independence
+
+The collections of services, repositories, factories, and entireties are the application. 
+
+## The Problem with Framework
+
+Having an application tightly couple to a particular framework makes it very hard to leave the framework.
+
+## Framework Independence
+
+The ability to switch a t will, easily between one framework or another, or to using no a framework at all. In a software application, the ability to leave a framework with minimal effort is a very powerful position to be in. 
+
+### Abstract the Usage of the Framework
+
+We use several tactics to abstract the usage of a framework:
+
+- **Use Interfaces Liberally** We previously discussed how we can use interfaces to define base functionality we require, type-hint to those interfaces, and then pass in concrete implementations of those interfaces using dependency injection (or some other method of inversion of control).
+- **Use the Adapter Pattern** We also discussed the usage of the Adapter design pattern to wrap the functionality of one class and make it conform to the specification of another, such as an interface.
+- **Follow the principles of clean code and SOLID** Writing clean code, and following the principles of SOLID, allow us to have nicely organized and grouped code, and when implemented correctly, code that doesn’t depend strongly on the framework to function.
 
 
 # References
