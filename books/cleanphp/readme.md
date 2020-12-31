@@ -51,17 +51,22 @@
     - [Obese Models](#obese-models)
     - [More Layers for All of the Things!](#more-layers-for-all-of-the-things)
   - [Clean Architecture](#clean-architecture)
-  - [The Onion Architecture](#the-onion-architecture)
-- [Framework Independence](#framework-independence)
-  - [The Problem with Framework](#the-problem-with-framework)
-  - [Framework Independence](#framework-independence-1)
-    - [Abstract the Usage of the Framework](#abstract-the-usage-of-the-framework)
-    - [Routes and Controllers](#routes-and-controllers)
-      - [Using Adapters to Wrap Your Controller.](#using-adapters-to-wrap-your-controller)
-      - [Keep Controllers Small](#keep-controllers-small)
-      - [Views](#views)
-      - [Forms](#forms)
-      - [Framework Services](#framework-services)
+    - [The Onion Architecture](#the-onion-architecture)
+  - [Framework Independence](#framework-independence)
+    - [The Problem with Framework](#the-problem-with-framework)
+    - [Framework Independence](#framework-independence-1)
+      - [Abstract the Usage of the Framework](#abstract-the-usage-of-the-framework)
+      - [Routes and Controllers](#routes-and-controllers)
+        - [Using Adapters to Wrap Your Controller.](#using-adapters-to-wrap-your-controller)
+        - [Keep Controllers Small](#keep-controllers-small)
+        - [Views](#views)
+        - [Forms](#forms)
+        - [Framework Services](#framework-services)
+  - [Database Independence](#database-independence)
+    - [Domain Models](#domain-models)
+    - [Domain Services](#domain-services)
+    - [Database Infrastructure/Persistance](#database-infrastructurepersistance)
+    - [Organizing the Code](#organizing-the-code)
 - [References](#references)
 
 
@@ -1311,13 +1316,13 @@ Uncle Bob describes these architectures as being:
 BigTable, CouchDB, or something else. Your business rules are not bound to the database.
 - Independent of any external agency. In fact your business rules simply don’t know anything at all about the outside world.
 
-## The Onion Architecture
+### The Onion Architecture
 
 
 <!-- ![Onion][architecture_onion] -->
 
 - Layer 1
-  - Domain Model: Pure models or entities that are representative of the bussines objects in your application.
+  - Domain Model: Pure models or entities that are representative of the business objects in your application.
 - Layer 2
   - Domain Service: Things like factories, repositories, and other services that use the core domain model.
 - Layer 3
@@ -1328,19 +1333,19 @@ BigTable, CouchDB, or something else. Your business rules are not bound to the d
   - External Libraries
   - Tests
 
-# Framework Independence
+## Framework Independence
 
 The collections of services, repositories, factories, and entireties are the application. 
 
-## The Problem with Framework
+### The Problem with Framework
 
 Having an application tightly couple to a particular framework makes it very hard to leave the framework.
 
-## Framework Independence
+### Framework Independence
 
 The ability to switch a t will, easily between one framework or another, or to using no a framework at all. In a software application, the ability to leave a framework with minimal effort is a very powerful position to be in. 
 
-### Abstract the Usage of the Framework
+#### Abstract the Usage of the Framework
 
 We use several tactics to abstract the usage of a framework:
 
@@ -1348,7 +1353,7 @@ We use several tactics to abstract the usage of a framework:
 - **Use the Adapter Pattern** We also discussed the usage of the Adapter design pattern to wrap the functionality of one class and make it conform to the specification of another, such as an interface.
 - **Follow the principles of clean code and SOLID** Writing clean code, and following the principles of SOLID, allow us to have nicely organized and grouped code, and when implemented correctly, code that doesn’t depend strongly on the framework to function.
 
-### Routes and Controllers
+#### Routes and Controllers
 
 The hardest part.
 
@@ -1358,7 +1363,7 @@ class CustomerController extends BaseController {}
 
 It extends immediately from the framework.
 
-#### Using Adapters to Wrap Your Controller.
+##### Using Adapters to Wrap Your Controller.
 
 Write controllers completely outside from your application. Similar to services:
 
@@ -1393,19 +1398,19 @@ class CustomerController extends AbstractActionController {
 }
 ```
 
-#### Keep Controllers Small
+##### Keep Controllers Small
 
 Controllers should be like response factories. The should create a response based on the input (the HTTP request).
 
-#### Views
+##### Views
 
 Composed by HTML, JS, and CSS. It's recommendable to use a library like Plates. This allow to keep the view layer intact when switching frameworks.
 
-#### Forms
+##### Forms
 
 Aura.Input
 
-#### Framework Services
+##### Framework Services
 
 Consider Laravel's Mail facade:
 
@@ -1418,7 +1423,7 @@ Mail::send('email.hello', $data, function($message) {
 Create an adapter interface
 
 ```php 
-interface MailerInteraface {
+interface MailerInterface {
     public function send($template, array $data, callable $callback);
 }
 ```
@@ -1499,6 +1504,61 @@ class YamlImporter {
         }
     }
 }
+```
+
+## Database Independence
+
+An application centered on a database can suffert some problems:
+
+1. If the database, or the database abstraction, is literally all over the code base, it becomes nearly impossible to refactor that code without a time consuming effort. 
+2. Testing is very hard: You have to setup a known state for each and every test case as the code is modifying the contests of the database with each test. 
+
+### Domain Models
+
+Domain model is the core o the application, and central to everything else around it. 
+
+The domain model is a collection of classes, each representing a data object relevant to the system. These classes, called Models or Entities, are simple plain, old PHP Objects. 
+
+This classes cannot be dependent upon any other layer or code base. 
+
+Example: 
+
+```php 
+class Customer {
+    protected $id;
+    protected $name;
+    protected $status;
+
+    public function getId() {
+        return $this->id;
+    }
+
+    public function setId($id) {
+        return $this->id = $id;
+    }
+
+    public function getName() {
+        return $this->name;
+    }
+
+    public function setName($name) {
+        return $this->name = $name;
+    }
+
+    // Some code
+}
+```
+
+### Domain Services
+
+Pending
+
+### Database Infrastructure/Persistance
+
+Pending
+### Organizing the Code
+
+Pending
 
 
 # References
