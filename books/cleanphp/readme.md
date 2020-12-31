@@ -61,6 +61,7 @@
       - [Keep Controllers Small](#keep-controllers-small)
       - [Views](#views)
       - [Forms](#forms)
+      - [Framework Services](#framework-services)
 - [References](#references)
 
 
@@ -1403,6 +1404,102 @@ Composed by HTML, JS, and CSS. It's recommendable to use a library like Plates. 
 #### Forms
 
 Aura.Input
+
+#### Framework Services
+
+Consider Laravel's Mail facade:
+
+```php 
+Mail::send('email.hello', $data, function($message) {
+    $message->to('hello@cfaguilera.me', 'You')->subject('Hello, You!');
+});
+```
+
+Create an adapter interface
+
+```php 
+interface MailerInteraface {
+    public function send($template, array $data, callable $callback);
+}
+```
+
+Implements the interface
+
+```php
+class LaravelMailerAdapter implements MailerInterface {
+    protected $mailer;
+
+    public function __construct(Mailer $mailer) {
+        $this->mailer = $mailer;
+    }
+
+    public function send($template, array $data, callable $callback) {
+        $this->mailer->send($template, $data, $callback);
+    }
+}
+```
+
+Inject the adapter to the controller
+
+```php 
+class MailController extends BaseController {
+    protected $mailer;
+    
+    public function __construct(MailerInterface $mailer) {
+        $this->mailer = $mailer;
+    }
+
+    public function sendMail() {
+        $this->mailer->send('email.hello', $data, function($message) {
+            $message->to('hello@cfaguilera.me', 'You')->subject('Hello, You!');
+        });
+    }
+}
+```
+
+Another case
+
+```php
+$data = Symfony\Component\Yaml\Yaml::parse($file);
+```
+
+Solution
+
+```php
+interface  YamlParserInterface {
+    public function parse($fileName);
+}
+```
+
+Implements the interface
+
+```php
+class SymfonyYamlAdapter implements YamlParserInterface {
+    public function parse($fileName) {
+        return Yaml::parse($fileName);
+    }
+}
+```
+
+Inject the adapter
+
+```php 
+class YamlImporter {
+    protected $parser;
+
+    public function __construct(YamlParserInterface $parser) {
+        $this->parser = $parser;
+    }
+
+    public function parseUserFile($fileName) {
+        $users = $this->parser->parse($fileName);
+
+        foreach($users as $user) {
+            // Some code
+        }
+    }
+}
+
 
 # References
 [The Onion Architecture](https://jeffreypalermo.com/2008/07/the-onion-architecture-part-1/)
