@@ -1674,7 +1674,72 @@ class BillingService {
 
 ### Database Infrastructure/Persistance
 
-Pending
+The persistence layer is responsible for retrieve and persisting data to our data storage, whatever that may be: RDB, NoSQL or API.
+
+For instance, if we use a RDB, and Doctrine ORM: 
+
+```php 
+class CustomerRepository implements CustomerRepositoryInterface {
+    protected $entityManager;
+    protected $entityClass = 'MyVendor\Domain\Entity\Customer';
+
+    public function __construct(EntityManager  $entityManager) {
+        $this->entityManager = $entityManager;
+    }
+
+    public function getAll() {
+        return $this->entityManager
+                    ->getRepository($this->entityClass)
+                    ->getAll();
+    }
+
+    public function getById($id) {
+        return $this->entityManager
+                    ->find($this->entityClass, $id);
+    }
+}
+```
+
+Create an abstract class to prevent duplicate functionality:
+
+```php 
+abstract class AbstractRepository {
+    protected $entityManager;
+    protected $entityClass = '';
+
+    public function __construct(EntityManager  $entityManager) {
+        $this->entityManager = $entityManager;
+
+        if(empty($this->entityClass)) {
+            throw new \RuntimeException(
+                'entityClass not specified form '. __CLASS__;
+            ); 
+        }
+    }
+
+    public function getAll() {
+        return $this->entityManager
+                    ->getRepository($this->entityClass)
+                    ->getAll();
+    }
+
+    public function getById($id) {
+        return $this->entityManager
+                    ->find($this->entityClass, $id);
+    }
+}
+```
+
+Concrete class: 
+
+```php 
+class CustomerRepository extends AbstractRepository implements CustomerRepositoryInterface {
+    protected $entityClass = 'MyVendor\Domain\Entity\Customer';
+}
+```
+
+Now we only need to add customer-specific logic to this repository, as needed.
+
 ### Organizing the Code
 
 Pending
