@@ -65,6 +65,9 @@
   - [Database Independence](#database-independence)
     - [Domain Models](#domain-models)
     - [Domain Services](#domain-services)
+      - [Repositories](#repositories)
+      - [Factories](#factories)
+      - [Servicies](#servicies)
     - [Database Infrastructure/Persistance](#database-infrastructurepersistance)
     - [Organizing the Code](#organizing-the-code)
 - [References](#references)
@@ -75,7 +78,7 @@
 Framework to developing applications:
 
 1. Testable
-2. Refactorable
+2. Re-factorable
 3. Easy to work with
 4. Easy to maintain
 
@@ -1515,7 +1518,7 @@ An application centered on a database can suffert some problems:
 
 ### Domain Models
 
-Domain model is the core o the application, and central to everything else around it. 
+Domain model is the first layer, the core of the application, and central to everything else around it. 
 
 The domain model is a collection of classes, each representing a data object relevant to the system. These classes, called Models or Entities, are simple plain, old PHP Objects. 
 
@@ -1551,7 +1554,123 @@ class Customer {
 
 ### Domain Services
 
-Pending
+Domain services is the Second Layer of the application, is meant to expand on this, and provide meaning and value th the Domain Model. 
+
+The Domain Service sub-layers can be:
+
+- **Repositories**, classes that define how entities should be retrieved and persisted back to some data storage, whether  it be a DB, API, XML, or some other data source.
+- **Factories**, classes that take care of the creation of entities. they may contain complex logic about how entities should be build in certain circumstances. 
+- **Services**, classes that implement logic of things to do with entities. 
+
+#### Repositories
+
+```php 
+interface CustomerRepositoryInterface {
+    public function getAll();
+    public function getBy($conditions);
+    public function getById($conditions);
+    public function save(Customer $customer);
+}
+```
+*Note: This interface doesn't do anything. It simply defines a contract to be followed by an concrete implementation*
+
+#### Factories
+
+Could be easy create an object:
+
+```php 
+$customer = new Customer();
+```
+
+But not always is:
+
+```php 
+$customer = new Customer();
+$customer->setCreditLimit(0);
+$customer->setLimit('pending');
+```
+
+Using a factory to consolidate code and make it reusable:
+
+```php
+class CustomerFactory {
+    public function create() {
+        $customer = new Customer();
+        $customer->setCreditLimit(0);
+        $customer->setLimit('pending');
+        
+        return $customer;
+    }
+}
+```
+
+Now we can create an object with our factory:
+
+```php
+$customer = (new CustomerFactory())->create();
+```
+
+We just set the defaults in the class ofr te constructor:
+
+```php 
+class Customer {
+    protected $id;
+    protected $name;
+    protected $creditLimit = 0;
+    protected $status = 'pending';
+}
+```
+
+A complex example:
+
+```php 
+class CustomerFactory {
+    protected $managerRepository;
+
+    public function __construct(AccountManagerRepositoryInterface $repo) {
+        $this->managerRepository = $repo;
+    }
+
+    public function create() {
+        $customer = new Customer();
+        $customer->setAccountManager(
+            $this->managerRepository->getNextAvailable();
+        );
+    }
+}
+```
+#### Servicies
+
+Responsible of doing things. 
+
+```php
+class BillingService {
+    protected $oderRepository;
+    protected $invoiceRepository;
+    protected $invoiceFactory;
+
+    public function __construct(
+        OrderRepositoryInterface $order,
+        InvoiceRepositoryInterface $invoice,
+        InvoiceFactory $factory,
+    ) {
+        $this->oderRepository = $order;
+        $this->invoiceRepository = $invoice;
+        $this->invoiceFactory = $factory;
+
+    }
+
+    public function generateInvoice(\DateTime $invoiceDate) {
+        $orders = $this->ordersRepository
+                    ->getActiveBillingOrders($invoiceDate);
+        
+        foreach($orders as $order) {
+            $invoice = $this->invoiceFactory->create($order);
+            $this->invoiceRepository->save($invoice);
+        }
+    }
+}
+```
 
 ### Database Infrastructure/Persistance
 
