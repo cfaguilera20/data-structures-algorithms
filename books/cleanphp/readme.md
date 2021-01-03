@@ -71,6 +71,8 @@
     - [Database Infrastructure/Persistance](#database-infrastructurepersistance)
       - [Using Dependency Injection to Fulfill Contracts](#using-dependency-injection-to-fulfill-contracts)
     - [Organizing the Code](#organizing-the-code)
+  - [External Agency Independence](#external-agency-independence)
+    - [Using Interfaces, Adapters, and Dependency Injection.](#using-interfaces-adapters-and-dependency-injection)
 - [References](#references)
 
 
@@ -1785,6 +1787,77 @@ Using PSR-4 autoloading standard we can have the namespaces:
 
 ```php 
 MyVendor\Project\Domain\Entity\Customer;
+```
+
+## External Agency Independence
+
+The more we use libraries directly in our code, the mor e he are tightly coupling ourselves to it, and more harder is going to be switch to something else. 
+
+### Using Interfaces, Adapters, and Dependency Injection.
+
+1. Create an interface defining the functionality we need.
+2. Write and adapter that wraps the third party code, making it conform to our interface. 
+3. Require an implementation of that interface to be injected into whatever client code needs it.
+
+Example, Geocoder PHP:
+
+1. Interface:
+
+```php 
+interface GeocoderInterface {
+    public function geocodeAddress($address);
+}
+```
+
+2. Write and adapter:
+
+```php
+
+class GeocoderPhpAdapter implements GeocoderInterface{
+    protected $geocoder;
+
+    public function __construct(Geocoder $geocoder) {
+        $this->geocoder = $geocoder;
+    }
+
+    public function geocodeAddress($address) {
+        $results = $this->geocoder->geocode($address);
+
+        return [
+            'longitude' => $results['longitude'],
+            'latitude' => $results['latitude'],
+        ];
+    }
+}
+
+```
+
+3. Require the implementation of the interface:
+
+```php 
+class AddressController {
+    protected $geocoder;
+
+    public function __construct(GeocoderInterface $geocoder) {
+        $this->geocoder = $geocoder;
+    }
+
+    public function geocode() {
+        return $this->geocoder->geocodeAddress(
+            $this->params('address')
+        );
+    }
+}
+```
+
+4. Inject Geocoder:
+
+```php 
+$geocoder = new GeocoderPhpAdapter(
+    new Geocoder(
+        new GoogleMapsProvider(new CurlHttpAdapter())
+    )
+);
 ```
 
 # References
