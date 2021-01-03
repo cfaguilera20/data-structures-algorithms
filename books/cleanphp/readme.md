@@ -69,6 +69,7 @@
       - [Factories](#factories)
       - [Servicies](#servicies)
     - [Database Infrastructure/Persistance](#database-infrastructurepersistance)
+      - [Using Dependency Injection to Fulfill Contracts](#using-dependency-injection-to-fulfill-contracts)
     - [Organizing the Code](#organizing-the-code)
 - [References](#references)
 
@@ -1739,6 +1740,28 @@ class CustomerRepository extends AbstractRepository implements CustomerRepositor
 ```
 
 Now we only need to add customer-specific logic to this repository, as needed.
+
+#### Using Dependency Injection to Fulfill Contracts
+
+```php 
+class CustomerFactory {
+    protected $managerRepository;
+    
+    public function __construct(AccountManagerRepository $repo) {
+        $this->managerRepository = $repo;
+    }
+
+    // Some code
+}
+```
+
+Implementation:
+
+```php 
+$customerFactory = new CustomerFactory(
+    new CustomerRepository($entityManager)
+);
+```
 
 ### Organizing the Code
 
