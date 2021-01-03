@@ -1765,8 +1765,27 @@ $customerFactory = new CustomerFactory(
 
 ### Organizing the Code
 
-Pending
+```
+src
+└───Domain
+│   └───Entity
+│   │   │   ...
+│   └───Factory
+│   │   │   ...
+│   └───Repository
+│   │   │   ...
+│   └───Service
+│   │   │   ...
+└───Persistence
+    └───Repository
+        │   ...
+```
 
+Using PSR-4 autoloading standard we can have the namespaces:
+
+```php 
+MyVendor\Project\Domain\Entity\Customer;
+```
 
 # References
 [The Onion Architecture](https://jeffreypalermo.com/2008/07/the-onion-architecture-part-1/)
