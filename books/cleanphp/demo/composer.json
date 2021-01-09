@@ -1,4 +1,5 @@
 {
+    "name": "clean/demo",
     "autoload": {
         "psr-4": {
             "Demo\\Invoicer\\": [
