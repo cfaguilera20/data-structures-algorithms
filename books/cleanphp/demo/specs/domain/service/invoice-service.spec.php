@@ -33,6 +33,7 @@ describe('InvoicingService', function () {
                 $this->factory->reveal()
             );
             $results = $service->generateInvoices();
+
             assert(is_array($results));
             assert(count($results) === count($orders));
         });
