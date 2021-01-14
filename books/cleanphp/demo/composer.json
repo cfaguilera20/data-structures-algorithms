@@ -14,6 +14,7 @@
     },
     "require": {
         "doctrine/orm": "^2.7",
-        "symfony/yaml": "^4.4"
+        "symfony/yaml": "^4.4",
+        "peridot-php/leo": "^1.6"
     }
 }
