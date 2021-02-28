@@ -33,8 +33,23 @@ function insertionSort(array) {
     return array;
 }
 
+/**
+ * Small version
+ */
+function insertionSort2(array) {
+  for(let i = 1; i < array.length; i++) {
+		let j = i;
+		while(j  > 0 && array[j] < array[j - 1]) {
+			swap(j, j - 1, array);
+			j--;
+		}
+	}
+	
+	return array;
+}
+
 function swap(i, j, array) {
-    [array[i], array[j]] = [array[j], array[i]];
+	[array[i], array[j]] = [array[j], array[i]]
 }
 
 console.log(insertionSort([2, 1, 4, 5, 3]).toString() == [1, 2, 3, 4, 5].toString());
