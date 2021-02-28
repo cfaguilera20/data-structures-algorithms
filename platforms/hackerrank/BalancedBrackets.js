@@ -18,5 +18,5 @@ function isBalanced(s) {
         }
         i++
     }
-    return 'YES';
+    return stack.length === 0 ? 'YES' : 'NO';
 }
