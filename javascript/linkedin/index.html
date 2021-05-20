@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>LinkedIn</title>
+    </head>
+    <body>
+        <div class="node" id="node">
+            <h1>Node overview</h1>
+            <p>
+                HTML documents get parsed by a browser and converted into a tree
+                structure of nodo objects representing a live structure. DOM is
+                programmatic interface.
+            </p>
+            <h2>Node Object Types</h2>
+            <pre>
+                for (let key in Node) {
+                    console.log(key, Node[key]);
+                }
+            </pre>
+            <ul></ul>
+            <h2>Properties and Methods</h2>
+            Node properties
+            <ul>
+                <li>childNodes</li>
+                <li>firstChild</li>
+                <li>lastChild</li>
+                <li>nextSibling</li>
+                <li>nodeName</li>
+                <li>nodeType</li>
+                <li>nodeValue</li>
+                <li>parentNode</li>
+                <li>previousSibling</li>
+            </ul>
+            Node methods
+            <ul>
+                <li>appendChild()</li>
+                <li>cloneNode()</li>
+                <li>compareDocumentPosition()</li>
+                <li>contains()</li>
+                <li>hasChildNodes()</li>
+                <li>insertBefore()</li>
+                <li>isEqualNode()</li>
+                <li>removeChild()</li>
+                <li>replaceChild()</li>
+            </ul>
+            Document methods
+            <ul>
+                <li>document.createElement()</li>
+                <li>document.createCreateTextNode()</li>
+            </ul>
+            HTML*Element properties
+            <ul>
+                <li>innerHtml</li>
+                <li>outerHTML</li>
+                <li>textContent</li>
+                <li>innerText</li>
+                <li>outerText</li>
+                <li>firstElementChild</li>
+                <li>lastElementChild</li>
+                <li>nextElementChild</li>
+                <li>previousElementChild</li>
+                <li>children</li>
+            </ul>
+            HTML element method
+            <ul>
+                <li>insertAdjacentHTML()</li>
+            </ul>
+        </div>
+        <script>
+            // Node Object Types
+            {
+                const ulElement = document.querySelector('#node ul');
+                for (let key in Node) {
+                    const liElement = document.createElement('li');
+                    const textElement = document.createTextNode(
+                        key + ': ' + Node[key]
+                    );
+                    liElement.appendChild(textElement);
+                    ulElement.insertBefore(liElement, ulElement.firstChild);
+                }
+            }
+        </script>
+        <div class="dom" id="dom">DOM</div>
+        <script>
+            {
+            }
+        </script>
+        <div class="events" id="events">Events</div>
+        <script>
+            {
+            }
+        </script>
+        <div class="bubbling" id="bubbling">Bubbling</div>
+        <script>
+            {
+            }
+        </script>
+        <div class="capturing" id="capturing">Capturing</div>
+        <script>
+            {
+            }
+        </script>
+        <div class="bubbling" id="async">Async</div>
+        <script>
+            {
+            }
+        </script>
+    </body>
+</html>
