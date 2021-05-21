@@ -21,6 +21,20 @@
                 }
             </pre>
             <ul></ul>
+            <script>
+                // Node Object Types
+                {
+                    const ulElement = document.querySelector('#node ul');
+                    for (let key in Node) {
+                        const liElement = document.createElement('li');
+                        const textElement = document.createTextNode(
+                            key + ': ' + Node[key]
+                        );
+                        liElement.appendChild(textElement);
+                        ulElement.insertBefore(liElement, ulElement.firstChild);
+                    }
+                }
+            </script>
             <h2>Properties and Methods</h2>
             Node properties
             <ul>
@@ -68,21 +82,47 @@
             <ul>
                 <li>insertAdjacentHTML()</li>
             </ul>
-        </div>
-        <script>
-            // Node Object Types
-            {
-                const ulElement = document.querySelector('#node ul');
-                for (let key in Node) {
-                    const liElement = document.createElement('li');
-                    const textElement = document.createTextNode(
-                        key + ': ' + Node[key]
+
+            <h2>Type and Name</h2>
+            <a href="#" id="typeAndNameTarget">Target anchor</a>
+            <pre>
+                console.log(document.doctype.nodeName); // html
+                console.log(document.doctype.nodeType); // 10
+                console.log(document.querySelector('#typeAndNameTarget').firstChild.nodeValue); // Target anchor
+            </pre>
+            <script>
+                {
+                    console.log(document.doctype.nodeName);
+                    console.log(document.doctype.nodeType);
+                    console.log(
+                        document.querySelector('#typeAndNameTarget').firstChild
+                            .nodeValue
                     );
-                    liElement.appendChild(textElement);
-                    ulElement.insertBefore(liElement, ulElement.firstChild);
                 }
-            }
-        </script>
+            </script>
+            <h2>Creating Elements</h2>
+            <div id="newElementsContainer"></div>
+            <pre>
+                const elementNodeP = document.createElement('p');
+            </pre>
+            <script>
+                {
+                    const elementNodeP = document.createElement('p');
+                    console.log(
+                        elementNodeP,
+                        elementNodeP.nodeType,
+                        elementNodeP.nodeName
+                    );
+                    const textElement =
+                        document.createTextNode('Hello there !');
+                    elementNodeP.appendChild(textElement);
+                    document
+                        .querySelector('#newElementsContainer')
+                        .append(elementNodeP);
+                }
+            </script>
+        </div>
+
         <div class="dom" id="dom">DOM</div>
         <script>
             {
