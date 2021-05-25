@@ -121,6 +121,30 @@
                         .append(elementNodeP);
                 }
             </script>
+            <h2>Creating Elements With Strings</h2>
+            <div id="newElementsWithStringsContainer">
+                <div id="a"></div>
+                <div id="b"></div>
+                <div id="c"></div>
+                <div id="d"></div>
+                <div id="e"></div>
+            </div>
+            <pre>
+                <code>
+                    document.getElementById('a').innerHTML = '<strong>Hi</strong>'; // Creates and adds to the DOM
+                    document.getElementById('b').outerHTML = '<div id="b" class="new">Whats Shaking</div>'; // Creates and replace
+                    document.getElementById('c').textContent = 'Dude'; // Creates and updates text
+                    document.getElementById('d').innerText = 'Keep it'; // Creates and updates text
+                </code>
+            </pre>
+            <script>
+                document.getElementById('a').innerHTML = '<strong>Hi</strong>';
+                document.getElementById('b').outerHTML =
+                    '<div id="b" class="new">What\'s Shaking</div>';
+                document.getElementById('c').textContent = 'Dude';
+                document.getElementById('d').innerText = 'Keep it';
+                document.getElementById('e').outerText = 'real !';
+            </script>
         </div>
 
         <div class="dom" id="dom">DOM</div>
