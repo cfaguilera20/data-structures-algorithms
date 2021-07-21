@@ -162,3 +162,140 @@ getSkills = (endorsements) => {
 // - Strings manipulation
 // - Objects and Arrays
 // - Javascript core concepts (Prototypal inheritance, closures, pure functions, ES6+ features, sorting objects, hashtables)
+
+// "react/http": "^1.3",
+// "react/child-process": "^0.6.2"
+
+
+
+
+///
+
+
+const Foo = function(a) {
+    this.a = a;
+
+    this.bar = () => {
+      return this.a;
+    }
+    this.baz = () => {
+      return this.a;
+    };
+  };
+
+  Foo.prototype = {
+    biz: () => {
+      return this.a;
+    },
+  };
+
+  const f = new Foo(7);
+
+  f.bar(); // ?
+  f.baz(); // ?
+  f.biz(); // ?
+
+
+  // parsing a query
+
+  parseQueryString('https://linkedin.com/in/esolomon?source=search&keywords=Evan%20Solomon')
+  // {source: 'search', keywords: 'Evan Solomon'}
+
+  parseQueryString('https://linkedin.com/in/esolomon?sources=search&sources=google&keywords=Evan%20Solomon')
+  // {sources: ['search', 'google'], keywords: 'Evan Solomon'}
+
+
+  function parseQueryString(url) {
+    const queryString = getQueryString(url); // source=search&keywords=Evan%20Solomon
+    const params = getParamsFromQuery(queryString);
+
+    return params;
+
+  }
+
+  function getQueryString(str) {
+
+    const parts = str.split(str, '?');
+    return parts[1]; // source=search&keywords=Evan%20Solomon
+  }
+
+  function getParamsFromQuery(queryParams) {
+    const params = {};
+    const queryParamsArray = queryParams.split('&'); // ['source=search', 'keywords=Evan%20Solomon']
+    let parts;
+
+    for(let i = 0; queryParamsArray.length; i++ ) {
+      parts = queryParamsArray[i].split('='); // ['source', 'search'];
+
+      if(!params[parts[0]]) {
+        params[parts[0]] = parts[1];
+      } else {
+        if(Array.is(params[parts[0]])) {
+          params[parts[0]].push(parts[1]);
+        } else {
+          let temp = params[parts[0]];
+
+          params[parts[0]] = [temp, parts[1]];
+        }
+      }
+    }
+
+    return params;
+  }
+
+
+
+
+  // infinite scroll
+
+  /**
+   * API Docs
+   * ---------
+   * /posts?page=0 => [{id: 1, title: 'Post 1'}, {id: 2, title: 'Post 2'}, {id: 3, title: 'Post 3'}, N...]
+   * /posts?page=1 => [{id: 4, title: 'Post 4'}, {id: 5, title: 'Post 5'}, {id: 6, title: 'Post 6'}, N...]
+   * /posts?page=N => [N...]
+   */
+
+  // HTML
+  // ---------
+  <ul id="posts"></ul>
+
+  // JS
+  // ---------
+  document.body.addEventListener('scroll', scrollHandler);
+
+  function scrollHandler() {
+    // load & append posts...
+    const bottomPosition = ;
+    const getCurrenPage = ;
+
+    if(getGetGurrentPost() === bottomPosition) {
+      const pagePosts = getPostByPage(getCurrenPage); // async
+      renderPost(pagePosts);
+      getCurrenPage++;
+    }
+  }
+
+
+  function getBottomPostion() {
+    return //;
+  }
+
+  function getGetGurrentPost() {
+    return //;
+  }
+
+  function renderPost(postData) {
+    const postContainer = window.querySelctor('#posts');
+    let template = [];
+
+    for(let post of postData) {
+      template.push(postTemplate(post));
+    }
+
+    postContainer.append(template.join(''));
+  }
+
+  function postTemplate(data) {
+
+  }
