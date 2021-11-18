@@ -49,6 +49,11 @@ class ArrayCollection implements CollectionInterface
 {
     private $elements = array();
 
+    public function __construct(array $elements = [])
+    {
+        $this->elements = $elements;
+    }
+
     public function add($element)
     {
         $this->elements[] = $element;
@@ -257,8 +262,11 @@ class ArrayCollection implements CollectionInterface
 
     public function pluck($key)
     {
+        print_r($key);
+        print_r($this->elements);
         return new static(array_map(function ($element) use ($key) {
-            return $element[$key];
+            print_r($element);
+            return is_object($element) ? $element->$key : $element[$key];
         }, $this->elements));
     }
 
@@ -859,3 +867,15 @@ print_r($report->export());
 $exporter = new CommandLineExporter();
 $report->setExporter($exporter);
 $report->export();
+
+
+$array = [
+    (object) ['id' => 1, 'name' => 'name 1'],
+    (object) ['id' => 1, 'name' => 'name 1'],
+    ['id' => 1, 'name' => 'name 1'],
+    ['id' => 1, 'name' => 'name 1'],
+    ['id' => 1, 'name' => 'name 1'],
+];
+
+$collection = new ArrayCollection($array);
+print_r($collection->pluck('name')->toArray());
