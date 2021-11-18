@@ -52,6 +52,7 @@ class ArrayCollection implements CollectionInterface
     public function add($element)
     {
         $this->elements[] = $element;
+        return $this;
     }
 
     public function clear()
@@ -829,12 +830,14 @@ class CommandLineExporter implements ReportExporterInterface
     }
 }
 
-$repository = new NetoRepository();
-$columns = new ArrayCollection();
-$columns->add(new Column('id', 'ID', 'asc'));
-$columns->add(new Column('name', 'Name', 'asc'));
-$header = new Header($columns);
-$dataTable = new NetoDataTable($repository, $header);
+$columns = (new ArrayCollection())
+    ->add(new Column('id', 'ID', 'asc'))
+    ->add(new Column('name', 'Name', 'asc'))
+    ->add(new Column('doble', 'X', 'asc'));
+$dataTable = new NetoDataTable(
+    new NetoRepository(),
+    new Header($columns)
+);
 $report = new NetoReport($dataTable, new CommandLineExporter());
 
 $exporter = new CsvExporter();
