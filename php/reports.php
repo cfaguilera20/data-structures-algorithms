@@ -455,7 +455,7 @@ class Cell implements CellInterface
     }
 }
 
-interface TableInterface extends CollectionInterface
+interface TableInterface
 {
     public function setHeader(HeaderInterface $header);
     public function getHeader();
@@ -481,7 +481,7 @@ interface DataTableInterface extends TableInterface
     public function load();
 }
 
-abstract class AbstractDataTable extends ArrayCollection implements DataTableInterface
+abstract class AbstractDataTable implements DataTableInterface
 {
     private $repository;
     private $filters;
