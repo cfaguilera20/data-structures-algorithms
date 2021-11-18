@@ -297,12 +297,6 @@ class ArrayCollection implements CollectionInterface
     }
 }
 
-interface HeaderInterface
-{
-    public function setColumns(CollectionInterface $columns);
-    public function getColumns();
-}
-
 interface ColumnInterface extends InterfaceEntity
 {
     public function setType(string $type);
@@ -313,18 +307,11 @@ interface ColumnInterface extends InterfaceEntity
     public function getOrder();
 }
 
-interface RowInterface extends CollectionInterface
-{
-    public function setCells(CollectionInterface $cells);
-    public function getCells();
-}
 
-interface CellInterface extends InterfaceEntity
+interface HeaderInterface
 {
-    public function setType(string $type);
-    public function getType();
-    public function setValue(string $value);
-    public function getValue();
+    public function setColumns(CollectionInterface $columns);
+    public function getColumns();
 }
 
 class Header implements HeaderInterface
@@ -346,7 +333,6 @@ class Header implements HeaderInterface
         return $this->columns;
     }
 }
-
 
 class Column implements ColumnInterface
 {
@@ -412,105 +398,41 @@ class Column implements ColumnInterface
 }
 
 
-class Row extends ArrayCollection implements RowInterface
-{
-    private $cells;
-
-    public function setCells(CollectionInterface $cells)
-    {
-        $this->cells = $cells;
-    }
-
-    public function getCells()
-    {
-        return $this->cells;
-    }
-}
-
-
-class Cell implements CellInterface
-{
-    private $value;
-    private $type;
-
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
-
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    public function setValue($value)
-    {
-        $this->value = $value;
-    }
-
-    public function getValue()
-    {
-        return $this->value;
-    }
-
-    public function setType(string $type)
-    {
-        $this->type = $type;
-    }
-
-    public function getType()
-    {
-        return $this->type;
-    }
-}
-
-interface TableInterface
-{
-    public function setHeader(HeaderInterface $header);
-    public function getHeader();
-    public function setRows(CollectionInterface $rows);
-    public function getRows();
-    public function addRow(RowInterface $row);
-    public function removeRow($key);
-    public function getRow($key);
-}
-
 interface RepositoryInterface
 {
     public function getRows();
 }
 
-interface DataTableInterface extends TableInterface
+interface ReportInterface
 {
-    public function __construct(RepositoryInterface $repository, HeaderInterface $header);
-    public function setRepository(RepositoryInterface $repository);
-    public function getRepository();
-    public function setFilters(array $filters);
-    public function getFilters();
-    public function load();
+    public function setTitle($title);
+    public function getTitle();
+    public function setHeader(HeaderInterface $header);
+    public function getHeader();
+    public function setData(CollectionInterface $data);
+    public function getData();
 }
 
-abstract class AbstractDataTable implements DataTableInterface
+abstract class AbstractReport implements ReportInterface
 {
-    private $repository;
-    private $filters;
     private $header;
-    private $rows;
+    private $data;
+    private $title = 'Report';
 
-    public function __construct(RepositoryInterface $repository, HeaderInterface $header)
+    public function __construct(HeaderInterface $header, CollectionInterface $data)
     {
-        $this->repository = $repository;
         $this->header = $header;
+        $this->data = $data;
     }
 
-    public function setRepository(RepositoryInterface $repository)
+    public function setTitle($title)
     {
-        $this->repository = $repository;
+        $this->title = $title;
     }
 
-    public function getRepository()
+    public function getTitle()
     {
-        return $this->repository;
+        return $this->title;
     }
 
     public function setHeader(HeaderInterface $header)
@@ -523,89 +445,15 @@ abstract class AbstractDataTable implements DataTableInterface
         return $this->header;
     }
 
-    public function setRows(CollectionInterface $rows)
+    public function setData(CollectionInterface $data)
     {
-        $this->rows = $rows;
+        $this->data = $data;
     }
 
-    public function getRows()
+    public function getData()
     {
-        return $this->rows;
+        return $this->data;
     }
-
-    public function addRow(RowInterface $row)
-    {
-        $this->rows->add($row);
-    }
-
-    public function removeRow($key)
-    {
-        $this->rows->remove($key);
-    }
-
-    public function getRow($key)
-    {
-        return $this->rows->get($key);
-    }
-
-    public function setFilters(array $filters)
-    {
-        $this->validateFilters($filters);
-        $this->filters = $filters;
-    }
-
-    public function getFilters()
-    {
-        return $this->filters;
-    }
-}
-
-class NetoDataTable extends AbstractDataTable
-{
-    public function __construct(RepositoryInterface $repository, HeaderInterface $header)
-    {
-        parent::__construct($repository, $header);
-    }
-
-    public function load()
-    {
-        $data = $this->getRepository()->getRows();
-        $rows = new ArrayCollection();
-
-        foreach ($data as $item) {
-            $cells = new ArrayCollection();
-            foreach ($this->getHeader()->getColumns()->getIterator() as $column) {
-                $cell = new Cell();
-                $attribute = $column->getId();
-                $cell->setValue($item->{$attribute});
-                $cells->add($cell);
-            }
-
-            $row = new Row();
-            $row->setCells($cells);
-            $rows->add($row);
-        }
-
-        $this->setRows($rows);
-
-        return $this;
-    }
-}
-
-interface ReportExporterInterface
-{
-    public function export(ReportInterface $dataTable);
-}
-
-interface ReportInterface
-{
-    public function setTitle(string $title);
-    public function getTitle();
-    public function setDataTable(DataTableInterface $dataTable);
-    public function getDataTable();
-    public function setExporter(ReportExporterInterface $exporter);
-    public function getExporter();
-    public function export();
 }
 
 class NetoRepository implements RepositoryInterface
@@ -638,136 +486,88 @@ class NetoRepository implements RepositoryInterface
     }
 }
 
-class NetoReport implements ReportInterface
+interface PresenterInterface
 {
-    private $dataTable;
-    private $title = 'Neto Report';
+    public function render();
+}
 
-    public function __construct(DataTableInterface $dataTable, ReportExporterInterface $exporter)
+interface ReportPresenterInterface extends PresenterInterface
+{
+    public function setReport(ReportInterface $report);
+    public function getReport();
+}
+
+abstract class AbstractReportPresenter implements ReportPresenterInterface
+{
+    private $report;
+
+    public function __construct(ReportInterface $report)
     {
-        $this->dataTable = $dataTable;
-        $this->exporter = $exporter;
+        $this->report = $report;
     }
 
-    public function setTitle(string $title)
+    public function setReport(ReportInterface $report)
     {
-        $this->title = $title;
+        $this->report = $report;
     }
 
-    public function getTitle()
+    public function getReport()
     {
-        return $this->title;
-    }
-
-    public function setDataTable(DataTableInterface $dataTable)
-    {
-        $this->dataTable = $dataTable;
-    }
-
-    public function getDataTable()
-    {
-        return $this->dataTable;
-    }
-
-    public function setExporter(ReportExporterInterface $exporter)
-    {
-        $this->exporter = $exporter;
-    }
-
-    public function getExporter()
-    {
-        return $this->exporter;
-    }
-
-    public function export()
-    {
-        $this->dataTable->load();
-        return $this->getExporter()->export($this);
+        return $this->report;
     }
 }
 
-class CsvExporter implements ReportExporterInterface
+
+
+class CsvPresenter extends AbstractReportPresenter
 {
-    public function export(ReportInterface $report)
+    public function render()
     {
-        $dataTable = $report->getDataTable();
-        $header = $dataTable->getHeader();
-        $rows = $dataTable->getRows();
-        $filename = __DIR__.'/'.$report->getTitle().'.csv';
-        $csv = fopen($filename, 'w');
+        $report = $this->getReport();
+        $header = $report->getHeader();
+        $csv = fopen(__DIR__.'/'.$report->getTitle().'.csv', 'w');
         // $csv = fopen('php://output', 'w');
 
         fputcsv($csv, array_map(function ($column) {
             return $column->getName();
         }, $header->getColumns()->toArray()));
 
-        foreach ($rows->getIterator() as $row) {
-            fputcsv($csv, array_map(function ($cell) {
-                return $cell->getValue();
-            }, $row->getCells()->toArray()));
+        foreach ($report->getData()->getIterator() as $row) {
+            fputcsv($csv, array_map(function ($column) use ($row) {
+                $attribute = $column->getId();
+                return $row->{$attribute};
+            }, $header->getColumns()->toArray()));
         }
 
         fclose($csv);
     }
 }
 
-class PdfExporter implements ReportExporterInterface
+class PdfPresenter extends AbstractReportPresenter
 {
-    public function export(ReportInterface $report)
+    public function render()
     {
-        $dataTable = $report->getDataTable();
-        $header = $dataTable->getHeader();
-        $rows = $dataTable->getRows();
-        $filename = __DIR__.'/'.$report->getTitle().'.pdf';
-        $pdf = new FPDF();
-        $pdf->AddPage();
-        $pdf->SetFont('Arial', 'B', 16);
-        $pdf->Cell(40, 10, $report->getTitle());
-        $pdf->Ln();
-        $pdf->SetFont('Arial', 'B', 12);
-        $pdf->Cell(40, 10, 'Header');
-        $pdf->Ln();
-        $pdf->SetFont('Arial', '', 12);
-        foreach ($header->getColumns()->getIterator() as $column) {
-            $pdf->Cell(40, 10, $column->getName());
-        }
-
-        $pdf->Ln();
-        $pdf->SetFont('Arial', 'B', 12);
-        $pdf->Cell(40, 10, 'Rows');
-        $pdf->Ln();
-        $pdf->SetFont('Arial', '', 12);
-        foreach ($rows->getIterator() as $row) {
-            foreach ($row->getCells()->getIterator() as $cell) {
-                $pdf->Cell(40, 10, $cell->getValue());
-            }
-
-            $pdf->Ln();
-        }
-
-        $pdf->Output($filename, 'F');
     }
 }
 
-class JsonExporter implements ReportExporterInterface
+class JsonPresenter extends AbstractReportPresenter
 {
-    public function export(ReportInterface $report)
+    public function render()
     {
-        $dataTable = $report->getDataTable();
-        $header = $dataTable->getHeader();
-        $rows = $dataTable->getRows();
-        $filename = __DIR__.'/'.$report->getTitle().'.json';
+        $report = $this->getReport();
+        $header = $report->getHeader();
 
         $data = [];
 
-        foreach ($rows->getIterator() as $row) {
-            $cells = [];
+        foreach ($report->getData()->getIterator() as $row) {
+            $rows = [];
 
-            foreach ($row->getCells()->getIterator() as $cell) {
-                $cells[] = $cell->getValue();
+            foreach ($header->getColumns()->getIterator() as $column) {
+                $attribute = $column->getId();
+                $rows[] = $row->{$attribute};
             }
 
-            $data[] = $cells;
+            $data[] = $rows;
         }
 
         $json = json_encode([
@@ -775,29 +575,29 @@ class JsonExporter implements ReportExporterInterface
             'rows' => $data
         ]);
 
-        file_put_contents($filename, $json);
+
+        file_put_contents(__DIR__.'/'.$report->getTitle().'.json', $json);
     }
 }
 
-class ArrayExporter implements ReportExporterInterface
+class ArrayPresenter extends AbstractReportPresenter
 {
-    public function export(ReportInterface $report)
+    public function render()
     {
-        $dataTable = $report->getDataTable();
-        $header = $dataTable->getHeader();
-        $rows = $dataTable->getRows();
-        $filename = __DIR__.'/'.$report->getTitle().'.json';
+        $report = $this->getReport();
+        $header = $report->getHeader();
 
         $data = [];
 
-        foreach ($rows->getIterator() as $row) {
-            $cells = [];
+        foreach ($report->getData()->getIterator() as $row) {
+            $rows = [];
 
-            foreach ($row->getCells()->getIterator() as $cell) {
-                $cells[] = $cell->getValue();
+            foreach ($header->getColumns()->getIterator() as $column) {
+                $attribute = $column->getId();
+                $rows[] = $row->{$attribute};
             }
 
-            $data[] = $cells;
+            $data[] = $rows;
         }
 
         $json = [
@@ -809,16 +609,16 @@ class ArrayExporter implements ReportExporterInterface
     }
 }
 
-class CommandLineExporter implements ReportExporterInterface
+class CommandLinePresenter extends AbstractReportPresenter
 {
-    public function export(ReportInterface $report)
+    public function render()
     {
         $pad = 10;
-        echo $report->getTitle() . PHP_EOL;
-        $datatable = $report->getDataTable();
-        $header = $datatable->getHeader();
-        $rows = $datatable->getRows();
+        $report = $this->getReport();
+        $header = $report->getHeader();
+        $data = $report->getData();
 
+        echo $report->getTitle() . PHP_EOL;
         echo 'Header' . PHP_EOL;
 
         foreach ($header->getColumns()->getIterator() as $column) {
@@ -827,9 +627,10 @@ class CommandLineExporter implements ReportExporterInterface
 
         echo PHP_EOL . '------------------------------------' . PHP_EOL;
 
-        foreach ($rows->getIterator() as $row) {
-            foreach ($row->getCells()->getIterator() as $cell) {
-                echo '| ' . str_pad($cell->getValue(), $pad). ' |';
+        foreach ($data->getIterator() as $row) {
+            foreach ($header->getColumns()->getIterator() as $column) {
+                $attribute = $column->getId();
+                echo '| ' . str_pad($row->{$attribute}, $pad). ' |';
             }
 
             echo PHP_EOL;
@@ -839,44 +640,41 @@ class CommandLineExporter implements ReportExporterInterface
     }
 }
 
-$columns = (new ArrayCollection())
-    ->add(new Column('id', 'ID', 'asc'))
-    ->add(new Column('name', 'Name', 'asc'))
-    ->add(new Column('test', 'X', 'asc'));
-$dataTable = new NetoDataTable(
-    new NetoRepository(),
-    new Header($columns)
-);
-$report = new NetoReport($dataTable, new CommandLineExporter());
+class NetoReport extends AbstractReport
+{
+    public function __construct(HeaderInterface $header, CollectionInterface $data)
+    {
+        parent::__construct($header, $data);
+    }
+}
 
-$exporter = new CsvExporter();
-$report->setExporter($exporter);
-$report->export();
+class ReportFactory
+{
+    public static function createNeto(array $data)
+    {
+        $columns = (new ArrayCollection())
+            ->add(new Column('id', 'ID', 'asc'))
+            ->add(new Column('name', 'Name', 'asc'))
+            ->add(new Column('test', 'X', 'asc'));
 
-// $exporter = new PdfExporter();
-// $report->setExporter($exporter);
-// $report->export();
+        return new NetoReport(
+            new Header($columns),
+            new ArrayCollection($data)
+        );
+    }
+}
 
-$exporter = new JsonExporter();
-$report->setExporter($exporter);
-$report->export();
+$repository = new NetoRepository();
+$report = ReportFactory::createNeto($repository->getRows());
 
-$exporter = new ArrayExporter();
-$report->setExporter($exporter);
-print_r($report->export());
+$presenterCsv = new CsvPresenter($report);
+$presenterCsv->render();
 
-$exporter = new CommandLineExporter();
-$report->setExporter($exporter);
-$report->export();
+$presenterJson = new JsonPresenter($report);
+$presenterJson->render();
 
+$presenterArray = new ArrayPresenter($report);
+$presenterArray->render();
 
-$array = [
-    (object) ['id' => 1, 'name' => 'name 1'],
-    (object) ['id' => 1, 'name' => 'name 1'],
-    ['id' => 1, 'name' => 'name 1'],
-    ['id' => 1, 'name' => 'name 1'],
-    ['id' => 1, 'name' => 'name 1'],
-];
-
-$collection = new ArrayCollection($array);
-// print_r($collection->pluck('name')->toArray());
+$presenterCommand = new CommandLinePresenter($report);
+$presenterCommand->render();
