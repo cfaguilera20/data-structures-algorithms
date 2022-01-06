@@ -43,3 +43,14 @@
 ## PHP import checker
 
 [Link](https://marketplace.visualstudio.com/items?itemName=marabesi.php-import-checker)
+
+
+## PHP mess dectector
+
+```
+brew install composer   
+composer global require phpmd/phpmd
+```
+
+[Link 1](https://marketplace.visualstudio.com/items?itemName=bmewburn.vscode-intelephense-client)
+[Link 2](https://marketplace.visualstudio.com/items?itemName=linyang95.phpmd)
