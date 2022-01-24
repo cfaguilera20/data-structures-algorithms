@@ -75,3 +75,7 @@ section("Upto:")
 5.upto(10) do |i|
     puts "Hello, charls #{i}"
 end
+
+
+section("Step:")
+5.step(10, 2) { |i| puts "Hello, charls #{i}" }
