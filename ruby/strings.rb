@@ -104,3 +104,16 @@ puts first_name.downcase! + " " + "downcase!" # Override
 section("Reverse:")
 puts first_name.reverse
 
+
+section("Include:")
+puts "Include \"carlos\": #{first_name}"
+puts first_name.include?("carlos")
+puts "Include \"Carlos\": #{first_name}"
+puts first_name.include?("Carlos")
+
+
+section("Empty & Nil:")
+puts "Empty: #{first_name.empty?}"
+puts "Nil: #{first_name.nil?}"
+puts "".empty?
+puts "".nil?
