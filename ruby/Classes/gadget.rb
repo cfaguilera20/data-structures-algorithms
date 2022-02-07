@@ -121,3 +121,25 @@ puts phone.to_s
 puts phone.username
 phone.username = "New username"
 puts phone.username
+
+
+section("Parameterized classes")
+class Gadget
+    attr_reader :production_number
+    attr_accessor :username
+
+    def initialize(username, password)
+        @username = username
+        @password = password
+        @production_number = "#{("a".."z").to_a.sample}-#{rand(1..100)}"
+    end
+
+    def to_s
+        "Gadget #{@production_number} has the username #{@username}. It is made from #{self.class} class and it has the ID #{self.object_id}"
+    end
+end
+
+phone = Gadget.new("User CFA", "topsecret")
+puts phone.to_s
+
+section("Class variables")
