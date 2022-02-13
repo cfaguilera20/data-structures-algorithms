@@ -26,3 +26,27 @@ phone = GadgetTwo.new("User1", "topsecret")
 # phone.initialize # This is not a method, it is a constructor
 p phone.production_number
 # p phone.generate_production_number # This is not a public method, it is a private method
+
+
+class Car 
+    def initialize(year, miles, color, model)
+        @year = year
+        @color = color
+        @speed = 0
+        @value = 10000 - miles / 10.to_f
+    end
+
+    def compare_car_with(car) 
+        self.value > car.value ? "This car is better" : "This car is worst"
+    end
+
+    protected 
+
+    def value
+        @value
+    end
+end
+
+fiat = Car.new(2010, 100_000, "white", "500")
+mini = Car.new(2010, 10_000, "white", "500")
+p fiat.compare_car_with(mini)
