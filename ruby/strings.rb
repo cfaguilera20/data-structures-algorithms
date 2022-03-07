@@ -111,9 +111,28 @@ puts first_name.include?("carlos")
 puts "Include \"Carlos\": #{first_name}"
 puts first_name.include?("Carlos")
 
-
 section("Empty & Nil:")
 puts "Empty: #{first_name.empty?}"
 puts "Nil: #{first_name.nil?}"
 puts "".empty?
 puts "".nil?
+
+car = {
+    :make => "Ford",
+    :model => "Mustang",
+    :year => "1964",
+    :color => "red"
+}
+
+p car[:color]
+
+
+def blocker_a(table) 
+    p table[:color]
+    yield table
+    
+end
+
+blocker_a :hellox do |table|
+    puts "Hello, #{table}"
+end
