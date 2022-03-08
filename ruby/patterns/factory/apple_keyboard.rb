@@ -1,8 +1,10 @@
 # frozen_string_literal: true
 
+require_relative "./abstract_keyboard"
+
 # AppleKeyboard
 class AppleKeyboard
   def display
-    raise(NotImplementedError, "#{self.class} has not implemented method '#{__method__}'")
+    puts("Apple keyboard")
   end
 end
